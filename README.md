@@ -1,11 +1,11 @@
-# Project Title
+# Plant Care Application
 
-#### Epicodus Intro to Programming: Lesson, Date
+#### Epicodus Intro to Programming: Group Project Week of June 18th - June 21st, 2018
 
-#### By NAME
+#### By Nikki Boyd, Renee Sarley, Nick Brown, Rita Bennett-Chew
 
 ## Description
-
+A plant profile and calendar app that will remind users when to complete tasks relating to each of their plants.
 
 
 ## Setup/Contribution Requirements
@@ -17,15 +17,14 @@
 
 ## Technologies Used
 
-* Bootstrap x.x.x
+* Bootstrap 3.3.7
 * jQuery 3.3.1
 
 ## Links
 
-* 
 
 ## License
 
 This software is licensed under the MIT license.
 
-Copyright (c) 2018 **Name**
+Copyright (c) 2018 **Team Plant Care**
