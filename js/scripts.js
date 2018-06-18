@@ -19,7 +19,18 @@ $(function(){
       }
     }
   };
-})
+    document.getElementById("waterSelection").onchange = function(){
+    var monthSelection = $("#waterSelection :selected").text()
+    if (monthSelection === "Once a month") {
+      $("#waterWeekdaySelection").hide();
+      $("#waterMonthSelection").show();
+      console.log("in the if section")
+    } else {
+      $("#waterMonthSelection").hide();
+      $("#waterWeekdaySelection").show();
+    }
+  };
+});
 
 
 

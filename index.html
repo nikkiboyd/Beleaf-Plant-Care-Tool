@@ -42,39 +42,231 @@
           <option>Very Tolerant</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="waterSelection">How often to water:</label>
-        <select class="form-control" id="waterSelection">
-          <option>Select a value</option>
-          <option>Once a week</option>
-          <option>Twice a week</option>
-          <option>Every other week</option>
-          <option>Once a month</option>
-        </select>
+      <div class="waterDiv">
+        <div class="form-group">
+          <label for="waterSelection">How often to water:</label>
+          <select class="form-control" id="waterSelection">
+            <option>Select a value</option>
+            <option>Once a week</option>
+            <option>Twice a week</option>
+            <option>Every other week</option>
+            <option>Once a month</option>
+          </select>
+        </div>
+        <div id="waterWeekdaySelection">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterMonday" value="monday">
+            <label class="form-check-label" for="waterMonday">Monday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterTuesday" value="tuesday">
+            <label class="form-check-label" for="waterTuesday">Tuesday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterWednesday" value="wednesday">
+            <label class="form-check-label" for="waterWednesday">Wednesday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterThursday" value="thursday">
+            <label class="form-check-label" for="waterThursday">Thursday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterFriday" value="friday">
+            <label class="form-check-label" for="waterFriday">Friday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterSaturday" value="saturday">
+            <label class="form-check-label" for="waterSaturday">Saturday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="waterSunday" value="sunday">
+            <label class="form-check-label" for="waterSunday">Sunday</label>
+          </div>
+        </div>
+        <div id="waterMonthSelection">
+          <div class="form-group">
+            <label for="waterMonthDay">Select a day of the month</label>
+            <select class="form-control" id="waterMonthDay">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="pruningSelection">How often to prune:</label>
-        <select class="form-control" id="pruningSelection">
-          <option>Select a value</option>
-          <option>Once a week</option>
-          <option>Twice a week</option>
-          <option>Every other week</option>
-          <option>Once a month</option>
-        </select>
+      <div class="pruningDiv">
+        <div class="form-group">
+          <label for="pruningSelection">How often to prune:</label>
+          <select class="form-control" id="pruningSelection">
+            <option>Select a value</option>
+            <option>Once a week</option>
+            <option>Twice a week</option>
+            <option>Every other week</option>
+            <option>Once a month</option>
+          </select>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneMonday" value="monday">
+          <label class="form-check-label" for="pruneMonday">Monday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneTuesday" value="tuesday">
+          <label class="form-check-label" for="pruneTuesday">Tuesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneWednesday" value="wednesday">
+          <label class="form-check-label" for="pruneWednesday">Wednesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneThursday" value="thursday">
+          <label class="form-check-label" for="pruneThursday">Thursday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneFriday" value="friday">
+          <label class="form-check-label" for="pruneFriday">Friday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneSaturday" value="saturday">
+          <label class="form-check-label" for="pruneSaturday">Saturday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="pruneSunday" value="sunday">
+          <label class="form-check-label" for="pruneSunday">Sunday</label>
+        </div>
+        <div class="form-group">
+          <label for="pruningMonthDay">Select a day of the month</label>
+          <select class="form-control" id="pruningMonthDay">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="fertilizingSelection">How often to fertilize:</label>
-        <select class="form-control" id="fertilizingSelection">
-          <option>Select a value</option>
-          <option>Once a week</option>
-          <option>Twice a week</option>
-          <option>Every other week</option>
-          <option>Once a month</option>
-        </select>
+      <div class="fertilizingDiv">
+        <div class="form-group">
+          <label for="fertilizingSelection">How often to fertilize:</label>
+          <select class="form-control" id="fertilizingSelection">
+            <option>Select a value</option>
+            <option>Once a week</option>
+            <option>Twice a week</option>
+            <option>Every other week</option>
+            <option>Once a month</option>
+          </select>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeMonday" value="monday">
+          <label class="form-check-label" for="fertilizeMonday">Monday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeTuesday" value="tuesday">
+          <label class="form-check-label" for="fertilizeTuesday">Tuesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeWednesday" value="wednesday">
+          <label class="form-check-label" for="fertilizeWednesday">Wednesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeThursday" value="thursday">
+          <label class="form-check-label" for="fertilizeThursday">Thursday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeFriday" value="friday">
+          <label class="form-check-label" for="fertilizeFriday">Friday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeSaturday" value="saturday">
+          <label class="form-check-label" for="fertilizeSaturday">Saturday</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="fertilizeSunday" value="sunday">
+          <label class="form-check-label" for="fertilizeSunday">Sunday</label>
+        </div>
+        <div class="form-group">
+          <label for="pruningMonthDay">Select a day of the month</label>
+          <select class="form-control" id="pruningMonthDay">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+          </select>
+        </div>
       </div>
       <button type="submit" name="button">Add Plant</button>
     </form>
-
   </div>
 </body>
 </html>
