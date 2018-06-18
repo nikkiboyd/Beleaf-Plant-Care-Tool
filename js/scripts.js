@@ -3,14 +3,43 @@
 // return a list of dates
 
 var today = new Date()
-var taskArrayWater = ["weekly", "Thursday", undefined]
 
-function makeSchedule() {
+// input 1:
+var taskArrayWater = ["weekly", "thursday"]
+// output 1:
+// [Thursday June 21 Date object, June 28 Date object, July 5 date object, July 12]
+
+// input 2:
+var taskArrayFert = ["monthly", 18]
+// output 2:
+// [Wednesday, July 18th]
+
+// use this with index of
+var weekdayArray=["sunday", "monday","tuesday",
+"wednesday","thursday","friday","saturday"]
+
+function makeSchedule(taskArrayWater) {
+  var finalDays = []
   var ddToday = today.getDate()
-  console.log(ddToday)
   var daysLater = 28
-  var nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
-  return nextDay
+  var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
+
+  // account for weekly tasks
+  if (taskArrayWater[0] === "weekly") {
+    var firstDay = new Date()
+    var dayOfWeek = firstDay.getDay()
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskArrayWater[1])){
+      firstDay.setDate(firstDay.getDate() + 1)
+    }
+    finalDays.push(firstDay)
+    console.log(firstDay)
+
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
+  }
+  console.log(finalDays)
+  return finalDays
 }
 
-makeSchedule()
+makeSchedule(taskArrayWater)
