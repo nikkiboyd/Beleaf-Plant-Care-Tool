@@ -7,7 +7,6 @@
 ## Description
 A plant profile and calendar app that will remind users when to complete tasks relating to each of their plants.
 
-
 ## Setup/Contribution Requirements
 
 1. Clone the repo
