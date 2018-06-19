@@ -70,31 +70,31 @@
         </div>
         <div class="hidden" id="waterSelectionWeekday">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterMonday" value="monday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterMonday" value="monday">
             <label class="form-check-label" for="waterMonday">Monday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterTuesday" value="tuesday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterTuesday" value="tuesday">
             <label class="form-check-label" for="waterTuesday">Tuesday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterWednesday" value="wednesday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterWednesday" value="wednesday">
             <label class="form-check-label" for="waterWednesday">Wednesday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterThursday" value="thursday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterThursday" value="thursday">
             <label class="form-check-label" for="waterThursday">Thursday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterFriday" value="friday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterFriday" value="friday">
             <label class="form-check-label" for="waterFriday">Friday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterSaturday" value="saturday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterSaturday" value="saturday">
             <label class="form-check-label" for="waterSaturday">Saturday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="waterSunday" value="sunday">
+            <input class="form-check-input" type="checkbox" name="waterDayCheckBoxes" id="waterSunday" value="sunday">
             <label class="form-check-label" for="waterSunday">Sunday</label>
           </div>
         </div>
@@ -102,6 +102,7 @@
           <div class="form-group">
             <label for="waterMonthDay">Select a day of the month</label>
             <select id ="waterMonthDropdown" class="form-control">
+              <option>Select a date</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -143,38 +144,38 @@
             <option>Twice a week</option>
             <option>Every other week</option>
             <option>Once a month</option>
-            <option>As needed</option>
+            <!-- <option>As needed</option>
             <option>Annually</option>
-            <option>Never</option>
+            <option>Never</option> -->
           </select>
         </div>
         <div id="pruningSelectionWeekday" class="hidden">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneMonday" value="monday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneMonday" value="monday">
             <label class="form-check-label" for="pruneMonday">Monday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneTuesday" value="tuesday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneTuesday" value="tuesday">
             <label class="form-check-label" for="pruneTuesday">Tuesday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneWednesday" value="wednesday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneWednesday" value="wednesday">
             <label class="form-check-label" for="pruneWednesday">Wednesday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneThursday" value="thursday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneThursday" value="thursday">
             <label class="form-check-label" for="pruneThursday">Thursday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneFriday" value="friday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneFriday" value="friday">
             <label class="form-check-label" for="pruneFriday">Friday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneSaturday" value="saturday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneSaturday" value="saturday">
             <label class="form-check-label" for="pruneSaturday">Saturday</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="pruneSunday" value="sunday">
+            <input class="form-check-input" name="pruneDayCheckBoxes" type="checkbox" id="pruneSunday" value="sunday">
             <label class="form-check-label" for="pruneSunday">Sunday</label>
           </div>
         </div>
@@ -221,9 +222,9 @@
             <option>Twice a week</option>
             <option>Every other week</option>
             <option>Once a month</option>
-            <option>As needed</option>
+            <!-- <option>As needed</option>
             <option>Annually</option>
-            <option>Never</option>
+            <option>Never</option> -->
           </select>
         </div>
         <div class="hidden" id="fertilizingSelectionWeekday">
