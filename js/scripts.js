@@ -84,7 +84,7 @@ function compareDatesFunc(a, b){
 }
 
 function sortIntoWeeksAndFormat(plant, property, dateArray) {
-  console.log(property)
+
   var weekOneTasks = [];
   var weekTwoTasks = [];
   var weekThreeTasks = [];
