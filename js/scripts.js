@@ -10,7 +10,7 @@ Plant.prototype.makeSchedule = function(taskKey) {
   var daysLater = 28
   var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
   var weekdayArray=["sunday", "monday","tuesday","wednesday","thursday","friday","saturday"]
-  if (taskKey[0] === "Weekly") {
+  if (taskKey[0] === "Once a week") {
     var firstDay = new Date()
     var dayOfWeek = firstDay.getDay()
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
@@ -53,6 +53,39 @@ var allPlantTemplates = []
 
 //user logic
 $(function(){
+
+  $("#plantEntryForm").submit(function(event){
+    event.preventDefault();
+    var nickName = $("#nickNameInput").val()
+    var commonName = $("#commonNameInput").val()
+    var sunlight = $("#sunlightSelection :selected").text()
+    var hardiness = $("#hardinessSelection :selected").text()
+    var water =  $("#waterSelection :selected").text()
+    var waterWeekday = $("#waterSelectionWeekday :checked").val()
+    var waterMonthday = $("#waterMonthDropdown :selected").text()
+    var pruning = $("#pruningSelection :selected").text()
+    var pruneWeekday = $("#pruningSelectionWeekday :checked").val()
+    var pruneMonthday = $("#pruneMonthDropdown :selected").text()
+    var fertilizing = $("#fertilizingSelection :selected").text()
+    var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
+    var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
+
+    var waterUserSelection
+    if(waterWeekday !== null){
+      console.log(waterWeekday)
+      waterUserSelection = waterWeekday
+    } else if(waterMonthday !== null){
+      console.log(waterMonthday)
+      waterUserSelection = waterMonthday
+    } else{
+      console.log("in the else")
+    }
+    console.log(waterUserSelection)
+    water = [water, waterUserSelection]
+    var newPlant = new Plant (commonName, sunlight, hardiness, water, pruning, fertilizing)
+    console.log(newPlant.makeSchedule(newPlant.water))
+  })
+
   document.getElementById("waterSelection").onchange = function(){
     var elementId = "#waterSelection"
     showHideMonthWeek(elementId)
@@ -95,7 +128,7 @@ $(function(){
         showHideMonthWeek("#waterSelection");
         showHideMonthWeek("#pruningSelection");
         showHideMonthWeek("#fertilizingSelection");
-     }
+      }
     }
   };
 });
@@ -134,7 +167,7 @@ allPlantTemplates.push(spider)
 
 // Test Plants
 var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month"], ["Every other week"])
-console.log(testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water))
+// console.log(testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water))
 
 var snake = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month"], ["Never"], ["Annually"])
 allPlantTemplates.push(snake)
@@ -158,8 +191,8 @@ allPlantTemplates.push(dracena)
 
 
 var testMonthlyPlantPruning = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week"])
-console.log(testMonthlyPlantPruning.makeSchedule(testMonthlyPlantPruning.pruning));
+// console.log(testMonthlyPlantPruning.makeSchedule(testMonthlyPlantPruning.pruning));
 
 var testEOWPlantFert = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week", "monday"])
-console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
+// console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
  // pruning, rotating, misting, fertilizing, location

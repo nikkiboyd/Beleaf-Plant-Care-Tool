@@ -13,7 +13,7 @@
     <form  id="plantEntryForm" class="" action="index.html" method="post">
       <div class="form-group">
         <label for="exampleFormControlInput1">Plant Nickname</label>
-        <input type="text" class="form-control" id="commonNameInput" placeholder="Pick a nickname for your plant">
+        <input type="text" class="form-control" id="nickNameInput" placeholder="Pick a nickname for your plant">
       </div>
       <div class="form-group">
         <label for="selectPlant">Select a Plant</label>
@@ -101,7 +101,7 @@
         <div class="hidden" id="waterSelectionMonth">
           <div class="form-group">
             <label for="waterMonthDay">Select a day of the month</label>
-            <select class="form-control">
+            <select id ="waterMonthDropdown" class="form-control">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -180,7 +180,7 @@
         </div>
         <div class="form-group hidden" id="pruningSelectionMonth">
           <label for="pruningMonthDay">Select a day of the month</label>
-          <select class="form-control" id="pruningMonthDay">
+          <select id="pruneMonthDropdown"class="form-control" id="pruningMonthDay">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -258,7 +258,7 @@
         </div>
         <div class="form-group hidden" id="fertilizingSelectionMonth">
           <label for="pruningMonthDay">Select a day of the month</label>
-          <select class="form-control" id="pruningMonthDay">
+          <select id="fertilizingMonthDropdown" class="form-control" id="pruningMonthDay">
             <option>1</option>
             <option>2</option>
             <option>3</option>
