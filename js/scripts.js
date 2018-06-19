@@ -1,48 +1,51 @@
-// make fucntion and eventually a prototype that takes today, and the task array ([frequency, weekDay, and monthDay])
-// It will create a range of days starting from today to 28 days into the future
-// return a list of dates
 
 var today = new Date()
 
-// input 1:
-var taskArrayWater = ["weekly", "thursday"]
-// output 1:
-// [Thursday June 21 Date object, June 28 Date object, July 5 date object, July 12]
-
-// input 2:
-var taskArrayFert = ["monthly", 18]
-// output 2:
-// [Wednesday, July 18th]
-
 // use this with index of
-var weekdayArray=["sunday", "monday","tuesday",
-"wednesday","thursday","friday","saturday"]
 
-function makeSchedule(taskArrayWater) {
+
+Plant.prototype.makeSchedule = function(taskKey) {
   var finalDays = []
   var ddToday = today.getDate()
   var daysLater = 28
   var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
-
-  // account for weekly tasks
-  if (taskArrayWater[0] === "weekly") {
+  var weekdayArray=["sunday", "monday","tuesday","wednesday","thursday","friday","saturday"]
+  if (taskKey[0] === "Weekly") {
     var firstDay = new Date()
     var dayOfWeek = firstDay.getDay()
-    while(firstDay.getDay() !== weekdayArray.indexOf(taskArrayWater[1])){
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
     }
     finalDays.push(firstDay)
-    console.log(firstDay)
-
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
+    return finalDays
+  } else if (taskKey[0] === "Every other week"){
+    var firstDay = new Date()
+    var dayOfWeek = firstDay.getDay()
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
+      firstDay.setDate(firstDay.getDate() + 1)
+    }
+    finalDays.push(firstDay)
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    return finalDays
+
+  } else if (taskKey[0] === "Once a month"){
+    var firstDay = new Date()
+    while(firstDay < fourWeeksLater) {
+      if (firstDay.getDate() === taskKey[1]) {
+      finalDays.push(firstDay)
+      return finalDays
+      } else {
+        firstDay = new Date (firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 1)
+      }
+    }
   }
-  console.log(finalDays)
-  return finalDays
 }
 
-makeSchedule(taskArrayWater)
+
+
 
 
 //pair one
@@ -125,6 +128,14 @@ function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
 
 var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(spider)
+
+
+// spider.makeSchedule(spider.water)
+
+// Test Plants
+var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month"], ["Every other week"])
+console.log(testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water))
+
 var snake = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month"], ["Never"], ["Annually"])
 allPlantTemplates.push(snake)
 var maple = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week"], ["As needed"], ["Never"])
@@ -146,5 +157,9 @@ allPlantTemplates.push(dracena)
 // spidey.location = "next to window"
 
 
+var testMonthlyPlantPruning = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week"])
+console.log(testMonthlyPlantPruning.makeSchedule(testMonthlyPlantPruning.pruning));
 
+var testEOWPlantFert = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week", "monday"])
+console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
  // pruning, rotating, misting, fertilizing, location
