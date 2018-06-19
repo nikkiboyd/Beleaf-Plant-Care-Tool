@@ -76,7 +76,9 @@ $(function(){
     var fertilizing = $("#fertilizingSelection :selected").text()
     var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
-    // buildTaskArray(water, waterWeekday, waterMonthday)
+
+
+
 
     if(waterCheckBoxes.length > 0){
       waterArray.push(water)
@@ -127,17 +129,17 @@ $(function(){
   })
 
   document.getElementById("waterSelection").onchange = function(){
-    var elementId = "#waterSelection"
+    var elementId = "waterSelection"
     showHideMonthWeek(elementId)
   };
 
   document.getElementById("pruningSelection").onchange = function(){
-    var elementId = "#pruningSelection"
+    var elementId = "pruningSelection"
     showHideMonthWeek(elementId)
   };
 
   document.getElementById("fertilizingSelection").onchange = function(){
-    var elementId = "#fertilizingSelection"
+    var elementId = "fertilizingSelection"
     showHideMonthWeek(elementId)
   };
 
@@ -172,19 +174,37 @@ $(function(){
     }
   };
 });
-
+function checkboxlimit(checkgroup, limit){
+  var checkgroup=checkgroup
+  var limit=limit
+  for (var i=0; i<checkgroup.length; i++){
+    checkgroup[i].onclick=function(){
+    var checkedcount=0
+    for (var i=0; i<checkgroup.length; i++)
+      checkedcount+=(checkgroup[i].checked)? 1 : 0
+    if (checkedcount>limit){
+      alert("You can only select a maximum of "+limit+" checkboxes")
+      this.checked=false
+      }
+    }
+  }
+}
 
 function showHideMonthWeek(elementId){
-  var monthSelection = $(elementId + " :selected").text()
+  var monthSelection = $("#" + elementId + " :selected").text()
   if (monthSelection === "Once a month") {
-    $(elementId + "Weekday").hide();
-    $(elementId + "Month").show();
+    $("#" + elementId + "Weekday").hide();
+    $("#" + elementId + "Month").show();
   } else if (monthSelection.search("week") > -1) {
-    $(elementId + "Month").hide();
-    $(elementId + "Weekday").show();
+    var limit= parseInt($("#" + elementId + " :selected").val())
+    var newVar = ("document.forms.plantEntryForm."+ elementId+"CheckBoxes")
+    console.log(newVar)
+    checkboxlimit(eval(newVar), limit)
+    $("#" + elementId + "Month").hide();
+    $("#" + elementId + "Weekday").show();
   } else {
-    $(elementId + "Month").hide();
-    $(elementId + "Weekday").hide();
+    $("#" + elementId + "Month").hide();
+    $("#" + elementId + "Weekday").hide();
   }
 }
 
