@@ -10,9 +10,11 @@ var taskArrayWater = ["weekly", "thursday"]
 // [Thursday June 21 Date object, June 28 Date object, July 5 date object, July 12]
 
 // input 2:
-var taskArrayFert = ["monthly", 18]
+var taskArrayFert = ["Once a month", 100]
 // output 2:
 // [Wednesday, July 18th]
+// input 3:
+ var taskArrayWater = ["Every other week","saturday"]
 
 // use this with index of
 var weekdayArray=["sunday", "monday","tuesday",
@@ -32,17 +34,46 @@ function makeSchedule(taskArrayWater) {
       firstDay.setDate(firstDay.getDate() + 1)
     }
     finalDays.push(firstDay)
-    console.log(firstDay)
-
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
-  }
-  console.log(finalDays)
   return finalDays
+  } else if (taskArrayWater[0] === "Every other week"){
+    var firstDay = new Date()
+    var dayOfWeek = firstDay.getDay()
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskArrayWater[1])){
+      firstDay.setDate(firstDay.getDate() + 1)
+    }
+    finalDays.push(firstDay)
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    return finalDays
+
+  } else if (taskArrayWater[0] === "Once a month"){
+    var firstDay = new Date()
+    while(firstDay < fourWeeksLater) {
+      console.log(firstDay)
+      if (firstDay.getDate() === taskArrayFert[1]) {
+      finalDays.push(firstDay)
+      return finalDays
+      } else {
+        firstDay = new Date (firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 1)
+      }
+    }
+    //
+    // for (; firstDay.getDate() <= 31  ; ++firstDay.getDate()) {
+    //   if (firstDay.getDate() === taskArrayWater[1]) {
+    //   return firstDay
+    //   }
+    // }
+    //
+    // while(firstDay.getDay() !== weekdayArray.indexOf(taskArrayWater[1])){
+    //   firstDay.setDate(firstDay.getDate() + 1)
+    // }
+    // finalDays.push(firstDay)
+  }
 }
 
-makeSchedule(taskArrayWater)
+makeSchedule(taskArrayFert)
 
 
 
@@ -94,10 +125,10 @@ function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
 var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(spider)
 
-//test user input
-var spidey = new Plant ("spider", "full", ["weekly"])
-spidey.nickname = "spidey"
-spidey.location = "next to window"
+// //test user input
+// var spidey = new Plant ("spider", "full", ["weekly"])
+// spidey.nickname = "spidey"
+// spidey.location = "next to window"
 
 
 
