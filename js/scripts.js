@@ -8,7 +8,7 @@ var monthArray = ["January", "February", "March", "April", "May", "June",
 Plant.prototype.makeSchedule = function(taskKey) {
   var finalDays = []
   var ddToday = today.getDate()
-  var daysLater = 32
+  var daysLater = 40
   var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
 
   if (taskKey[0] === "Once a week") {
@@ -101,7 +101,6 @@ function makeCalendar(everyPlant, userDays) {
 var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month"], ["Every other week"])
 var testArrayDates = testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water)
 
-
 //user logic
 $(function(){
   document.getElementById("waterSelection").onchange = function(){
@@ -118,7 +117,6 @@ $(function(){
     var elementId = "#fertilizingSelection"
     showHideMonthWeek(elementId)
   };
-
 
   document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
