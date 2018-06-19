@@ -1,15 +1,14 @@
 
 var today = new Date()
 
-// use this with index of
-
+  var weekdayArray=["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
 Plant.prototype.makeSchedule = function(taskKey) {
   var finalDays = []
   var ddToday = today.getDate()
   var daysLater = 28
   var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
-  var weekdayArray=["sunday", "monday","tuesday","wednesday","thursday","friday","saturday"]
+
   if (taskKey[0] === "Weekly") {
     var firstDay = new Date()
     var dayOfWeek = firstDay.getDay()
@@ -30,8 +29,27 @@ Plant.prototype.makeSchedule = function(taskKey) {
     finalDays.push(firstDay)
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
     return finalDays
+  } else if (taskKey[0] === "Twice a week"){
+    var firstDay = new Date()
+    var secondDay = new Date()
+    var twoDays = [taskKey[1], taskKey[2]];
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
+      firstDay.setDate(firstDay.getDate() + 1)
+    }
+    finalDays.push(firstDay)
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
 
-  } else if (taskKey[0] === "Once a month"){
+    while(secondDay.getDay() !== weekdayArray.indexOf(taskKey[2])){
+      secondDay.setDate(secondDay.getDate() + 1)
+    }
+    finalDays.push(secondDay)
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 7))
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 14))
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 21))
+    return finalDays
+  } else if (taskKey[0] === "Once a month") {
     var firstDay = new Date()
     while(firstDay < fourWeeksLater) {
       if (firstDay.getDate() === taskKey[1]) {
@@ -133,8 +151,8 @@ allPlantTemplates.push(spider)
 // spider.makeSchedule(spider.water)
 
 // Test Plants
-var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month"], ["Every other week"])
-console.log(testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water))
+var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month"], ["Every other week"])
+var testArrayDates = testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water)
 
 var snake = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month"], ["Never"], ["Annually"])
 allPlantTemplates.push(snake)
@@ -157,9 +175,24 @@ allPlantTemplates.push(dracena)
 // spidey.location = "next to window"
 
 
-var testMonthlyPlantPruning = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week"])
+var testMonthlyPlantPruning = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Twice a week", "Tuesday", "Thursday"], ["Every other week"])
 console.log(testMonthlyPlantPruning.makeSchedule(testMonthlyPlantPruning.pruning));
 
-var testEOWPlantFert = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week", "monday"])
-console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
+var testEOWPlantFert = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month", 14], ["Every other week", "Monday"])
+// console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
  // pruning, rotating, misting, fertilizing, location
+
+// pair 2 tuesday B
+console.log(testArrayDates)
+var monthArray = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"]
+
+testArrayDates.forEach(function(date){
+  var dayOfWeekString = weekdayArray[date.getDay()]
+  var monthString = monthArray[date.getMonth()]
+  var dateOfMonth = date.getDate()
+  var year = date.getFullYear()
+  var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
+  $("#fullDate").text(formattedDate);
+  console.log(formattedDate)
+})
