@@ -84,8 +84,11 @@ $(function(){
        showHideMonthWeek("#pruningSelection");
        $("#fertilizingSelection").val(fertilizingFrequency);
        showHideMonthWeek("#fertilizingSelection");
+       $("#commonNameDiv").hide()
      } else if (plantName === "Create your own") {
+        $("#commonNameDiv").show()
         document.getElementById("plantEntryForm").reset();
+        $("#selectPlant").val("Create your own");
         showHideMonthWeek("#waterSelection");
         showHideMonthWeek("#pruningSelection");
         showHideMonthWeek("#fertilizingSelection");

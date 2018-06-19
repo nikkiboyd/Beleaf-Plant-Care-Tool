@@ -12,6 +12,10 @@
   <div class="container">
     <form  id="plantEntryForm" class="" action="index.html" method="post">
       <div class="form-group">
+        <label for="exampleFormControlInput1">Plant Nickname</label>
+        <input type="text" class="form-control" id="commonNameInput" placeholder="Pick a nickname for your plant">
+      </div>
+      <div class="form-group">
         <label for="selectPlant">Select a Plant</label>
         <select class="form-control" id="selectPlant">
           <option>Select a plant to begin</option>
@@ -25,6 +29,10 @@
           <option>Asparagus Fern</option>
           <option>Dracena</option>
         </select>
+      </div>
+      <div id="commonNameDiv" class="form-group hidden">
+        <label for="exampleFormControlInput1">Common Name</label>
+        <input type="text" class="form-control" id="commonNameInput" placeholder="Enter plant's common name">
       </div>
       <div class="form-group">
         <label for="sunlightSelection">Select level of sunlight:</label>
