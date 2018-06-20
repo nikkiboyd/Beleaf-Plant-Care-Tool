@@ -86,7 +86,11 @@ function compareDatesFunc(a, b){
   return (a - b);
 }
 
-function sortIntoWeeksAndFormat(plant, property, dateArray) {
+function compareFirstElementDatesFunc(a, b){
+  return (a[0] - b[0]);
+}
+
+function sortIntoWeeksAndFormat(allEvents) {
   var weekOneRange = [today, (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6))];
   var weekTwoRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13))]
   var weekThreeRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20))]
@@ -99,8 +103,8 @@ function sortIntoWeeksAndFormat(plant, property, dateArray) {
   var weekFourEvents = [];
   var glanceEvents = [];
 
-  var plantPropSpecificArray = [[], [], [], [], []]
-
+  allEvents.sort(compareFirstElementDatesFunc);
+  console.log(allEvents)
   for(i = 0; i < dateArray.length; i++) {
     var dayOfWeekString = weekdayArray[dateArray[i].getDay()]
     var monthString = monthArray[dateArray[i].getMonth()]
@@ -168,9 +172,9 @@ function sortIntoWeeksAndFormat(plant, property, dateArray) {
 }
 
 function makeCalendar(everyPlant) {
-
   var allEvents = [];
   everyPlant.forEach(function(plant) {
+
     var waterDays = plant.makeSchedule(plant.water)
     for (i = 0; i < waterDays.length; i++) {
       var singleWaterEvent = [];
@@ -181,14 +185,14 @@ function makeCalendar(everyPlant) {
     var pruningDays = plant.makeSchedule(plant.pruning)
     for (x = 0; x < pruningDays.length; x++) {
       var singlePruneEvent = [];
-      singlePruneEvent.push(pruningDays[i], plant.commonName, "Prune");
+      singlePruneEvent.push(pruningDays[x], plant.commonName, "Prune");
       allEvents.push(singlePruneEvent)
     }
 
     var fertilizingDays = plant.makeSchedule(plant.fertilizing)
     for (y = 0; y < fertilizingDays.length; y++) {
       var singleFertilizeEvent = [];
-      singleFertilizeEvent.push(fertilizingDays[i], plant.commonName, "Fertilize");
+      singleFertilizeEvent.push(fertilizingDays[y], plant.commonName, "Fertilize");
       allEvents.push(singleFertilizeEvent)
     }
   });
@@ -334,8 +338,9 @@ $(function(){
     event.preventDefault();
     var everyPlant = testPlants.concat(allUserPlants);
     console.log(everyPlant)
-    var allDays = makeCalendar(everyPlant);
-    console.log(allDays)
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
+    console.log(allEvents)
     // testArrayDates.forEach(function(date){
     //   var dayOfWeekString = weekdayArray[date.getDay()]
     //   var monthString = monthArray[date.getMonth()]
