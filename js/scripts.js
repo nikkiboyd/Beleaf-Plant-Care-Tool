@@ -91,7 +91,7 @@ function sortIntoWeeksAndFormat(allEvents) {
     var monthString = monthArray[allEvents[i][0].getMonth()]
     var dateOfMonth = allEvents[i][0].getDate()
     var year = allEvents[i][0].getFullYear()
-    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
+    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth
 
     if (allEvents[i][0] >= weekOneRange[0] && allEvents[i][0] <= weekOneRange[1]) {
       $("#week-one-tasks").append("<div class='form-check'>" +
