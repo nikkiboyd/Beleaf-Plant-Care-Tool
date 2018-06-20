@@ -44,109 +44,121 @@
           </div>
         </div>
       </div>
-
-      <div class="form-group">
-        <label for="sunlightSelection">Select level of sunlight:</label>
-        <select class="form-control" id="sunlightSelection">
-          <option>Select a value</option>
-          <option>Full Sun</option>
-          <option>Part Sun</option>
-          <option>Shade</option>
-          <option>Indirect Sun</option>
-          <option>North-facing</option>
-          <option>South-facing</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="hardinessSelection">Select hardiness type:</label>
-        <select class="form-control" id="hardinessSelection">
-          <option>Select a value</option>
-          <option>Average</option>
-          <option>Heat Tolerant</option>
-          <option>Drought Tolerant</option>
-          <option>Very Tolerant</option>
-          <option>Temperamental</option>
-        </select>
-      </div>
-      <div class="waterDiv">
-        <div class="form-group">
-          <label for="waterSelection">How often to water:</label>
-          <select class="form-control" id="waterSelection">
+      <h3 id="detailsHeader" class="hidden">Tell us the details about <span class="plantName">your plant </span></h3>
+      <div class="row bottomBorder" id="plantEntryStepTwo">
+        <div class="form-group col-sm-5">
+          <label for="sunlightSelection"> <span class="plantName">Plant</span>'s sunlight needs are</label>
+          <select class="form-control" id="sunlightSelection">
             <option>Select a value</option>
-            <option value="1">Once a week</option>
-            <option value="2">Twice a week</option>
-            <option value="1">Every other week</option>
-            <option>Once a month</option>
+            <option>Full Sun</option>
+            <option>Part Sun</option>
+            <option>Shade</option>
+            <option>Indirect Sun</option>
+            <option>North-facing</option>
+            <option>South-facing</option>
           </select>
         </div>
-        <div class="hidden" id="waterSelectionWeekday">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterMonday" value="monday">
-            <label class="form-check-label" for="waterMonday">Monday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterTuesday" value="tuesday">
-            <label class="form-check-label" for="waterTuesday">Tuesday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterWednesday" value="wednesday">
-            <label class="form-check-label" for="waterWednesday">Wednesday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterThursday" value="thursday">
-            <label class="form-check-label" for="waterThursday">Thursday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterFriday" value="friday">
-            <label class="form-check-label" for="waterFriday">Friday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSaturday" value="saturday">
-            <label class="form-check-label" for="waterSaturday">Saturday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSunday" value="sunday">
-            <label class="form-check-label" for="waterSunday">Sunday</label>
-          </div>
+        <div class="form-group col-sm-5">
+          <label for="hardinessSelection"><span class="plantName">Plant's</span>'s hardiness type is</label>
+          <select class="form-control" id="hardinessSelection">
+            <option>Select a value</option>
+            <option>Average</option>
+            <option>Heat Tolerant</option>
+            <option>Drought Tolerant</option>
+            <option>Very Tolerant</option>
+            <option>Temperamental</option>
+          </select>
         </div>
-        <div class="hidden" id="waterSelectionMonth">
-          <div class="form-group">
-            <label for="waterMonthDay">Select a day of the month</label>
-            <select id ="waterMonthDropdown" class="form-control">
-              <option>Select a date</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-              <option>16</option>
-              <option>17</option>
-              <option>18</option>
-              <option>19</option>
-              <option>20</option>
-              <option>21</option>
-              <option>22</option>
-              <option>23</option>
-              <option>24</option>
-              <option>25</option>
-              <option>26</option>
-              <option>27</option>
-              <option>28</option>
-            </select>
-          </div>
+        <div class="col-sm-2">
+          <button id="sunNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="sunReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
         </div>
       </div>
-      <div class="pruningDiv">
+      <div class="waterDiv row">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label for="waterSelection">How often to water:</label>
+            <select class="form-control" id="waterSelection">
+              <option>Select a value</option>
+              <option value="1">Once a week</option>
+              <option value="2">Twice a week</option>
+              <option value="1">Every other week</option>
+              <option>Once a month</option>
+            </select>
+          </div>
+          <div class="hidden" id="waterSelectionWeekday">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterMonday" value="monday">
+              <label class="form-check-label" for="waterMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterTuesday" value="tuesday">
+              <label class="form-check-label" for="waterTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterWednesday" value="wednesday">
+              <label class="form-check-label" for="waterWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterThursday" value="thursday">
+              <label class="form-check-label" for="waterThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterFriday" value="friday">
+              <label class="form-check-label" for="waterFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSaturday" value="saturday">
+              <label class="form-check-label" for="waterSaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSunday" value="sunday">
+              <label class="form-check-label" for="waterSunday">Sunday</label>
+            </div>
+          </div>
+          <div class="hidden" id="waterSelectionMonth">
+            <div class="form-group">
+              <label for="waterMonthDay">Select a day of the month</label>
+              <select id ="waterMonthDropdown" class="form-control">
+                <option>Select a date</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button id="sunNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="sunReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
+        </div>
+      </div>
+      <div class="pruningDiv hidden">
         <div class="form-group">
           <label for="pruningSelection">How often to prune:</label>
           <select class="form-control" id="pruningSelection">
@@ -224,7 +236,7 @@
           </select>
         </div>
       </div>
-      <div class="fertilizingDiv">
+      <div class="fertilizingDiv hidden">
         <div class="form-group">
           <label for="fertilizingSelection">How often to fertilize:</label>
           <select class="form-control" id="fertilizingSelection">
@@ -302,7 +314,7 @@
           </select>
         </div>
       </div>
-      <button type="submit" name="button">Add Plant</button>
+      <button class="hidden" type="submit" name="button">Add Plant</button>
     </form>
     <div id="calendar-display">
       <span id="fullDate"></span>
@@ -333,7 +345,7 @@
     <p class="daily-tasks" id="week-glance-tasks">
 
     </p>
-    <button id="refreshButton" type="button" class="btn btn-primary">Refresh Calendar</button>
+    <button id="refreshButton" type="button" class="btn btn-primary ">Refresh Calendar</button>
   </div>
 </body>
 </html>

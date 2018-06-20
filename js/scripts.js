@@ -245,8 +245,45 @@ function validateNickName(nickName){
   return validatedNickName
 }//END OF validateNickName
 
+function getTemplatePlantDetails(){
+  // var nickname = $("#nickNameInput").val()
+  var plantName = $("#selectPlant :selected").text()
+  for(plant = 0; plant < allPlantTemplates.length; ++plant){
+    if(plantName === allPlantTemplates[plant].commonName){
+      //get values for selected plant
+      var sunlight = allPlantTemplates[plant].sunlight
+      var hardiness = allPlantTemplates[plant].hardiness
+      var waterFrequency = allPlantTemplates[plant].water[0]
+      var pruningFrequency = allPlantTemplates[plant].pruning[0]
+      var fertilizingFrequency = allPlantTemplates[plant].fertilizing[0]
+      //update option shown in dropdown menus
+      updatePlantDetails("sunlightSelection", sunlight)
+      updatePlantDetails("hardinessSelection", hardiness)
+      updatePlantDetails("waterSelection", waterFrequency)
+      updatePlantDetails("pruningSelection", pruningFrequency)
+      updatePlantDetails("fertilizingSelection", fertilizingFrequency)
+     // show or hide month or week selection divs
+    //  showHideMonthWeek("waterSelection");
+    //  showHideMonthWeek("pruningSelection");
+    //  showHideMonthWeek("fertilizingSelection");
+    //  $("#commonNameDiv").hide()
+  //  } else if (plantName === "Create your own") {
+  //     $("#commonNameDiv").show()
+  //     // document.getElementById("plantEntryForm").reset();
+  //     $("#selectPlant").val("Create your own");
+  //     showHideMonthWeek("waterSelection");
+  //     showHideMonthWeek("pruningSelection");
+  //     showHideMonthWeek("fertilizingSelection");
+    }
+  }
+} //END getTemplatePlantDetails
+
 //user logic
 $(function(){
+  //Hide Plant detail divs
+  $("#plantEntryStepTwo").hide()
+  $(".waterDiv").hide()
+
   //STEP ONE - Name plant and select its type
   $("#createPlant").click(function(event){
     event.preventDefault()
@@ -258,47 +295,25 @@ $(function(){
     if(validatedNickName !== ""){
       var validatedCommonName = validateCommonName(commonName, customCommonName);
       if(validatedCommonName !== ""){
-        console.log("the validated common name is " + validatedCommonName)
-       alert(nickName + " the " + validatedCommonName)
-       //show the plant details divs
-       //append to say something about plant
+       $("#plantEntryStepTwo").show()
+       $("#detailsHeader").show()
+       $(".plantName").text(nickName + " the " + validatedCommonName)
+       getTemplatePlantDetails()
      }
     }
   });
 
-  // STEP TWO - fill in plant details if a template plant is selected
-  document.getElementById("selectPlant").onchange = function(){
-    var nickname = $("#nickNameInput").val()
-    var plantName = $("#selectPlant :selected").text()
-    for(plant = 0; plant < allPlantTemplates.length; ++plant){
-      if(plantName === allPlantTemplates[plant].commonName){
-        //get values for selected plant
-        var sunlight = allPlantTemplates[plant].sunlight
-        var hardiness = allPlantTemplates[plant].hardiness
-        var waterFrequency = allPlantTemplates[plant].water[0]
-        var pruningFrequency = allPlantTemplates[plant].pruning[0]
-        var fertilizingFrequency = allPlantTemplates[plant].fertilizing[0]
-        //update option shown in dropdown menus
-        updatePlantDetails("sunlightSelection", sunlight)
-        updatePlantDetails("hardinessSelection", hardiness)
-        updatePlantDetails("waterSelection", waterFrequency)
-        updatePlantDetails("pruningSelection", pruningFrequency)
-        updatePlantDetails("fertilizingSelection", fertilizingFrequency)
-       // show or hide month or week selection divs
-       showHideMonthWeek("waterSelection");
-       showHideMonthWeek("pruningSelection");
-       showHideMonthWeek("fertilizingSelection");
-       $("#commonNameDiv").hide()
-     } else if (plantName === "Create your own") {
-        $("#commonNameDiv").show()
-        // document.getElementById("plantEntryForm").reset();
-        $("#selectPlant").val("Create your own");
-        showHideMonthWeek("waterSelection");
-        showHideMonthWeek("pruningSelection");
-        showHideMonthWeek("fertilizingSelection");
-      }
-    }
-  };//END OF ONCHANGE FOR SELECTPLANT
+  // STEP TWO -Sunlight and hardiness
+
+    $("#sunNext").click(function(){
+      console.log("next button")
+      $("#sunNext").hide()
+      $("#sunReset").show()
+      $(".waterDiv").show()
+      $("#plantEntryStepTwo").removeClass("bottomBorder");
+      $(".waterDiv").addClass("bottomBorder");
+
+    })
 
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
@@ -349,7 +364,7 @@ $(function(){
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
     console.log(newPlant)
-
+    $("#plantEntryStepTwo").hide()
   }) //END SUBMIT CLICK EVENT
 
 
