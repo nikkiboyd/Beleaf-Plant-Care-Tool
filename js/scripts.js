@@ -203,9 +203,22 @@ Plant.prototype.addUsersDetails = function(newPlant, nickName){
 }
 
 //This is called by click event for Create your plant
-function validateNickNameAndCommonName(nickName, commonName, customCommonName){
-  var validatedNickName
+function validateCommonName(commonName, customCommonName){
   var validatedCommonName
+  if (commonName === "Create your own" && customCommonName !== ""){
+    validatedCommonName = customCommonName
+    console.log("this is the validated commonName " + validatedCommonName)
+  } else if (commonName !== "Select a plant to begin" && commonName !== "Create your own"){
+      validatedCommonName = commonName
+  } else{
+    alert("what kind of plant is this")
+  }
+  console.log("the validated commonName is " + validatedCommonName)
+}//END OF validateCommonName
+
+
+function validateNickName(nickName){
+  var validatedNickName
   //validate nickname
   if(nickName !== ""){
     console.log("in the if statement")
@@ -226,17 +239,8 @@ function validateNickNameAndCommonName(nickName, commonName, customCommonName){
   } else {
     alert("Please enter a nickname for your plant")
   }
-  //validate type of plant
-  if (commonName === "Create your own" && customCommonName !== ""){
-    validatedCommonName = customCommonName
-    console.log("this is the validated commonName " + validatedCommonName)
-  } else if (commonName !== "Select a plant to begin" && commonName !== "Create your own"){
-      validatedCommonName = commonName
-  } else{
-    alert("what kind of plant is " + validatedNickName)
-  }
-  console.log("the plant name is " + validatedNickName + " the " + validatedCommonName)
-}//END OF validateNickNameAndCommonName
+  console.log("the validated nickname is " + validatedNickName)
+}//END OF validateNickName
 
 //user logic
 $(function(){
@@ -246,8 +250,8 @@ $(function(){
     var nickName = $("#nickNameInput").val()
     var commonName = $("#selectPlant").val()
     var customCommonName = $("#customCommonName").val()
-    console.log("the custom common name is " + customCommonName )
-    validateNickNameAndCommonName(nickName, commonName, customCommonName)
+    validateNickName(nickName)
+    validateCommonName(commonName, customCommonName)
   });
 
   // STEP TWO - fill in plant details if a template plant is selected
