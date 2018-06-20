@@ -285,11 +285,23 @@ function isOptionAlreadySelected(elementId){
   }
 }
 
+function hasDropdownOptionBeenSelected(value){
+  if(value === "Select a value"){
+    return false
+  } else {
+    return true
+  }
+}
+
+
+
 //user logic
 $(function(){
   //Hide Plant detail divs
   $("#plantEntryStepTwo").hide()
   $(".waterDiv").hide()
+  $(".pruningDiv").hide()
+
 
   //STEP ONE - Name plant and select its type
   $("#createPlant").click(function(event){
@@ -315,19 +327,63 @@ $(function(){
         $("#commonNameDiv").show()
       }
     }
-  // STEP TWO -Sunlight and hardiness, show water
+  // STEP TWO -Select & validate sunlight and hardiness, show water div
   $("#sunNext").click(function(){
-    $("#sunNext").hide()
-    $("#sunReset").show()
-    $(".waterDiv").show()
-    $("#plantEntryStepTwo").removeClass("bottomBorder");
-    $(".waterDiv").addClass("bottomBorder");
-    isOptionAlreadySelected("waterSelection")
+    var sunlight = $("#sunlightSelection :selected").text()
+    var hardiness = $("#hardinessSelection :selected").text()
+    if(hasDropdownOptionBeenSelected(sunlight)){
+      if(hasDropdownOptionBeenSelected(hardiness)){
+        $("#sunNext").hide()
+        $("#sunReset").show()
+        $(".waterDiv").show()
+        $("#plantEntryStepTwo").removeClass("bottomBorder");
+        $(".waterDiv").addClass("bottomBorder");
+        isOptionAlreadySelected("waterSelection")
+      } else{
+        alert("Please select hardiness level")
+      }
+    } else {
+      alert("Please select sunlight needs")
+    }
   })
 
   //STEP THREE - Water div, show pruning
-  //
-  //show pruning div
+  $("#waterNext").click(function(){
+    var water = $("#waterSelection :selected").text()
+    var waterMonthday = $("#waterMonthDropdown :selected").text()
+    var waterCheckBoxes = []
+    $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
+      waterCheckBoxes.push($(this).val());
+    })
+    $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
+      waterCheckBoxes.push($(this).val());
+    })
+    if(hasDropdownOptionBeenSelected(water)){
+      if(waterCheckBoxes.length > 0 || waterMonthday !== "Select a date"){
+        console.log("in the if statement with" + water)
+        $("#waterNext").hide()
+        $("#waterReset").show()
+        $(".pruningDiv").show()
+        $(".waterDiv").removeClass("bottomBorder");
+        $(".pruningDiv").addClass("bottomBorder");
+        isOptionAlreadySelected("pruningSelection")
+      } else {
+        alert("Please select when you will water")
+      }
+    } else {
+      alert("Please select how often to water")
+    }
+  })
+
+  //STEP FOUR -Pruning div, show fertilizing div
+  $("#pruningNext").click(function(){
+    var water = $("#waterSelection :selected").text()
+    var pruneMonthday = $("#pruneMonthDropdown :selected").text()
+    var waterCheckBoxes = []
+    alert("pruning working")
+
+  })
+
 
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
@@ -442,20 +498,23 @@ function checkNickname(nickname, myPlants){
 });
 
 function showHideMonthWeek(elementId){
-  var monthSelection = $("#" + elementId + " :selected").text()
-  if (monthSelection === "Once a month") {
+  var selection = $("#" + elementId + " :selected").text()
+  if (selection === "Once a month") {
     $("#" + elementId + "Weekday").hide();
+    $("#" + elementId + "WeekdayLabel").hide();
     $("#" + elementId + "Month").show();
-  } else if (monthSelection.search("week") > -1) {
+  } else if (selection.search("week") > -1) {
     var limit= parseInt($("#" + elementId + " :selected").val())
     var newVar = ("document.forms.plantEntryForm."+ elementId+"CheckBoxes")
     console.log(newVar)
     checkboxlimit(eval(newVar), limit)
     $("#" + elementId + "Month").hide();
     $("#" + elementId + "Weekday").show();
+    $("#" + elementId + "WeekdayLabel").show();
   } else {
     $("#" + elementId + "Month").hide();
     $("#" + elementId + "Weekday").hide();
+    $("#" + elementId + "WeekdayLabel").hide();
   }
 }
 

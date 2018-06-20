@@ -77,7 +77,7 @@
       <div class="waterDiv row">
         <div class="col-sm-10">
           <div class="form-group">
-            <label for="waterSelection">How often to water:</label>
+            <label for="waterSelection"> <span class="plantName"></span> needs to be watered </label>
             <select class="form-control" id="waterSelection">
               <option>Select a value</option>
               <option value="1">Once a week</option>
@@ -85,6 +85,9 @@
               <option value="1">Every other week</option>
               <option>Once a month</option>
             </select>
+          </div>
+          <div class ="hidden" id="waterSelectionWeekdayLabel">
+            Select when you will water
           </div>
           <div class="hidden" id="waterSelectionWeekday">
             <div class="form-check form-check-inline">
@@ -158,82 +161,88 @@
           <button id="waterReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
         </div>
       </div>
-      <div class="pruningDiv hidden">
-        <div class="form-group">
-          <label for="pruningSelection">How often to prune:</label>
-          <select class="form-control" id="pruningSelection">
-            <option>Select a value</option>
-            <option value="1">Once a week</option>
-            <option value="2">Twice a week</option>
-            <option value="1">Every other week</option>
-            <option value="1">Once a month</option>
-            <!-- <option>As needed</option>
-            <option>Annually</option>
-            <option>Never</option> -->
-          </select>
+      <div class="pruningDiv row">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label for="pruningSelection">How often to prune:</label>
+            <select class="form-control" id="pruningSelection">
+              <option>Select a value</option>
+              <option value="1">Once a week</option>
+              <option value="2">Twice a week</option>
+              <option value="1">Every other week</option>
+              <option value="1">Once a month</option>
+              <!-- <option>As needed</option>
+              <option>Annually</option>
+              <option>Never</option> -->
+            </select>
+          </div>
+          <div id="pruningSelectionWeekday" class="hidden">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningeSelectionCheckBoxes" type="checkbox" id="pruneMonday" value="monday">
+              <label class="form-check-label" for="pruneMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneTuesday" value="tuesday">
+              <label class="form-check-label" for="pruneTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneWednesday" value="wednesday">
+              <label class="form-check-label" for="pruneWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneThursday" value="thursday">
+              <label class="form-check-label" for="pruneThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneFriday" value="friday">
+              <label class="form-check-label" for="pruneFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSaturday" value="saturday">
+              <label class="form-check-label" for="pruneSaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSunday" value="sunday">
+              <label class="form-check-label" for="pruneSunday">Sunday</label>
+            </div>
+          </div>
+          <div class="form-group hidden" id="pruningSelectionMonth">
+            <label for="pruningMonthDay">Select a day of the month</label>
+            <select id="pruneMonthDropdown"class="form-control" id="pruningMonthDay">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+            </select>
+          </div>
         </div>
-        <div id="pruningSelectionWeekday" class="hidden">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningeSelectionCheckBoxes" type="checkbox" id="pruneMonday" value="monday">
-            <label class="form-check-label" for="pruneMonday">Monday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneTuesday" value="tuesday">
-            <label class="form-check-label" for="pruneTuesday">Tuesday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneWednesday" value="wednesday">
-            <label class="form-check-label" for="pruneWednesday">Wednesday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneThursday" value="thursday">
-            <label class="form-check-label" for="pruneThursday">Thursday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneFriday" value="friday">
-            <label class="form-check-label" for="pruneFriday">Friday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSaturday" value="saturday">
-            <label class="form-check-label" for="pruneSaturday">Saturday</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSunday" value="sunday">
-            <label class="form-check-label" for="pruneSunday">Sunday</label>
-          </div>
-        </div>
-        <div class="form-group hidden" id="pruningSelectionMonth">
-          <label for="pruningMonthDay">Select a day of the month</label>
-          <select id="pruneMonthDropdown"class="form-control" id="pruningMonthDay">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
-            <option>22</option>
-            <option>23</option>
-            <option>24</option>
-            <option>25</option>
-            <option>26</option>
-            <option>27</option>
-            <option>28</option>
-          </select>
+        <div class="col-sm-2">
+          <button id="pruningNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="pruningReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
         </div>
       </div>
       <div class="fertilizingDiv hidden">
