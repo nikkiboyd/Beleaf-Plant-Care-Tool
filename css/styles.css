@@ -1,6 +1,17 @@
 body{
 
 }
+#plantEntryStepOne{
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+button{
+  margin-bottom: 10px;
+}
+
+.custom{
+  font-style: italic;
+}
 
 .hidden {
   display: none;
