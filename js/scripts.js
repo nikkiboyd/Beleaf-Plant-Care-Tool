@@ -140,6 +140,13 @@ function sortIntoWeeksAndFormat(plant, property, dateArray) {
                           property + " " + plant.commonName + " on " + dateArray[i] +
                           "</label>" +
                           "</div>")
+    } else {
+      $("#week-glance-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          "Else: " + property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
     }
   }
 }
@@ -161,6 +168,34 @@ function makeCalendar(everyPlant) {
 var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month"], ["Every other week"])
 var testArrayDates = testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water)
 
+function updatePlantDetails(elementId, detail){
+  var dropdown = document.getElementById(elementId)
+  for (i=0; i < dropdown.options.length; ++i){
+   if(dropdown.options[i].text === detail){
+     dropdown.selectedIndex = i
+     break
+   } else{
+     dropdown.selectedIndex = 0
+   }
+  }
+}
+
+function checkboxlimit(checkgroup, limit){
+  var checkgroup=checkgroup
+  var limit=limit
+  for (var i=0; i<checkgroup.length; i++){
+    checkgroup[i].onclick=function(){
+    var checkedcount=0
+    for (var i=0; i<checkgroup.length; i++)
+      checkedcount+=(checkgroup[i].checked)? 1 : 0
+    if (checkedcount>limit){
+      alert("You can only select a maximum of "+limit+" checkboxes")
+      this.checked=false
+      }
+    }
+  }
+}
+
 //user logic
 $(function(){
 
@@ -171,13 +206,10 @@ $(function(){
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
     var water =  $("#waterSelection :selected").text()
-    // var waterWeekday = $("#waterSelectionWeekday :checked").val()
-    // console.log(waterWeekday)
     var waterCheckBoxes = []
     $("input:checkbox[name=waterDayCheckBoxes]:checked").each(function(){
       waterCheckBoxes.push($(this).val());
     })
-    console.log(water, waterCheckBoxes)
     var waterArray =[]
     var waterMonthday = $("#waterMonthDropdown :selected").text()
     var prune = $("#pruningSelection :selected").text()
@@ -187,9 +219,7 @@ $(function(){
     var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
 
-
-
-
+    //NEED TO UP TO MAKE SURE USER HAS SELECTED ALL NECESSARY SELECTIONS FOR ALL FIELDS
     if(waterCheckBoxes.length > 0){
       waterArray.push(water)
       console.log("water array: " + waterArray)
@@ -204,29 +234,6 @@ $(function(){
     } else{
       alert("Select your water day.")
     }
-    // if(typeof waterWeekday !== "undefined"){
-    //   console.log("waterWeekday")
-    //   water = [water, waterWeekday]
-    // } else if(waterMonthday !== "Select a date"){
-    //   console.log(waterMonthday)
-    //     water = [water, parseInt(waterMonthday)]
-    // } else{
-    //   alert("Select your water day.")
-    // }
-
-    // prunig array
-    // if(typeof pruneWeekday !== "undefined"){
-    //   console.log(pruneWeekday)
-    //   prune = [prune, pruneWeekday]
-    //   console.log(prune)
-    // } else if(pruneMonthday !== "Select a date"){
-    //   console.log(pruneMonthday)
-    //     prune = [prune, parseInt(pruneMonthday)]
-    //     console.log(prune)
-    // } else {
-    //     alert("Select your prune day.")
-    // }
-
     if(waterArray.length >= 2){
       var newPlant = new Plant (commonName, sunlight, hardiness, waterArray, prune, fertilizing)
       console.log(newPlant)
@@ -236,6 +243,7 @@ $(function(){
       console.log("in the else for the water check if")
     }
     console.log(newPlant)
+
   })
 
   document.getElementById("waterSelection").onchange = function(){
@@ -255,54 +263,47 @@ $(function(){
 
   document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
+    console.log(plantName)
     for(plant = 0; plant < allPlantTemplates.length; ++plant){
       if(plantName === allPlantTemplates[plant].commonName){
+        //get values for selected plant
         var sunlight = allPlantTemplates[plant].sunlight
         var hardiness = allPlantTemplates[plant].hardiness
         var waterFrequency = allPlantTemplates[plant].water[0]
         var pruningFrequency = allPlantTemplates[plant].pruning[0]
         var fertilizingFrequency = allPlantTemplates[plant].fertilizing[0]
-       $("#sunlightSelection").val(sunlight);
-       $("#hardinessSelection").val(hardiness);
-       $("#waterSelection").val(waterFrequency);
-       showHideMonthWeek("#waterSelection");
-       $("#pruningSelection").val(pruningFrequency);
-       showHideMonthWeek("#pruningSelection");
-       $("#fertilizingSelection").val(fertilizingFrequency);
-       showHideMonthWeek("#fertilizingSelection");
+        //update option shown in dropdown menus
+        updatePlantDetails("sunlightSelection", sunlight)
+        updatePlantDetails("hardinessSelection", hardiness)
+        updatePlantDetails("waterSelection", waterFrequency)
+        updatePlantDetails("pruningSelection", pruningFrequency)
+        updatePlantDetails("fertilizingSelection", fertilizingFrequency)
+       // show or hide month or week selection divs
+       showHideMonthWeek("waterSelection");
+       showHideMonthWeek("pruningSelection");
+       showHideMonthWeek("fertilizingSelection");
        $("#commonNameDiv").hide()
      } else if (plantName === "Create your own") {
         $("#commonNameDiv").show()
         document.getElementById("plantEntryForm").reset();
         $("#selectPlant").val("Create your own");
-        showHideMonthWeek("#waterSelection");
-        showHideMonthWeek("#pruningSelection");
-        showHideMonthWeek("#fertilizingSelection");
+        showHideMonthWeek("waterSelection");
+        showHideMonthWeek("pruningSelection");
+        showHideMonthWeek("fertilizingSelection");
       }
     }
   };
 
-});
-function checkboxlimit(checkgroup, limit){
-  var checkgroup=checkgroup
-  var limit=limit
-  for (var i=0; i<checkgroup.length; i++){
-    checkgroup[i].onclick=function(){
-    var checkedcount=0
-    for (var i=0; i<checkgroup.length; i++)
-      checkedcount+=(checkgroup[i].checked)? 1 : 0
-    if (checkedcount>limit){
-      alert("You can only select a maximum of "+limit+" checkboxes")
-      this.checked=false
-      }
-    }
-  }
-}
+
+
+
 
 
   $("#refreshButton").click(function(event){
+    console.log("button")
     event.preventDefault();
-    var everyPlant = allPlantTemplates.concat(allUserPlants);
+    var everyPlant = testPlants.concat(allUserPlants);
+    console.log(everyPlant)
     var allDays = makeCalendar(everyPlant);
     console.log(allDays)
     // testArrayDates.forEach(function(date){
@@ -322,6 +323,7 @@ function checkboxlimit(checkgroup, limit){
     // });
   });
 });
+
 function showHideMonthWeek(elementId){
   var monthSelection = $("#" + elementId + " :selected").text()
   if (monthSelection === "Once a month") {
@@ -341,8 +343,7 @@ function showHideMonthWeek(elementId){
 }
 
 // Template Plants
-var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week", "Thursday"], ["Once a month", 6], ["Every other week", "Monday"])
-allPlantTemplates.push(spider)
+
 
 
 
@@ -350,16 +351,12 @@ allPlantTemplates.push(spider)
 
 // Test Plants
 
-
+var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
+allPlantTemplates.push(spider)
 var snake = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month"], ["Once a month"], ["Once a month"])
 allPlantTemplates.push(snake)
 var maple = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week"], ["Once a month"], ["onchange"])
 allPlantTemplates.push(maple)
-
-var snake2 = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month", 22], ["Once a month", 14], ["Once a month", 2])
-
-var maple2 = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week", "Wednesday", "Thursday"], ["Once a month", 2], ["Once a month", 2])
-
 var xmascactus = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(xmascactus)
 var aralia = new Plant ("Japanese Aralia", "Shade", "Average", ["Once a week"], ["Once a month"], ["Once a month"])
@@ -371,13 +368,20 @@ allPlantTemplates.push(asparagus)
 var dracena = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(dracena)
 
-
+var testPlants = []
+var spider2 = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week", "Thursday"], ["Once a month", 6], ["Every other week", "Monday"])
+var snake2 = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month", 22], ["Once a month", 14], ["Once a month", 2])
+var maple2 = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week", "Wednesday", "Thursday"], ["Once a month", 2], ["Once a month", 2])
 var aralia2 = new Plant ("Japanese Aralia", "Shade", "Average", ["Once a week", "Saturday"], ["Once a month", 17], ["Once a month", 19])
 var xmascactus2 = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a week", "Thursday"], ["Once a month", 13], ["Every other week", "Friday"])
 var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twice a week", "Sunday", "Friday"], ["Once a month", 1], ["Every other week", "Monday"])
-
-
 var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
-
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
-
+testPlants.push(spider2)
+testPlants.push(snake2)
+testPlants.push(maple2)
+testPlants.push(aralia2)
+testPlants.push(xmascactus2)
+testPlants.push(peacelily2)
+testPlants.push(asparagus2)
+testPlants.push(dracena2)
