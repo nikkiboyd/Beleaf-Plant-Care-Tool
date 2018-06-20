@@ -95,6 +95,16 @@ function sortIntoWeeksAndFormat(allEvents) {
     var year = allEvents[i][0].getFullYear()
     var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth
 
+    $("#week-one-range").text(" " + (weekOneRange[0].getMonth() + 1) + "/" + weekOneRange[0].getDate() + " - " + (weekOneRange[1].getMonth() + 1) + "/" + weekOneRange[1].getDate())
+
+    $("#week-two-range").text(" " + (weekTwoRange[0].getMonth() + 1) + "/" + weekTwoRange[0].getDate() + " - " + (weekTwoRange[1].getMonth() + 1) + "/" + weekTwoRange[1].getDate())
+
+    $("#week-three-range").text(" " + (weekThreeRange[0].getMonth() + 1) + "/" + weekThreeRange[0].getDate() + " - " + (weekThreeRange[1].getMonth() + 1) + "/" + weekThreeRange[1].getDate())
+
+    $("#week-four-range").text(" " + (weekFourRange[0].getMonth() + 1) + "/" + weekFourRange[0].getDate() + " - " + (weekFourRange[1].getMonth() + 1) + "/" + weekFourRange[1].getDate())
+
+    $("#glance-range").text(" " + (glanceRange[0].getMonth() + 1) + "/" + glanceRange[0].getDate() + " - " + (glanceRange[1].getMonth() + 1) + "/" + glanceRange[1].getDate())
+
     if (allEvents[i][0] >= weekOneRange[0] && allEvents[i][0] <= weekOneRange[1]) {
       $("#week-one-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
@@ -368,31 +378,11 @@ function checkNickname(nickname, myPlants){
 
 
 
-
-
   $("#refreshButton").click(function(event){
-    console.log("button")
     event.preventDefault();
     var everyPlant = testPlants.concat(allUserPlants);
-    console.log(everyPlant)
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
-    console.log(allEvents)
-    // testArrayDates.forEach(function(date){
-    //   var dayOfWeekString = weekdayArray[date.getDay()]
-    //   var monthString = monthArray[date.getMonth()]
-    //   var dateOfMonth = date.getDate()
-    //   var year = date.getFullYear()
-
-
-    //   var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
-    //   $("p").append("<div class='form-check'>" +
-    //                     "<input class='form-check-input' type='checkbox' id='defaultCheck1'>" +
-    //                     "<label class='form-check-label' for='defaultCheck1'>" +
-    //                       "Value from other team" +
-    //                     "</label>" +
-    //                   "</div>")
-    // });
   });
 });
 
