@@ -201,29 +201,54 @@ function checkboxlimit(checkgroup, limit){
 Plant.prototype.addUsersDetails = function(newPlant, nickName){
   newPlant.nickName = nickName
 }
+function validateNickNameAndCommonName(nickName, commonName){
+  if(nickName !== "" && commonName !== "Select a plant to begin"){
+    for(i=0; i < allUserPlants.length; ++i){
+      if(nickName === allUserPlants[i].nickName){
+        alert("please pick another name")
+      } else{
+        break
+      }
+    }
+    console.log(nickName + " the "+ commonName +" is a valid nickname")
+  } else if(nickName !== ""){
+    alert("Please choose a nickname")
+  } else if(commonName === "Select a plant to begin"){
+    alert("please select a plant type or select Create your own")
+  } else if(commonName === "Create your own"){
+    $("#customCommonName").show();
+    console.log("create your own was selected")
+    var commonName = $("#customCommonName").val()
+    console.log(commonName)
+  }
+}
 //user logic
 $(function(){
   $("#createPlant").click(function(event){
     event.preventDefault()
     var nickName = $("#nickNameInput").val()
     var commonName = $("#selectPlant").val()
-    console.log(commonName)
-    if(nickName !== "" && commonName !== "Select a plant to begin"){
-      for(i=0; i < allUserPlants.length; ++i){
-        if(nickName === allUserPlants[i].nickName){
-          alert("please pick another name")
-        }else{
-          break
-        }
-      }
-      console.log(nickName + " the "+ commonName +" is a valid nickname")
-    } else if(nickName !== ""){
-      alert("Please choose a nickname")
-    } else if(commonName === "Select a plant to begin"){
-      alert("please select a plant type or select Create your own")
-    } else if(commonName === "Create your own"){
-      console.log("create your own was selected")
-    }
+    validateNickNameAndCommonName(nickName, commonName)
+
+    // if(nickName !== "" && commonName !== "Select a plant to begin"){
+    //   for(i=0; i < allUserPlants.length; ++i){
+    //     if(nickName === allUserPlants[i].nickName){
+    //       alert("please pick another name")
+    //     }else{
+    //       break
+    //     }
+    //   }
+    //   console.log(nickName + " the "+ commonName +" is a valid nickname")
+    // } else if(nickName !== ""){
+    //   alert("Please choose a nickname")
+    // } else if(commonName === "Select a plant to begin"){
+    //   alert("please select a plant type or select Create your own")
+    // } else if(commonName === "Create your own"){
+    //   $("#customCommonName").show();
+    //   console.log("create your own was selected")
+    //   var commonName = $("#customCommonName").val()
+    //   console.log(customCommonName)
+    // }
   });
 
   $("#plantEntryForm").submit(function(event){

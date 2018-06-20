@@ -12,32 +12,39 @@
   <div class="container">
     <h1>Add a plant</h1>
     <form  id="plantEntryForm" class="" action="index.html" method="post">
-      <div class="row" id="plantEntryStepOne">
-        <div class="form-group col-sm-6">
-          <label for="exampleFormControlInput1">Give your plant a name:</label>
-          <input type="text" class="form-control" id="nickNameInput" placeholder="Pick a nickname for your plant">
+      <div id="plantEntryStepOne">
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="exampleFormControlInput1">Give your plant a name:</label>
+            <input type="text" class="form-control" id="nickNameInput" placeholder="Pick a nickname for your plant">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="selectPlant">Select the type of plant or create your own:</label>
+            <select class="form-control" id="selectPlant">
+              <option>Select a plant to begin</option>
+              <option>Create your own</option>
+              <option>Spider Plant</option>
+              <option>Snake Plant</option>
+              <option>Japanese Maple</option>
+              <option>Christmas Cactus</option>
+              <option>Japanese Aralia</option>
+              <option>Peace Lily</option>
+              <option>Asparagus Fern</option>
+              <option>Dracena</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group col-sm-6">
-          <label for="selectPlant">Select the type of plant or create your own:</label>
-          <select class="form-control" id="selectPlant">
-            <option>Select a plant to begin</option>
-            <option class="custom">Create your own</option>
-            <option>Spider Plant</option>
-            <option>Snake Plant</option>
-            <option>Japanese Maple</option>
-            <option>Christmas Cactus</option>
-            <option>Japanese Aralia</option>
-            <option>Peace Lily</option>
-            <option>Asparagus Fern</option>
-            <option>Dracena</option>
-          </select>
+        <div class="row">
+          <div class="col-sm-6">
+            <button class=" col-sm-6 btn btn-success"type="button" id="createPlant">Create your plant</button>
+          </div>
+          <div id="commonNameDiv" class="form-group col-sm-6 hidden">
+            <label for="exampleFormControlInput1">What type of plant is this?</label>
+            <input type="text" class="form-control" id="customCommonName" placeholder="Enter plant's common name">
+          </div>
         </div>
-        <button class="btn btn-success"type="button" id="createPlant">Create your plant</button>
       </div>
-      <div id="commonNameDiv" class="form-group hidden">
-        <label for="exampleFormControlInput1">Common Name</label>
-        <input type="text" class="form-control" id="commonNameInput" placeholder="Enter plant's common name">
-      </div>
+
       <div class="form-group">
         <label for="sunlightSelection">Select level of sunlight:</label>
         <select class="form-control" id="sunlightSelection">
