@@ -208,11 +208,13 @@ function validateCommonName(commonName, customCommonName){
       validatedCommonName = commonName
   } else{
     alert("what kind of plant is this")
+    validatedCommonName = ""
   }
   console.log("the validated commonName is " + validatedCommonName)
+  return validatedCommonName
 }//END OF validateCommonName
 
-
+//This is called by click event for Create your plant
 function validateNickName(nickName){
   var validatedNickName
   //validate nickname
@@ -225,17 +227,22 @@ function validateNickName(nickName){
         console.log("in the for loop")
         if(nickName === allUserPlants[i].nickName){
           alert("please pick another name")
+          validatedNickName = ""
         } else{
           console.log("this is the current nickName:" + validatedNickName)
           validatedNickName = nickName
           break
         }
       }
-    } else(validatedNickName = nickName)
+    } else {
+      validatedNickName = nickName
+    }
   } else {
     alert("Please enter a nickname for your plant")
+    validatedNickName = ""
   }
   console.log("the validated nickname is " + validatedNickName)
+  return validatedNickName
 }//END OF validateNickName
 
 //user logic
@@ -246,8 +253,17 @@ $(function(){
     var nickName = $("#nickNameInput").val()
     var commonName = $("#selectPlant").val()
     var customCommonName = $("#customCommonName").val()
-    validateNickName(nickName)
-    validateCommonName(commonName, customCommonName)
+    var validatedNickName =validateNickName(nickName)
+    console.log("this is the validatedNickName " + validatedNickName)
+    if(validatedNickName !== ""){
+      var validatedCommonName = validateCommonName(commonName, customCommonName);
+      if(validatedCommonName !== ""){
+        console.log("the validated common name is " + validatedCommonName)
+       alert(nickName + " the " + validatedCommonName)
+       //show the plant details divs
+       //append to say something about plant
+     }
+    }
   });
 
   // STEP TWO - fill in plant details if a template plant is selected
