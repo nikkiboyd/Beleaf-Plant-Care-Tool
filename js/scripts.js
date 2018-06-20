@@ -1,15 +1,16 @@
-
 var today = new Date()
 
-// use this with index of
+var weekdayArray=["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
+var monthArray = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"]
 
 Plant.prototype.makeSchedule = function(taskKey) {
   var finalDays = []
   var ddToday = today.getDate()
-  var daysLater = 28
+  var daysLater = 40
   var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
-  var weekdayArray=["sunday", "monday","tuesday","wednesday","thursday","friday","saturday"]
+
   if (taskKey[0] === "Once a week") {
     var firstDay = new Date()
     var dayOfWeek = firstDay.getDay()
@@ -30,26 +31,135 @@ Plant.prototype.makeSchedule = function(taskKey) {
     finalDays.push(firstDay)
     finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
     return finalDays
+  } else if (taskKey[0] === "Twice a week"){
+    var firstDay = new Date()
+    var secondDay = new Date()
+    var twoDays = [taskKey[1], taskKey[2]];
+    while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
+      firstDay.setDate(firstDay.getDate() + 1)
+    }
+    finalDays.push(firstDay)
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
 
-  } else if (taskKey[0] === "Once a month"){
+    while(secondDay.getDay() !== weekdayArray.indexOf(taskKey[2])){
+      secondDay.setDate(secondDay.getDate() + 1)
+    }
+    finalDays.push(secondDay)
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 7))
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 14))
+    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 21))
+
+    finalDays.sort(compareDatesFunc)
+    return finalDays
+  } else if (taskKey[0] === "Once a month") {
     var firstDay = new Date()
     while(firstDay < fourWeeksLater) {
       if (firstDay.getDate() === taskKey[1]) {
       finalDays.push(firstDay)
       return finalDays
-      } else {
+    } else {
         firstDay = new Date (firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 1)
       }
     }
   }
 }
 
-
-
-
-
-//pair one
 var allPlantTemplates = []
+var allUserPlants = []
+
+//business logic
+function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
+  this.commonName = commonName
+  this.sunlight = sunlight
+  this.hardiness = hardiness
+  this.water = water
+  this.pruning = pruning
+  this.fertilizing = fertilizing
+}
+
+function compareDatesFunc(a, b){
+  return (a - b);
+}
+
+function sortIntoWeeksAndFormat(plant, property, dateArray) {
+
+  var weekOneTasks = [];
+  var weekTwoTasks = [];
+  var weekThreeTasks = [];
+  var weekFourTasks = [];
+  var glanceWeekTasks =[];
+
+  var weekOneRange = [today, (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6))];
+  var weekTwoRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13))]
+  var weekThreeRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20))]
+  var weekFourRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 21)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 27))]
+  var glanceRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 28)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 40))]
+
+  console.log(dateArray)
+  for(i = 0; i < dateArray.length; i++) {
+    var dayOfWeekString = weekdayArray[dateArray[i].getDay()]
+    var monthString = monthArray[dateArray[i].getMonth()]
+    var dateOfMonth = dateArray[i].getDate()
+    var year = dateArray[i].getFullYear()
+    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
+
+    if (dateArray[i] > weekOneRange[0] && dateArray[i] < weekOneRange[1]) {
+      $("#week-one-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
+    } else if (dateArray[i] > weekTwoRange[0] && dateArray[i] < weekTwoRange[1]) {
+      $("#week-two-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
+    } else if (dateArray[i] > weekThreeRange[0] && dateArray[i] < weekThreeRange[1]) {
+      $("#week-three-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
+    } else if (dateArray[i] > weekFourRange[0] && dateArray[i] < weekFourRange[1]) {
+      $("#week-four-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
+    } else if (dateArray[i] > glanceRange[0] && dateArray[i] < glanceRange[1]) {
+      $("#week-glance-tasks").append("<div class='form-check'>" +
+                          "<label class='form-check-label'>" +
+                          "<input class='form-check-input' type='checkbox'>" +
+                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          "</label>" +
+                          "</div>")
+    }
+  }
+}
+
+function makeCalendar(everyPlant) {
+  everyPlant.forEach(function(plant) {
+
+    var waterDays = plant.makeSchedule(plant.water)
+    sortIntoWeeksAndFormat(plant, "Water", waterDays)
+
+    var pruningDays = plant.makeSchedule(plant.pruning)
+    sortIntoWeeksAndFormat(plant, "Prune", pruningDays)
+
+    var fertilizingDays = plant.makeSchedule(plant.fertilizing)
+    sortIntoWeeksAndFormat(plant, "Fertilize", fertilizingDays)
+  })
+}
+
+var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month"], ["Every other week"])
+var testArrayDates = testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water)
 
 //user logic
 $(function(){
@@ -143,10 +253,8 @@ $(function(){
     showHideMonthWeek(elementId)
   };
 
-
   document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
-    console.log(plantName)
     for(plant = 0; plant < allPlantTemplates.length; ++plant){
       if(plantName === allPlantTemplates[plant].commonName){
         var sunlight = allPlantTemplates[plant].sunlight
@@ -173,6 +281,7 @@ $(function(){
       }
     }
   };
+
 });
 function checkboxlimit(checkgroup, limit){
   var checkgroup=checkgroup
@@ -190,6 +299,29 @@ function checkboxlimit(checkgroup, limit){
   }
 }
 
+
+  $("#refreshButton").click(function(event){
+    event.preventDefault();
+    var everyPlant = allPlantTemplates.concat(allUserPlants);
+    var allDays = makeCalendar(everyPlant);
+    console.log(allDays)
+    // testArrayDates.forEach(function(date){
+    //   var dayOfWeekString = weekdayArray[date.getDay()]
+    //   var monthString = monthArray[date.getMonth()]
+    //   var dateOfMonth = date.getDate()
+    //   var year = date.getFullYear()
+
+
+    //   var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
+    //   $("p").append("<div class='form-check'>" +
+    //                     "<input class='form-check-input' type='checkbox' id='defaultCheck1'>" +
+    //                     "<label class='form-check-label' for='defaultCheck1'>" +
+    //                       "Value from other team" +
+    //                     "</label>" +
+    //                   "</div>")
+    // });
+  });
+});
 function showHideMonthWeek(elementId){
   var monthSelection = $("#" + elementId + " :selected").text()
   if (monthSelection === "Once a month") {
@@ -208,31 +340,26 @@ function showHideMonthWeek(elementId){
   }
 }
 
-
-//business logic
-function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
-  this.commonName = commonName
-  this.sunlight = sunlight
-  this.hardiness = hardiness
-  this.water = water
-  this.pruning = pruning
-  this.fertilizing = fertilizing
-}
-
-var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
+// Template Plants
+var spider = new Plant ("Spider Plant", "Part Sun", "Very Tolerant", ["Every other week", "Thursday"], ["Once a month", 6], ["Every other week", "Monday"])
 allPlantTemplates.push(spider)
+
 
 
 // spider.makeSchedule(spider.water)
 
 // Test Plants
-var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month"], ["Every other week"])
-// console.log(testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water))
+
 
 var snake = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month"], ["Once a month"], ["Once a month"])
 allPlantTemplates.push(snake)
 var maple = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week"], ["Once a month"], ["onchange"])
 allPlantTemplates.push(maple)
+
+var snake2 = new Plant ("Snake Plant", "Indirect Sun", "Very Tolerant", ["Once a month", 22], ["Once a month", 14], ["Once a month", 2])
+
+var maple2 = new Plant ("Japanese Maple", "Part Sun", "Temperamental", ["Twice a week", "Wednesday", "Thursday"], ["Once a month", 2], ["Once a month", 2])
+
 var xmascactus = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(xmascactus)
 var aralia = new Plant ("Japanese Aralia", "Shade", "Average", ["Once a week"], ["Once a month"], ["Once a month"])
@@ -244,15 +371,13 @@ allPlantTemplates.push(asparagus)
 var dracena = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week"], ["Once a month"], ["Every other week"])
 allPlantTemplates.push(dracena)
 
-// //test user input
-// var spidey = new Plant ("spider", "full", ["weekly"])
-// spidey.nickname = "spidey"
-// spidey.location = "next to window"
+
+var aralia2 = new Plant ("Japanese Aralia", "Shade", "Average", ["Once a week", "Saturday"], ["Once a month", 17], ["Once a month", 19])
+var xmascactus2 = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a week", "Thursday"], ["Once a month", 13], ["Every other week", "Friday"])
+var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twice a week", "Sunday", "Friday"], ["Once a month", 1], ["Every other week", "Monday"])
 
 
-var testMonthlyPlantPruning = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week"])
-// console.log(testMonthlyPlantPruning.makeSchedule(testMonthlyPlantPruning.pruning));
+var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
 
-var testEOWPlantFert = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "saturday"], ["Once a month", 14], ["Every other week", "monday"])
-// console.log(testEOWPlantFert.makeSchedule(testEOWPlantFert.fertilizing));
- // pruning, rotating, misting, fertilizing, location
+var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
+
