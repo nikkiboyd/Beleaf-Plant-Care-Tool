@@ -64,6 +64,15 @@ Plant.prototype.makeSchedule = function(taskKey) {
   }
 }
 
+function formatDate(dateObj) {
+  var dayOfWeekString = weekdayArray[dateObj.getDay()]
+  var monthString = monthArray[dateObj.getMonth()]
+  var dateOfMonth = dateObj.getDate()
+  var year = dateObj.getFullYear()
+  var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth
+  return formattedDate
+}
+
 function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
   this.commonName = commonName
   this.sunlight = sunlight
@@ -79,6 +88,18 @@ function compareFirstElementDatesFunc(a, b){
   return (a[0] - b[0]);
 }
 
+function makeUniqueWeekDays(weekEvents) {
+    var uniqueDays = [] // an array listing each unique weekday in week One
+    weekEvents.forEach(function(day){
+      console.log(uniqueDays)
+      weekdayVal = day[0].getDay() // a number
+      if (!uniqueDays.includes(weekdayArray[weekdayVal])) {
+        uniqueDays.push(weekdayArray[weekdayVal])
+      }
+    })
+    return(uniqueDays)
+}
+
 function sortIntoWeeksAndFormat(allEvents) {
   var weekOneRange = [today, (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6).setHours(0,0,0,0)))];
   var weekTwoRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13).setHours(0,0,0,0)))]
@@ -89,11 +110,12 @@ function sortIntoWeeksAndFormat(allEvents) {
   allEvents.sort(compareFirstElementDatesFunc);
 
   for(i = 0; i < allEvents.length; i++) {
-    var dayOfWeekString = weekdayArray[allEvents[i][0].getDay()]
-    var monthString = monthArray[allEvents[i][0].getMonth()]
-    var dateOfMonth = allEvents[i][0].getDate()
-    var year = allEvents[i][0].getFullYear()
-    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth
+
+    var weekOneEvents = []
+    var weekTwoEvents = []
+    var weekThreeEvents = []
+    var weekFourEvents = []
+    var glanceEvents = []
 
     $("#week-one-range").text(" " + (weekOneRange[0].getMonth() + 1) + "/" + weekOneRange[0].getDate() + " - " + (weekOneRange[1].getMonth() + 1) + "/" + weekOneRange[1].getDate())
 
@@ -106,48 +128,57 @@ function sortIntoWeeksAndFormat(allEvents) {
     $("#glance-range").text(" " + (glanceRange[0].getMonth() + 1) + "/" + glanceRange[0].getDate() + " - " + (glanceRange[1].getMonth() + 1) + "/" + glanceRange[1].getDate())
 
     if (allEvents[i][0] >= weekOneRange[0] && allEvents[i][0] <= weekOneRange[1]) {
-      $("#week-one-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
-    } else if (allEvents[i][0] >= weekTwoRange[0] && allEvents[i][0] <= weekTwoRange[1]) {
-      $("#week-two-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
-    } else if (allEvents[i][0] >= weekThreeRange[0] && allEvents[i][0] <= weekThreeRange[1]) {
-      $("#week-three-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
-    } else if (allEvents[i][0] >= weekFourRange[0] && allEvents[i][0] <= weekFourRange[1]) {
-      $("#week-four-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
-    } else if (allEvents[i][0] >= glanceRange[0] && allEvents[i][0] <= glanceRange[1]) {
-      $("#week-glance-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
-    } else {
-      $("#week-glance-tasks").append("<div class='form-check'>" +
-                          "<label class='form-check-label'>" +
-                          "<input class='form-check-input' type='checkbox'>" +
-                          "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-                          "</label>" +
-                          "</div>")
+      weekOneEvents.push(allEvents[i])
     }
+  //   } else if (allEvents[i][0] >= weekTwoRange[0] && allEvents[i][0] <= weekTwoRange[1]) {
+  //     $("#week-two-tasks").append("<div class='form-check'>" +
+  //                         "<label class='form-check-label'>" +
+  //                         "<input class='form-check-input' type='checkbox'>" +
+  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+  //                         "</label>" +
+  //                         "</div>")
+  //   } else if (allEvents[i][0] >= weekThreeRange[0] && allEvents[i][0] <= weekThreeRange[1]) {
+  //     $("#week-three-tasks").append("<div class='form-check'>" +
+  //                         "<label class='form-check-label'>" +
+  //                         "<input class='form-check-input' type='checkbox'>" +
+  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+  //                         "</label>" +
+  //                         "</div>")
+  //   } else if (allEvents[i][0] >= weekFourRange[0] && allEvents[i][0] <= weekFourRange[1]) {
+  //     $("#week-four-tasks").append("<div class='form-check'>" +
+  //                         "<label class='form-check-label'>" +
+  //                         "<input class='form-check-input' type='checkbox'>" +
+  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+  //                         "</label>" +
+  //                         "</div>")
+  //   } else if (allEvents[i][0] >= glanceRange[0] && allEvents[i][0] <= glanceRange[1]) {
+  //     $("#week-glance-tasks").append("<div class='form-check'>" +
+  //                         "<label class='form-check-label'>" +
+  //                         "<input class='form-check-input' type='checkbox'>" +
+  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+  //                         "</label>" +
+  //                         "</div>")
+  //   } else {
+  //     $("#week-glance-tasks").append("<div class='form-check'>" +
+  //                         "<label class='form-check-label'>" +
+  //                         "<input class='form-check-input' type='checkbox'>" +
+  //                         "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+  //                         "</label>" +
+  //                         "</div>")
+  //   }
+  // }
+  console.log(weekOneEvents)
+    var uniqueDays = makeUniqueWeekDays(weekOneEvents) // the makeUniqueWeekDays function expects ALL week 1 events, and here it is being called once every time we loop through the events
+    console.log(uniqueDays)
+    weekOneEvents.forEach(function(event) {
+      $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
+      $("#week-one-tasks").append("<div class='form-check'>" +
+                              "<label class='form-check-label'>" +
+                              "<input class='form-check-input' type='checkbox'>" +
+                              event[2] + " " + event[1] +
+                              "</label>" +
+                              "</div>")
+    })
   }
 }
 
