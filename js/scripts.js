@@ -171,8 +171,6 @@ $(function(){
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
     var water =  $("#waterSelection :selected").text()
-    // var waterWeekday = $("#waterSelectionWeekday :checked").val()
-    // console.log(waterWeekday)
     var waterCheckBoxes = []
     $("input:checkbox[name=waterDayCheckBoxes]:checked").each(function(){
       waterCheckBoxes.push($(this).val());
@@ -236,6 +234,7 @@ $(function(){
       console.log("in the else for the water check if")
     }
     console.log(newPlant)
+
   })
 
   document.getElementById("waterSelection").onchange = function(){
@@ -255,34 +254,51 @@ $(function(){
 
   document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
+    console.log(plantName)
     for(plant = 0; plant < allPlantTemplates.length; ++plant){
       if(plantName === allPlantTemplates[plant].commonName){
+        //get values for selected plant
         var sunlight = allPlantTemplates[plant].sunlight
         var hardiness = allPlantTemplates[plant].hardiness
         var waterFrequency = allPlantTemplates[plant].water[0]
         var pruningFrequency = allPlantTemplates[plant].pruning[0]
         var fertilizingFrequency = allPlantTemplates[plant].fertilizing[0]
-       $("#sunlightSelection").val(sunlight);
-       $("#hardinessSelection").val(hardiness);
-       $("#waterSelection").val(waterFrequency);
-       showHideMonthWeek("#waterSelection");
-       $("#pruningSelection").val(pruningFrequency);
-       showHideMonthWeek("#pruningSelection");
-       $("#fertilizingSelection").val(fertilizingFrequency);
-       showHideMonthWeek("#fertilizingSelection");
+        //update option shown in dropdown menus
+        updatePlantDetails("sunlightSelection", sunlight)
+        updatePlantDetails("hardinessSelection", hardiness)
+        updatePlantDetails("waterSelection", waterFrequency)
+        updatePlantDetails("pruningSelection", pruningFrequency)
+        updatePlantDetails("fertilizingSelection", fertilizingFrequency)
+       // show or hide month or week selection divs
+       showHideMonthWeek("waterSelection");
+       showHideMonthWeek("pruningSelection");
+       showHideMonthWeek("fertilizingSelection");
        $("#commonNameDiv").hide()
      } else if (plantName === "Create your own") {
         $("#commonNameDiv").show()
         document.getElementById("plantEntryForm").reset();
         $("#selectPlant").val("Create your own");
-        showHideMonthWeek("#waterSelection");
-        showHideMonthWeek("#pruningSelection");
-        showHideMonthWeek("#fertilizingSelection");
+        showHideMonthWeek("waterSelection");
+        showHideMonthWeek("pruningSelection");
+        showHideMonthWeek("fertilizingSelection");
       }
     }
   };
 
 });
+
+function updatePlantDetails(elementId, detail){
+  var dropdown = document.getElementById(elementId)
+  for (i=0; i < dropdown.options.length; ++i){
+   if(dropdown.options[i].text === detail){
+     dropdown.selectedIndex = i
+     break
+   } else{
+     dropdown.selectedIndex = 0
+   }
+  }
+}
+
 function checkboxlimit(checkgroup, limit){
   var checkgroup=checkgroup
   var limit=limit
@@ -321,7 +337,7 @@ function checkboxlimit(checkgroup, limit){
     //                   "</div>")
     // });
   });
-});
+// });
 function showHideMonthWeek(elementId){
   var monthSelection = $("#" + elementId + " :selected").text()
   if (monthSelection === "Once a month") {
@@ -380,4 +396,3 @@ var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twi
 var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
 
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
-
