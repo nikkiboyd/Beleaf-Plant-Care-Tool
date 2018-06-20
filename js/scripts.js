@@ -1,26 +1,27 @@
-var today = new Date()
-
+//business logic
+var today = new Date(new Date().setHours(0,0,0,0))
 var weekdayArray=["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-
 var monthArray = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"]
+var allPlantTemplates = []
+var allUserPlants = []
 
 Plant.prototype.makeSchedule = function(taskKey) {
   var finalDays = []
   var ddToday = today.getDate()
   var daysLater = 40
-  var fourWeeksLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater)
+  var fourWeeksLater = new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysLater).setHours(0,0,0,0))
 
   if (taskKey[0] === "Once a week") {
-    var firstDay = new Date()
+    var firstDay = new Date(new Date().setHours(0,0,0,0))
     var dayOfWeek = firstDay.getDay()
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
     }
     finalDays.push(firstDay)
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21).setHours(0,0,0,0)))
     return finalDays
   } else if (taskKey[0] === "Every other week"){
     var firstDay = new Date()
@@ -29,29 +30,26 @@ Plant.prototype.makeSchedule = function(taskKey) {
       firstDay.setDate(firstDay.getDate() + 1)
     }
     finalDays.push(firstDay)
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14).setHours(0,0,0,0)))
     return finalDays
   } else if (taskKey[0] === "Twice a week"){
-    var firstDay = new Date()
-    var secondDay = new Date()
+    var firstDay = new Date(new Date().setHours(0,0,0,0))
+    var secondDay = new Date(new Date().setHours(0,0,0,0))
     var twoDays = [taskKey[1], taskKey[2]];
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
     }
     finalDays.push(firstDay)
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7))
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14))
-    finalDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21))
-
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21).setHours(0,0,0,0)))
     while(secondDay.getDay() !== weekdayArray.indexOf(taskKey[2])){
       secondDay.setDate(secondDay.getDate() + 1)
     }
     finalDays.push(secondDay)
-    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 7))
-    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 14))
-    finalDays.push(new Date(secondDay.getFullYear(), secondDay.getMonth(), secondDay.getDate() + 21))
-
-    finalDays.sort(compareDatesFunc)
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 7).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 14).setHours(0,0,0,0)))
+    finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21).setHours(0,0,0,0)))
     return finalDays
   } else if (taskKey[0] === "Once a month") {
     var firstDay = new Date()
@@ -60,16 +58,12 @@ Plant.prototype.makeSchedule = function(taskKey) {
       finalDays.push(firstDay)
       return finalDays
     } else {
-        firstDay = new Date (firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 1)
+        firstDay = new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 1).setHours(0,0,0,0))
       }
     }
   }
 }
 
-var allPlantTemplates = []
-var allUserPlants = []
-
-//business logic
 function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
   this.commonName = commonName
   this.sunlight = sunlight
@@ -81,72 +75,66 @@ function Plant(commonName, sunlight, hardiness, water, pruning, fertilizing){
 }
 
 
-function compareDatesFunc(a, b){
-  return (a - b);
+function compareFirstElementDatesFunc(a, b){
+  return (a[0] - b[0]);
 }
 
-function sortIntoWeeksAndFormat(plant, property, dateArray) {
+function sortIntoWeeksAndFormat(allEvents) {
+  var weekOneRange = [today, (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6).setHours(0,0,0,0)))];
+  var weekTwoRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13).setHours(0,0,0,0)))]
+  var weekThreeRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20).setHours(0,0,0,0)))]
+  var weekFourRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 21).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 27).setHours(0,0,0,0)))]
+  var glanceRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 28).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 40).setHours(0,0,0,0)))]
 
-  var weekOneTasks = [];
-  var weekTwoTasks = [];
-  var weekThreeTasks = [];
-  var weekFourTasks = [];
-  var glanceWeekTasks =[];
+  allEvents.sort(compareFirstElementDatesFunc);
 
-  var weekOneRange = [today, (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6))];
-  var weekTwoRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13))]
-  var weekThreeRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20))]
-  var weekFourRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 21)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 27))]
-  var glanceRange = [(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 28)), (new Date(today.getFullYear(), today.getMonth(), today.getDate() + 40))]
+  for(i = 0; i < allEvents.length; i++) {
+    var dayOfWeekString = weekdayArray[allEvents[i][0].getDay()]
+    var monthString = monthArray[allEvents[i][0].getMonth()]
+    var dateOfMonth = allEvents[i][0].getDate()
+    var year = allEvents[i][0].getFullYear()
+    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth
 
-  console.log(dateArray)
-  for(i = 0; i < dateArray.length; i++) {
-    var dayOfWeekString = weekdayArray[dateArray[i].getDay()]
-    var monthString = monthArray[dateArray[i].getMonth()]
-    var dateOfMonth = dateArray[i].getDate()
-    var year = dateArray[i].getFullYear()
-    var formattedDate = dayOfWeekString + ", " + monthString + " " + dateOfMonth + ", " + year
-
-    if (dateArray[i] > weekOneRange[0] && dateArray[i] < weekOneRange[1]) {
+    if (allEvents[i][0] >= weekOneRange[0] && allEvents[i][0] <= weekOneRange[1]) {
       $("#week-one-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
-    } else if (dateArray[i] > weekTwoRange[0] && dateArray[i] < weekTwoRange[1]) {
+    } else if (allEvents[i][0] >= weekTwoRange[0] && allEvents[i][0] <= weekTwoRange[1]) {
       $("#week-two-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
-    } else if (dateArray[i] > weekThreeRange[0] && dateArray[i] < weekThreeRange[1]) {
+    } else if (allEvents[i][0] >= weekThreeRange[0] && allEvents[i][0] <= weekThreeRange[1]) {
       $("#week-three-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
-    } else if (dateArray[i] > weekFourRange[0] && dateArray[i] < weekFourRange[1]) {
+    } else if (allEvents[i][0] >= weekFourRange[0] && allEvents[i][0] <= weekFourRange[1]) {
       $("#week-four-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
-    } else if (dateArray[i] > glanceRange[0] && dateArray[i] < glanceRange[1]) {
+    } else if (allEvents[i][0] >= glanceRange[0] && allEvents[i][0] <= glanceRange[1]) {
       $("#week-glance-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          property + " " + plant.commonName + " on " + dateArray[i] +
+                          allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
     } else {
       $("#week-glance-tasks").append("<div class='form-check'>" +
                           "<label class='form-check-label'>" +
                           "<input class='form-check-input' type='checkbox'>" +
-                          "Else: " + property + " " + plant.commonName + " on " + dateArray[i] +
+                          "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
                           "</label>" +
                           "</div>")
     }
@@ -154,21 +142,29 @@ function sortIntoWeeksAndFormat(plant, property, dateArray) {
 }
 
 function makeCalendar(everyPlant) {
+  var allEvents = [];
   everyPlant.forEach(function(plant) {
-
     var waterDays = plant.makeSchedule(plant.water)
-    sortIntoWeeksAndFormat(plant, "Water", waterDays)
-
+    for (i = 0; i < waterDays.length; i++) {
+      var singleWaterEvent = [];
+      singleWaterEvent.push(waterDays[i], plant.commonName, "Water");
+      allEvents.push(singleWaterEvent)
+    }
     var pruningDays = plant.makeSchedule(plant.pruning)
-    sortIntoWeeksAndFormat(plant, "Prune", pruningDays)
-
+    for (x = 0; x < pruningDays.length; x++) {
+      var singlePruneEvent = [];
+      singlePruneEvent.push(pruningDays[x], plant.commonName, "Prune");
+      allEvents.push(singlePruneEvent)
+    }
     var fertilizingDays = plant.makeSchedule(plant.fertilizing)
-    sortIntoWeeksAndFormat(plant, "Fertilize", fertilizingDays)
-  })
+    for (y = 0; y < fertilizingDays.length; y++) {
+      var singleFertilizeEvent = [];
+      singleFertilizeEvent.push(fertilizingDays[y], plant.commonName, "Fertilize");
+      allEvents.push(singleFertilizeEvent)
+    }
+  });
+  return allEvents;
 }
-
-var testWeeklyPlantWater = new Plant("commonName", "sunlight", "hardiness", ["Weekly", "Saturday"], ["Once a month"], ["Every other week"])
-var testArrayDates = testWeeklyPlantWater.makeSchedule(testWeeklyPlantWater.water)
 
 function updatePlantDetails(elementId, detail){
   var dropdown = document.getElementById(elementId)
@@ -379,8 +375,9 @@ function checkNickname(nickname, myPlants){
     event.preventDefault();
     var everyPlant = testPlants.concat(allUserPlants);
     console.log(everyPlant)
-    var allDays = makeCalendar(everyPlant);
-    console.log(allDays)
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
+    console.log(allEvents)
     // testArrayDates.forEach(function(date){
     //   var dayOfWeekString = weekdayArray[date.getDay()]
     //   var monthString = monthArray[date.getMonth()]
