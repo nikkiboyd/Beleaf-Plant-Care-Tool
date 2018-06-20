@@ -15,8 +15,14 @@ button{
 
 }
 
+#plantEntryStepOne, .waterDiv{
+  position: relative;
+}
+
 .nextButtons, .resetButtons{
   float: right;
+  position: absolute;
+  bottom: 2px;
 }
 
 .hidden {

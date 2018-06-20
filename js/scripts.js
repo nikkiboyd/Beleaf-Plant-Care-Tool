@@ -278,6 +278,13 @@ function getTemplatePlantDetails(){
   }
 } //END getTemplatePlantDetails
 
+function isOptionAlreadySelected(elementId){
+  var water =  $("#" + elementId + " :selected").text()
+  if(water !== "Select a value"){
+    showHideMonthWeek(elementId)
+  }
+}
+
 //user logic
 $(function(){
   //Hide Plant detail divs
@@ -302,18 +309,25 @@ $(function(){
      }
     }
   });
+  document.getElementById("selectPlant").onchange = function(){
+    var plantName = $("#selectPlant :selected").text()
+    if (plantName === "Create your own") {
+        $("#commonNameDiv").show()
+      }
+    }
+  // STEP TWO -Sunlight and hardiness, show water
+  $("#sunNext").click(function(){
+    $("#sunNext").hide()
+    $("#sunReset").show()
+    $(".waterDiv").show()
+    $("#plantEntryStepTwo").removeClass("bottomBorder");
+    $(".waterDiv").addClass("bottomBorder");
+    isOptionAlreadySelected("waterSelection")
+  })
 
-  // STEP TWO -Sunlight and hardiness
-
-    $("#sunNext").click(function(){
-      console.log("next button")
-      $("#sunNext").hide()
-      $("#sunReset").show()
-      $(".waterDiv").show()
-      $("#plantEntryStepTwo").removeClass("bottomBorder");
-      $(".waterDiv").addClass("bottomBorder");
-
-    })
+  //STEP THREE - Water div, show pruning
+  //
+  //show pruning div
 
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
