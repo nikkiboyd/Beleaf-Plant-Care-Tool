@@ -774,7 +774,7 @@ var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every ot
 Plant.prototype.addUsersDetails(spider2, "Spidey")
 Plant.prototype.addUsersDetails(snake2, "Slytherin")
 Plant.prototype.addUsersDetails(maple2, "Syrup")
-Plant.prototype.addUsersDetails(aralia2, "Ari")
+Plant.prototype.addUsersDetails(aralia2, "Arya")
 Plant.prototype.addUsersDetails(xmascactus2, "Christmas")
 Plant.prototype.addUsersDetails(peacelily2, "Dove")
 Plant.prototype.addUsersDetails(asparagus2, "Sparry")
