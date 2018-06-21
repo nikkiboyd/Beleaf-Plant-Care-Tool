@@ -91,7 +91,6 @@ function compareFirstElementDatesFunc(a, b){
 function makeUniqueWeekDays(weekEvents) {
     var uniqueDays = [] // an array listing each unique weekday in week One
     weekEvents.forEach(function(day){
-      console.log(uniqueDays)
       weekdayVal = day[0].getDay() // a number
       if (!uniqueDays.includes(weekdayArray[weekdayVal])) {
         uniqueDays.push(weekdayArray[weekdayVal])
@@ -109,13 +108,13 @@ function sortIntoWeeksAndFormat(allEvents) {
 
   allEvents.sort(compareFirstElementDatesFunc);
 
-  for(i = 0; i < allEvents.length; i++) {
+  var weekOneEvents = []
+  var weekTwoEvents = []
+  var weekThreeEvents = []
+  var weekFourEvents = []
+  var glanceEvents = []
 
-    var weekOneEvents = []
-    var weekTwoEvents = []
-    var weekThreeEvents = []
-    var weekFourEvents = []
-    var glanceEvents = []
+  for(i = 0; i < allEvents.length; i++) {
 
     $("#week-one-range").text(" " + (weekOneRange[0].getMonth() + 1) + "/" + weekOneRange[0].getDate() + " - " + (weekOneRange[1].getMonth() + 1) + "/" + weekOneRange[1].getDate())
 
@@ -167,19 +166,20 @@ function sortIntoWeeksAndFormat(allEvents) {
   //                         "</div>")
   //   }
   // }
-  console.log(weekOneEvents)
-    var uniqueDays = makeUniqueWeekDays(weekOneEvents) // the makeUniqueWeekDays function expects ALL week 1 events, and here it is being called once every time we loop through the events
-    console.log(uniqueDays)
-    weekOneEvents.forEach(function(event) {
-      $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
-      $("#week-one-tasks").append("<div class='form-check'>" +
-                              "<label class='form-check-label'>" +
-                              "<input class='form-check-input' type='checkbox'>" +
-                              event[2] + " " + event[1] +
-                              "</label>" +
-                              "</div>")
-    })
+
+    // })
   }
+  var uniqueDays = makeUniqueWeekDays(weekOneEvents) // the makeUniqueWeekDays function expects ALL week 1 events, and here it is being called once every time we loop through the events
+  console.log(uniqueDays)
+  weekOneEvents.forEach(function(event) {
+    $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
+    $("#week-one-tasks").append("<div class='form-check'>" +
+                            "<label class='form-check-label'>" +
+                            "<input class='form-check-input' type='checkbox'>" +
+                            event[2] + " " + event[1] +
+                            "</label>" +
+                            "</div>")
+})
 }
 
 function makeCalendar(everyPlant) {
