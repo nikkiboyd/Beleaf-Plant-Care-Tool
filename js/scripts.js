@@ -14,7 +14,7 @@ Plant.prototype.makeSchedule = function(taskKey) {
 
   if (taskKey[0] === "Once a week") {
     var firstDay = new Date(new Date().setHours(0,0,0,0))
-    var dayOfWeek = firstDay.getDay()
+    var dayOfWeek = new Date(new Date().setHours(0,0,0,0))
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
     }
@@ -406,6 +406,7 @@ $(function(){
     $("#myPlants-display").hide();
     $("#helppage").hide();
 // the rest here is same code as the refresh button
+// Need to ask Renee about the next 3 lines: necessary?
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
@@ -673,8 +674,11 @@ function checkNickname(nickname, myPlants){
 }
 
   $("#refreshButton").click(function(event){
-    event.preventDefault();
+    event.preventDefault()
+    console.log(allUserPlants)
+    console.log(testPlants)
     var everyPlant = testPlants.concat(allUserPlants);
+    debugger
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
   });
