@@ -389,12 +389,14 @@ $(function(){
 
   $(".myplantslink").click(function(event){
     event.preventDefault();
+    appendToGarden(allUserPlants)
     $(".homepage").hide();
     $(".container").show();
     $("#calendar-container").hide();
     $("#plantEntryForm").hide();
     $("#myPlants-display").show();
     $("#helppage").hide();
+
 
   });
   $(".schedulelink").click(function(event){
@@ -631,9 +633,8 @@ $(function(){
     // } else{
     //   console.log("in the else for the water check if")
     // }
-    allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
-    appendToGarden(allUserPlants) // see below function
+    allUserPlants.push(newPlant);
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryForm input").attr("disabled", false)
     $("#plantEntryForm select").attr("disabled", false)
@@ -659,12 +660,6 @@ $(function(){
     var elementId = "fertilizingSelection"
     showHideMonthWeek(elementId)
   };
-
-function appendToGarden(allUserPlants) {
-  allUserPlants.forEach(function(plant){
-    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id=" + plant.nickName + ">" + plant.nickName + "</h2>" + "<h3 id=" + plant.commonName + ">" + plant.commonName + "</h3>" + "<img src='img/" + plant.commonName + ".jpg'>" +"</div>")
-  })
-}
 
 // NOT USING THIS YET
 function checkNickname(nickname, myPlants){
@@ -709,6 +704,11 @@ function showHideMonthWeek(elementId){
   }
 }
 
+function appendToGarden(allUserPlants) {
+  allUserPlants.forEach(function(plant){
+    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id=" + plant.nickName + ">" + plant.nickName + "</h2>" + "<h3 id=" + plant.commonName + ">" + plant.commonName + "</h3>" + "<img src='img/" + plant.commonName + ".jpg'>" +"</div>")
+  })
+}
 // Template Plants
 
 
@@ -744,6 +744,8 @@ var xmascactus2 = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a we
 var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twice a week", "Sunday", "Friday"], ["Once a month", 1], ["Every other week", "Monday"])
 var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
+
+Plant.prototype.addUsersDetails(spider2, "spidey")
 testPlants.push(spider2)
 testPlants.push(snake2)
 testPlants.push(maple2)
