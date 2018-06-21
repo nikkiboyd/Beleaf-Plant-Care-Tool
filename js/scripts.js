@@ -24,7 +24,7 @@ Plant.prototype.makeSchedule = function(taskKey) {
     finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21).setHours(0,0,0,0)))
     return finalDays
   } else if (taskKey[0] === "Every other week"){
-    var firstDay = new Date()
+    var firstDay = new Date(new Date().setHours(0,0,0,0))
     var dayOfWeek = firstDay.getDay()
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
@@ -52,7 +52,7 @@ Plant.prototype.makeSchedule = function(taskKey) {
     finalDays.push(new Date(new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() + 21).setHours(0,0,0,0)))
     return finalDays
   } else if (taskKey[0] === "Once a month") {
-    var firstDay = new Date()
+    var firstDay = new Date(new Date().setHours(0,0,0,0))
     while(firstDay < fourWeeksLater) {
       if (firstDay.getDate() === taskKey[1]) {
       finalDays.push(firstDay)
@@ -141,7 +141,7 @@ function sortIntoWeeksAndFormat(allEvents) {
       $("#week-glance-tasks").append("<div class='form-check'>" +
                               "<label class='form-check-label'>" +
                               "<input class='form-check-input' type='checkbox'>" +
-                              "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+                              "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + allEvents[i][0] +
                               "</label>" +
                               "</div>")
     }
