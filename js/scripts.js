@@ -584,6 +584,9 @@ $(function(){
     var nickName = $("#nickNameInput").val()
     // need to update commonName var to pull from validation function
     var commonName = $("#selectPlant").val()
+    var customCommonName = $("#customCommonName").val()
+    var validatedCommonName = validateCommonName(commonName, customCommonName)
+    console.log("the validated common name is " + validatedCommonName)
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
     var water =  $("#waterSelection :selected").text()
@@ -614,7 +617,7 @@ $(function(){
         console.log(waterCheckBoxes[i])
         console.log("water array: " + waterArray)
       }
-      var newPlant = new Plant (commonName, sunlight, hardiness, waterArray, prune, fertilizing)
+      var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, prune, fertilizing)
     } else if(waterMonthday !== "Select a date"){
       console.log(waterMonthday)
       waterArray = [water, parseInt(waterMonthday)]
