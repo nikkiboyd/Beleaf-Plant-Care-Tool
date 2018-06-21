@@ -407,10 +407,13 @@ $(function(){
   })
 
   // RESET BUTTONS
-  // $("#resetCreatePlant").click(function(){
-  //   resetDropdown("selectPlant")
-  //   $("$commonNameDiv").val("")
-  // })
+  $("#resetCreatePlant").click(function(){
+    resetDropdown("selectPlant")
+    $("$commonNameDiv").val("")
+    $("#selectPlant").attr("disabled", false)
+    $("#plantCreateReset").hide()
+    $("#plantCreateNext").show()
+  })
 
   $("#sunReset").click(function(){
     resetDropdown("sunlightSelection")
@@ -432,6 +435,16 @@ $(function(){
     $("#waterNext").show()
   })
 
+  $("#pruningReset").click(function(){
+    resetDropdown("pruningSelection")
+    resetDropdown("pruneMonthDropdown")
+    $("#pruningSelectionWeekday input").prop("checked", false);
+    $("#pruningSelection").attr("disabled", false)
+    $("#pruningSelectionWeekday input").attr("disabled", false)
+    $("#pruneMonthDropdown").attr("disabled", false)
+    $("#pruningReset").hide()
+    $("#pruningNext").show()
+  })
 
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
