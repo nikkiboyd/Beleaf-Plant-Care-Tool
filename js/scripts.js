@@ -239,7 +239,50 @@ function validateNickName(nickName){
 }//END OF validateNickName
 
 //user logic
+
+// homepage
+//
+
 $(function(){
+  $("#linkhomepage").click(function(event){
+    event.preventDefault();
+    $(".container").hide();
+    $("#homepage").show();
+    $("#helppage").hide();
+  });
+
+  $("#myplantslink").click(function(event){
+    event.preventDefault();
+    $(".container").hide();
+    $("#homepage").show();
+    $("#plantEntryForm").hide();
+    $("#calendar-display").hide();
+    $("#myPlants-display").show();
+  });
+  $("#schedulelink").click(function(event){
+    event.preventDefault();
+    $(".container").show();
+    $("#homepage").hide();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").hide();
+// the rest here is same code as the refresh button
+    var everyPlant = testPlants.concat(allUserPlants);
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
+  });
+  $("#addplantlink").click(function(event){
+    event.preventDefault();
+    $(".container").show();
+    $("#homepage").hide();
+    $("#plantEntryForm").show()
+    $("#calendar-display").hide();
+    $("#myPlants-display").hide();
+  });
+  $("#helplink").click(function(event){
+    event.preventDefault();
+    $("#helppage").toggle();
+  });
+
   //STEP ONE - Name plant and select its type
   $("#createPlant").click(function(event){
     event.preventDefault()

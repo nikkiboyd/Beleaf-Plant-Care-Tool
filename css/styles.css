@@ -14,3 +14,13 @@ button{
 .hidden {
   display: none;
 }
+
+#homepage {
+  display: none;
+  text-align: center;
+  background-color: grey;
+  box-sizing: border-box;
+  width: 70%;
+  margin: auto;
+}
+}
