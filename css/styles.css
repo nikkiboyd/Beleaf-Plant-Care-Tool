@@ -41,6 +41,8 @@ button {
   color: #d1eb56;
   font-size: 30px
 }
+.navigation {
+
 
 #common-name {
   font-family: 'Poiret One', cursive;
@@ -82,4 +84,22 @@ button {
   margin-left: -50px;
   margin-right: -50px;
   text-align: right;
+}
+.homepage {
+  display: none;
+  text-align: center;
+  background-color: grey;
+  box-sizing: border-box;
+  width: 70%;
+  height: 400px;
+  margin: auto;
+}
+
+#plantAppTitle {
+  font-family: monospace;
+  font-size: 52pt;
+}
+
+#helppage {
+  background-color: lightgreen;
 }
