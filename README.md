@@ -27,3 +27,7 @@ A plant profile and calendar app that will remind users when to complete tasks r
 This software is licensed under the MIT license.
 
 Copyright (c) 2018 **Team Plant Care**
+
+
+
+<img width="872" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
