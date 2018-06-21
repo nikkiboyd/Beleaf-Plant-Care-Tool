@@ -466,9 +466,12 @@ $(function(){
     Plant.prototype.addUsersDetails(newPlant, nickName)
     console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
+    $("#plantEntryForm input").attr("disabled", false)
+    $("#plantEntryForm select").attr("disabled", false)
+    $("#nickNameInput").prop("readonly", false)
+    $("#customCommonName").prop("readonly", false)
     $(".nextButtons").show()
     $(".resetButtons").hide()
-
     $("#plantEntryStepTwo").hide()
   }) //END SUBMIT CLICK EVENT
 
