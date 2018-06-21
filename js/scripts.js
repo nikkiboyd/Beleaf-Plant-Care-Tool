@@ -392,6 +392,7 @@ $(function(){
   $(".waterDiv").hide()
   $(".pruningDiv").hide()
   $(".fertilizingDiv").hide()
+  $(".container").hide();
 
   $(".linkhomepage").click(function(event){
     event.preventDefault();
@@ -404,7 +405,7 @@ $(function(){
     appendToGarden(allUserPlants)
     $(".homepage").hide();
     $(".container").show();
-    $("#calendar-container").hide();
+    $("#calendar-display").hide();
     $("#plantEntryForm").hide();
     $("#myPlants-display").show();
     $("#helppage").hide();
@@ -415,21 +416,17 @@ $(function(){
     event.preventDefault();
     $(".homepage").hide();
     $(".container").show();
-    $("#calendar-container").show();
+    $("#calendar-display").show();
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
     $("#helppage").hide();
-// the rest here is same code as the refresh button
-// Need to ask Renee about the next 3 lines: necessary?
-    var everyPlant = testPlants.concat(allUserPlants);
-    var allEvents = makeCalendar(everyPlant);
-    sortIntoWeeksAndFormat(allEvents);
+
   });
   $(".addplantlink").click(function(event){
     event.preventDefault();
     $(".homepage").hide();
     $(".container").show();
-    $("#calendar-container").hide();
+    $("#calendar-display").hide();
     $("#plantEntryForm").show()
     $("#myPlants-display").hide();
     $("#helppage").hide();
@@ -438,7 +435,7 @@ $(function(){
     event.preventDefault();
     $(".homepage").hide();
     $(".container").show();
-    $("#calendar-container").hide();
+    $("#calendar-display").hide();
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
     $("#helppage").show();
