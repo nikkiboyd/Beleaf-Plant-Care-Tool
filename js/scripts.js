@@ -632,7 +632,8 @@ $(function(){
     // }
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
-    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
+    $("#myGarden").append("<div class='newPlant col-md-3'>" +
+                        "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/" + commonName + ".jpg'>" + "</div>")
     console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryForm input").attr("disabled", false)

@@ -5,10 +5,6 @@ body {
     color: #656863;
 }
 
-.select-options {
-    color: #9ba098;
-}
-
 #plantEntryStepOne {
   border-bottom: 1px solid #82c2aa;
   padding-bottom: 20px;
@@ -41,8 +37,6 @@ button {
   color: #d1eb56;
   font-size: 30px
 }
-.navigation {
-
 
 #common-name {
   font-family: 'Poiret One', cursive;
@@ -52,20 +46,26 @@ button {
 
 .calendar-header {
   color: #82c2aa;
-  font-family: 'Abril Fatface', cursive;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
   font-size: 30px;
 }
 
 .card {
   padding: 50px;
   margin: 0px;
+  border-color: white;
+}
+
+li {
+  cursor: pointer;
 }
 
 .btn {
   background-color: #a6e234;
   border-color: #a6e234;
   font-size: 25px;
-  width: 25%;
+  width: 50%;
 }
 
 .btn:hover {
@@ -85,31 +85,50 @@ button {
   margin-right: -50px;
   text-align: right;
 }
+
 .homepage {
+  margin-top: 25%;
   display: none;
   text-align: center;
-  background-color: grey;
-  box-sizing: border-box;
-  width: 70%;
-  height: 400px;
-  margin: auto;
+  width: 100%;
+  height: auto;
 }
 
-#plantAppTitle {
-  font-family: monospace;
-  font-size: 52pt;
+.nextButtons, .resetButtons {
+  margin-top: 30px;
+  font-size: 18px;
 }
 
-#helppage {
-  background-color: lightgreen;
+.daily-tasks {
+  margin-left: 20px;
 }
 
-#homepage {
-  display: none;
+.form-check-label {
+  margin: 5px;
+}
+
+h4 {
+  margin-top: 10px;
+  color: #82c2aa;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
+}
+
+.navbar {
   text-align: center;
-  background-color: grey;
-  box-sizing: border-box;
-  width: 70%;
-  margin: auto;
 }
+
+.nav-link {
+  background-color:
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 0.5px;
+    border-color: #82c2aa;
 }
