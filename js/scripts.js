@@ -262,18 +262,6 @@ function getTemplatePlantDetails(){
       updatePlantDetails("waterSelection", waterFrequency)
       updatePlantDetails("pruningSelection", pruningFrequency)
       updatePlantDetails("fertilizingSelection", fertilizingFrequency)
-     // show or hide month or week selection divs
-    //  showHideMonthWeek("waterSelection");
-    //  showHideMonthWeek("pruningSelection");
-    //  showHideMonthWeek("fertilizingSelection");
-    //  $("#commonNameDiv").hide()
-  //  } else if (plantName === "Create your own") {
-  //     $("#commonNameDiv").show()
-  //     // document.getElementById("plantEntryForm").reset();
-  //     $("#selectPlant").val("Create your own");
-  //     showHideMonthWeek("waterSelection");
-  //     showHideMonthWeek("pruningSelection");
-  //     showHideMonthWeek("fertilizingSelection");
     }
   }
 } //END getTemplatePlantDetails
@@ -293,6 +281,10 @@ function hasDropdownOptionBeenSelected(value){
   }
 }
 
+function resetFields(fieldId){
+  document.getElementById(fieldId).reset();
+}
+
 
 
 //user logic
@@ -301,6 +293,8 @@ $(function(){
   $("#plantEntryStepTwo").hide()
   $(".waterDiv").hide()
   $(".pruningDiv").hide()
+  $(".fertilizingDiv").hide()
+
 
 
   //STEP ONE - Name plant and select its type
@@ -318,6 +312,9 @@ $(function(){
        $("#detailsHeader").show()
        $(".plantName").text(nickName + " the " + validatedCommonName)
        getTemplatePlantDetails()
+       $("#nickNameInput").prop("readonly", true)
+       $("#selectPlant").attr("disabled", true)
+       $("#customCommonName").prop("readonly", true)
      }
     }
   });
@@ -339,6 +336,8 @@ $(function(){
         $("#plantEntryStepTwo").removeClass("bottomBorder");
         $(".waterDiv").addClass("bottomBorder");
         isOptionAlreadySelected("waterSelection")
+        $("#sunlightSelection").attr("disabled", true)
+        $("#hardinessSelection").attr("disabled", true)
       } else{
         alert("Please select hardiness level")
       }
@@ -367,6 +366,9 @@ $(function(){
         $(".waterDiv").removeClass("bottomBorder");
         $(".pruningDiv").addClass("bottomBorder");
         isOptionAlreadySelected("pruningSelection")
+        $("#waterSelection").attr("disabled", true)
+        $("#waterMonthDropdown").attr("disabled", true)
+        $("#waterSelectionWeekday input").attr("disabled", true)
       } else {
         alert("Please select when you will water")
       }
@@ -383,9 +385,30 @@ $(function(){
     $("input:checkbox[name=pruningSelectionCheckBoxes]:checked").each(function(){
       pruneCheckBoxes.push($(this).val());
     })
-    alert(prune)
-    alert("prune week day " + pruneCheckBoxes)
+    if(hasDropdownOptionBeenSelected(prune)){
+      if(pruneCheckBoxes.length > 0 || pruneMonthday !== "Select a date"){
+        $("#pruningNext").hide()
+        $("#pruningReset").show()
+        $(".fertilizingDiv").show()
+        $(".pruningDiv").removeClass("bottomBorder");
+        $(".fertilizingDiv").addClass("bottomBorder");
+        isOptionAlreadySelected("fertilizingSelection")
+        $("#pruningSelection").attr("disabled", true)
+        $("#pruneMonthDropdown").attr("disabled", true)
+        $("#pruningSelectionWeekday input").attr("disabled", true)
+      } else {
+        alert("Please select when you will prune")
+      }
+    } else {
+      alert("Please select how often to prune")
+    }
+  })
 
+  $("#waterReset").click(function(){
+    alert("this button is working")
+    // resetFields("waterSelection")
+    // resetFields("waterMonthDropdown")
+    document.getElementById("waterSelection").reset();
   })
 
 
@@ -409,6 +432,10 @@ $(function(){
     var fertilizing = $("#fertilizingSelection :selected").text()
     var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
+    $("#plantEntryStepTwo").hide()
+    $(".waterDiv").hide()
+    $(".pruningDiv").hide()
+    $(".fertilizingDiv").hide()
 
     //NEED TO UPDATE TO MAKE SURE USER HAS SELECTED ALL NECESSARY SELECTIONS FOR ALL FIELDS
     if(waterCheckBoxes.length > 0){
@@ -438,6 +465,10 @@ $(function(){
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
     console.log(newPlant)
+    document.getElementById("plantEntryForm").reset();
+    $(".nextButtons").show()
+    $(".resetButtons").hide()
+
     $("#plantEntryStepTwo").hide()
   }) //END SUBMIT CLICK EVENT
 

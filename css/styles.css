@@ -12,14 +12,13 @@ body{
 
 button{
   margin-bottom: 10px;
-
 }
 
 #plantEntryStepOne, .waterDiv{
   position: relative;
 }
 
-.nextButtons, .resetButtons{
+.nextButtons, .resetButtons, #submit{
   float: right;
   position: absolute;
   bottom: 2px;
