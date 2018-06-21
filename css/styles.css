@@ -1,0 +1,22 @@
+body{
+
+}
+#plantEntryStepOne{
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+button{
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.newPlant {
+  margin: 30px;
+}
+
+#unique-name {
+  color: blue;
+}
