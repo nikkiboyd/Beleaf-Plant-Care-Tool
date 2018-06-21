@@ -403,7 +403,9 @@ $(function(){
 
   $(".myplantslink").click(function(event){
     event.preventDefault();
-    appendToGarden(allUserPlants)
+    $("#myGarden").empty();
+    var everyPlant = testPlants.concat(allUserPlants);
+    appendToGarden(everyPlant)
     $(".homepage").hide();
     $(".container").show();
     $("#calendar-display").hide();
@@ -638,7 +640,6 @@ $(function(){
     var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
     Plant.prototype.addUsersDetails(newPlant, validatedNickName)
     allUserPlants.push(newPlant);
-    console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryStepTwo").hide()
     $(".waterDiv").hide()
@@ -712,8 +713,8 @@ function showHideMonthWeek(elementId){
   }
 }
 
-function appendToGarden(allUserPlants) {
-  allUserPlants.forEach(function(plant){
+function appendToGarden(everyPlant) {
+  everyPlant.forEach(function(plant){
     $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id=" + plant.nickName + ">" + plant.nickName + "</h2>" + "<h3 id=" + plant.commonName + ">" + plant.commonName + "</h3>" + "<img src='img/" + plant.commonName + ".jpg'>" +"</div>")
   })
 }
@@ -753,7 +754,7 @@ var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twi
 var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
 
-Plant.prototype.addUsersDetails(spider2, "spidey")
+Plant.prototype.addUsersDetails(spider2, "Spidey")
 Plant.prototype.addUsersDetails(snake2, "Slytherin")
 Plant.prototype.addUsersDetails(maple2, "Syrup")
 Plant.prototype.addUsersDetails(aralia2, "Ari")
