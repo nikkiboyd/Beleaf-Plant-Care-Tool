@@ -1,15 +1,28 @@
 body{
 
 }
-#plantEntryStepOne{
+#plantEntryStepOne {
   border-bottom: 1px solid black;
   margin-bottom: 10px;
 }
+.bottomBorder{
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
 button{
   margin-bottom: 10px;
 }
 
+#plantEntryStepOne, .waterDiv{
+  position: relative;
+}
 
+.nextButtons, .resetButtons, #submit{
+  float: right;
+  position: absolute;
+  bottom: 2px;
+}
 
 .hidden {
   display: none;
