@@ -14,7 +14,7 @@ Plant.prototype.makeSchedule = function(taskKey) {
 
   if (taskKey[0] === "Once a week") {
     var firstDay = new Date(new Date().setHours(0,0,0,0))
-    var dayOfWeek = firstDay.getDay()
+    var dayOfWeek = new Date(new Date().setHours(0,0,0,0))
     while(firstDay.getDay() !== weekdayArray.indexOf(taskKey[1])){
       firstDay.setDate(firstDay.getDate() + 1)
     }
@@ -401,12 +401,14 @@ $(function(){
 
   $(".myplantslink").click(function(event){
     event.preventDefault();
+    appendToGarden(allUserPlants)
     $(".homepage").hide();
     $(".container").show();
     $("#calendar-container").hide();
     $("#plantEntryForm").hide();
     $("#myPlants-display").show();
     $("#helppage").hide();
+
 
   });
   $(".schedulelink").click(function(event){
@@ -418,6 +420,7 @@ $(function(){
     $("#myPlants-display").hide();
     $("#helppage").hide();
 // the rest here is same code as the refresh button
+// Need to ask Renee about the next 3 lines: necessary?
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
@@ -632,10 +635,11 @@ $(function(){
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
     var fertilizingArray = validateTaskInputs(fertilizing, fertilizingCheckBoxes, fertilizeMonthday)
 
+
     //create new plant
     var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
-    allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, validatedNickName)
+    allUserPlants.push(newPlant);
     $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
     console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
@@ -683,7 +687,9 @@ function checkNickname(nickname, myPlants){
 } // NOT USING THE ABOVE FUNCTION
 
   $("#refreshButton").click(function(event){
-    event.preventDefault();
+    event.preventDefault()
+    console.log(allUserPlants)
+    console.log(testPlants)
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
@@ -711,6 +717,11 @@ function showHideMonthWeek(elementId){
   }
 }
 
+function appendToGarden(allUserPlants) {
+  allUserPlants.forEach(function(plant){
+    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id=" + plant.nickName + ">" + plant.nickName + "</h2>" + "<h3 id=" + plant.commonName + ">" + plant.commonName + "</h3>" + "<img src='img/" + plant.commonName + ".jpg'>" +"</div>")
+  })
+}
 // Template Plants
 
 
@@ -746,6 +757,8 @@ var xmascactus2 = new Plant ("Christmas Cactus", "Shade", "Average", ["Once a we
 var peacelily2 = new Plant ("Peace Lily", "Indirect Sun", "Very Tolerant", ["Twice a week", "Sunday", "Friday"], ["Once a month", 1], ["Every other week", "Monday"])
 var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Once a week", "Tuesday"], ["Once a month", 16], ["Once a month", 6])
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
+
+Plant.prototype.addUsersDetails(spider2, "spidey")
 testPlants.push(spider2)
 testPlants.push(snake2)
 testPlants.push(maple2)
