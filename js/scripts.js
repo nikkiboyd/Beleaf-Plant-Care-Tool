@@ -101,6 +101,12 @@ function makeUniqueWeekDays(weekEvents) {
 
 function sortIntoWeeksAndFormat(allEvents) {
 
+  $("#week-glance-tasks").text("")
+  $("#week-one-tasks").text("")
+  $("#week-two-tasks").text("")
+  $("#week-three-tasks").text("")
+  $("#week-four-tasks").text("")
+
   var weekOneRange = [today, (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6).setHours(0,0,0,0)))];
   var weekTwoRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13).setHours(0,0,0,0)))]
   var weekThreeRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20).setHours(0,0,0,0)))]
@@ -403,6 +409,7 @@ $(function(){
 
   $(".myplantslink").click(function(event){
     event.preventDefault();
+    $("#myGarden").text("")
     appendToGarden(allUserPlants)
     $(".homepage").hide();
     $(".container").show();
@@ -421,6 +428,12 @@ $(function(){
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
     $("#helppage").hide();
+    event.preventDefault()
+    console.log(allUserPlants)
+    console.log(testPlants)
+    var everyPlant = testPlants.concat(allUserPlants);
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
 
   });
   $(".addplantlink").click(function(event){
@@ -653,6 +666,9 @@ $(function(){
     $(".nextButtons").show()
     $(".resetButtons").hide()
     $("#plantEntryStepTwo").hide()
+    $("#detailMsg").hide()
+    $("#confirmMsg").show()
+
 
   }) //END SUBMIT CLICK EVENT
 
