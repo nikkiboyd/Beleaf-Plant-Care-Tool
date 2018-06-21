@@ -30,4 +30,4 @@ Copyright (c) 2018 **Team Plant Care**
 
 
 
-<img width="872" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
+<img align="left" width="100" height="100" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
