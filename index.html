@@ -1,15 +1,405 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Plant Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- remove styles link for Bootstrap 3.3.7 and uncomment below if you want to use Bootstrap 4.0.0 -->
-  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Amatic+SC:700|Josefin+Sans|Poiret+One|Spirax" rel="stylesheet">
   <script src="js/scripts.js"></script>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body>
+  <div class="container">
+    <div class="navbar navbar-light" style="background-color: #a6e234; color: black; font-weight: bold">
+      <ul class="nav nav-pills">
+         <li class="nav-item">
+           <a class="nav-link linkhomepage">Homepage</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link myplantslink">My Garden</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link schedulelink">My Schedule</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link addplantlink">Add Plant</a>
+         </li>
+       </ul>
+    </div>
+   <form  id="plantEntryForm" class="card" action="index.html" method="post">
+      <div id="plantEntryStepOne">
+        <div class="jumbotron">
+          <h1>Add Plant</h1>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="exampleFormControlInput1">Give your plant a name:</label>
+            <input type="text" class="form-control" id="nickNameInput" placeholder="Pick a nickname for your plant">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="selectPlant">Select the type of plant or create your own:</label>
+            <select class="form-control" id="selectPlant">
+              <option>Select a plant to begin</option>
+              <option>Create your own</option>
+              <option>Spider Plant</option>
+              <option>Snake Plant</option>
+              <option>Japanese Maple</option>
+              <option>Christmas Cactus</option>
+              <option>Japanese Aralia</option>
+              <option>Peace Lily</option>
+              <option>Asparagus Fern</option>
+              <option>Dracena</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <button class="col-sm-6 btn btn-success" type="button" id="createPlant">Create</button>
+            <button class="col-sm-6 btn btn-primary hidden" type="button" id="resetCreatePlant">Reset</button>
+          </div>
+          <div id="commonNameDiv" class="form-group col-sm-6 hidden">
+            <label for="exampleFormControlInput1">What type of plant is this?</label>
+            <input type="text" class="form-control" id="customCommonName" placeholder="Enter plant's common name">
+          </div>
+        </div>
+      </div>
+      <h3 id="detailsHeader" class="hidden"> <span id="detailMsg"> Tell us the details about </span><span class="plantName">your plant </span> <span id="confirmMsg"> has been added to your garden!</span></h3>
+      <div class="row bottomBorder" id="plantEntryStepTwo">
+        <div class="form-group col-sm-5">
+          <label for="sunlightSelection"> <span class="plantName">Plant</span>'s sunlight needs are</label>
+          <select class="form-control" id="sunlightSelection">
+            <option>Select a value</option>
+            <option>Full Sun</option>
+            <option>Part Sun</option>
+            <option>Shade</option>
+            <option>Indirect Sun</option>
+            <option>North-facing</option>
+            <option>South-facing</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-5">
+          <label for="hardinessSelection"><span class="plantName">Plant's</span>'s hardiness type is</label>
+          <select class="form-control" id="hardinessSelection">
+            <option>Select a value</option>
+            <option>Average</option>
+            <option>Heat Tolerant</option>
+            <option>Drought Tolerant</option>
+            <option>Very Tolerant</option>
+            <option>Temperamental</option>
+          </select>
+        </div>
+        <div class="col-sm-2 buttonDiv">
+          <button id="sunNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="sunReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
+        </div>
+      </div>
+      <div class="waterDiv row">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label for="waterSelection"> <span class="plantName"></span> needs to be watered </label>
+            <select class="form-control" id="waterSelection">
+              <option>Select a value</option>
+              <option value="1">Once a week</option>
+              <option value="2">Twice a week</option>
+              <option value="1">Every other week</option>
+              <option>Once a month</option>
+            </select>
+          </div>
+          <div class ="hidden" id="waterSelectionWeekdayLabel">
+            Select when you will water
+          </div>
+          <div class="hidden" id="waterSelectionWeekday">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterMonday" value="Monday">
+              <label class="form-check-label" for="waterMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterTuesday" value="Tuesday">
+              <label class="form-check-label" for="waterTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterWednesday" value="Wednesday">
+              <label class="form-check-label" for="waterWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterThursday" value="Thursday">
+              <label class="form-check-label" for="waterThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterFriday" value="Friday">
+              <label class="form-check-label" for="waterFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSaturday" value="Saturday">
+              <label class="form-check-label" for="waterSaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="waterSelectionCheckBoxes" id="waterSunday" value="Sunday">
+              <label class="form-check-label" for="waterSunday">Sunday</label>
+            </div>
+          </div>
+          <div class="hidden" id="waterSelectionMonth">
+            <div class="form-group">
+              <label for="waterMonthDay">Select a day of the month</label>
+              <select id ="waterMonthDropdown" class="form-control">
+                <option>Select a date</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button id="waterNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="waterReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
+        </div>
+      </div>
+      <div class="pruningDiv row">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label for="pruningSelection">How often to prune:</label>
+            <select class="form-control" id="pruningSelection">
+              <option>Select a value</option>
+              <option value="1">Once a week</option>
+              <option value="2">Twice a week</option>
+              <option value="1">Every other week</option>
+              <option value="1">Once a month</option>
+              <!-- <option>As needed</option>
+              <option>Annually</option>
+              <option>Never</option> -->
+            </select>
+          </div>
+          <div id="pruningSelectionWeekday" class="hidden">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningeSelectionCheckBoxes" type="checkbox" id="pruneMonday" value="Monday">
+              <label class="form-check-label" for="pruneMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneTuesday" value="Tuesday">
+              <label class="form-check-label" for="pruneTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneWednesday" value="Wednesday">
+              <label class="form-check-label" for="pruneWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneThursday" value="Thursday">
+              <label class="form-check-label" for="pruneThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneFriday" value="Friday">
+              <label class="form-check-label" for="pruneFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSaturday" value="Saturday">
+              <label class="form-check-label" for="pruneSaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="pruningSelectionCheckBoxes" type="checkbox" id="pruneSunday" value="Sunday">
+              <label class="form-check-label" for="pruneSunday">Sunday</label>
+            </div>
+          </div>
+          <div class="form-group hidden" id="pruningSelectionMonth">
+            <label for="pruningMonthDay">Select a day of the month</label>
+            <select id="pruneMonthDropdown"class="form-control" id="pruningMonthDay">
+              <option>Select a date</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button id="pruningNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
+          <button id="pruningReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
+        </div>
+      </div>
+      <div class="fertilizingDiv row">
+        <div class="col-sm-10">
+          <div class="form-group">
+            <label for="fertilizingSelection">How often to fertilize:</label>
+            <select class="form-control" id="fertilizingSelection">
+              <option>Select a value</option>
+              <option value="1">Once a week</option>
+              <option value="2">Twice a week</option>
+              <option value="1">Every other week</option>
+              <option>Once a month</option>
+              <!-- <option>As needed</option>
+              <option>Annually</option>
+              <option>Never</option> -->
+            </select>
+          </div>
+          <div class="hidden" id="fertilizingSelectionWeekday">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeMonday" value="Monday">
+              <label class="form-check-label" for="fertilizeMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeTuesday" value="Tuesday">
+              <label class="form-check-label" for="fertilizeTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeWednesday" value="Wednesday">
+              <label class="form-check-label" for="fertilizeWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeThursday" value="Thursday">
+              <label class="form-check-label" for="fertilizeThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeFriday" value="Friday">
+              <label class="form-check-label" for="fertilizeFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeSaturday" value="Saturday">
+              <label class="form-check-label" for="fertilizeSaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="fertilizingSelectionCheckBoxes" type="checkbox" id="fertilizeSunday" value="Sunday">
+              <label class="form-check-label" for="fertilizeSunday">Sunday</label>
+            </div>
+          </div>
+          <div class="form-group hidden" id="fertilizingSelectionMonth">
+            <label for="pruningMonthDay">Select a day of the month</label>
+            <select id="fertilizingMonthDropdown" class="form-control" id="pruningMonthDay">
+              <option>Select a date</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary nextButtons" id="submit" type="submit" name="button">Add</button>
+        </div>
+      </div>
+    </form>
+    <div id="calendar-display" class="card">
+      <span id="fullDate"></span>
+      <div class="jumbotron">
+        <h1>My Schedule</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-6 calendar-card card">
+          <h2 class="calendar-header">The week of: <span id="week-one-range"></span></h2>
+          <hr>
+          <p class="daily-tasks" id="week-one-tasks"></p>
+        </div>
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">The week of: <span id="week-two-range"></span></h2>
+          <hr>
+          <p class="daily-tasks" id="week-two-tasks"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">The week of: <span id="week-three-range"></span></h2>
+          <hr>
+          <p class="daily-tasks" id="week-three-tasks"></p>
+        </div>
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">The week of: <span id="week-four-range"></span></h2>
+          <hr>
+          <p class="daily-tasks" id="week-four-tasks"></p>
+        </div>
+      </div>
+      <!-- <div class="col-md-12 card">
+        <h2 class="calendar-header">Next month: <span id="glance-range"></span></h2>
+        <p class="daily-tasks" id="week-glance-tasks"></p>
+      </div> -->
+      <!-- <button id="refreshButton" type="button" class="center btn btn-primary">Refresh Calendar</button> -->
+    </div>
+    <div id="myPlants-display" class="card">
+      <div class="jumbotron">
+        <h1>My Garden</h1>
+      </div>
+      <div class="row" id="myGarden">
+      </div>
+    </div>
+
+  </div>   <!-- container ending -->
+
+<!-- id="homepagelink" -->
+  <div class="card homepage" >
+    <img src="css/beleaf.jpg" alt="Beleaf Logo"><br><br><br>
+    <button class="col-sm-6 btn btn-primary myplantslink"type="button">My Garden</button>
+    <button class="col-sm-6 btn btn btn-info schedulelink"type="button">My Schedule</button>
+    <button class="col-sm-6 btn btn-success addplantlink"type="button">Add Plant</button>
+  </div>
 </body>
 </html>

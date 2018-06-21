@@ -1,0 +1,148 @@
+body {
+    background-image: url('background.jpg');
+    background-repeat: repeat;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #656863;
+}
+
+#plantEntryStepOne {
+  border-bottom: 1px solid #82c2aa;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+/* START next/reset buttons to the bottom of parent div*/
+button {
+  margin-bottom: 10px;
+}
+.buttonDiv{
+  position: relative;
+}
+/*END next/reset buttons*/
+
+/*START form formatting */
+
+/*END */
+
+
+.nextButtons, .resetButtons{
+  position: absolute;
+  bottom: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.newPlant {
+  margin: 30px;
+  padding: 15px;
+  text-align: center;
+}
+
+#unique-name {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  color: #d1eb56;
+  font-size: 30px
+}
+
+#common-name {
+  font-family: 'Poiret One', cursive;
+  font-size: 20px;
+  color: #c4cf80;
+}
+
+.calendar-header {
+  color: #82c2aa;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
+  font-size: 30px;
+}
+
+.card {
+  padding: 50px;
+  margin: 0px;
+  border-color: white;
+}
+
+li {
+  cursor: pointer;
+}
+
+.btn {
+  background-color: #a6e234;
+  border-color: #a6e234;
+  font-size: 25px;
+  width: 50%;
+}
+
+.btn:hover {
+  background-color: #82c2aa;
+  border-color: #82c2aa;
+}
+
+.jumbotron {
+  background-image: url('jumbotron.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Abril Fatface', cursive;
+  color: white;
+  padding: 50px;
+  margin-top: -50px;
+  margin-left: -50px;
+  margin-right: -50px;
+  text-align: right;
+}
+
+.homepage {
+  margin-top: 20%;
+  display: none;
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
+
+.nextButtons, .resetButtons {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.daily-tasks {
+  margin-left: 20px;
+}
+
+.form-check-label {
+  margin: 5px;
+}
+
+h4 {
+  margin-top: 10px;
+  color: #82c2aa;
+  font-weight: bold;
+  font-family: 'Poiret One', cursive;
+}
+
+.navbar {
+  text-align: center;
+}
+
+.nav-link {
+  background-color:
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 0.5px;
+    border-color: #82c2aa;
+}
