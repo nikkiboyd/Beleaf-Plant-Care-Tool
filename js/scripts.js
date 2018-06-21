@@ -169,17 +169,34 @@ function sortIntoWeeksAndFormat(allEvents) {
 
     // })
   }
-  var uniqueDays = makeUniqueWeekDays(weekOneEvents) // the makeUniqueWeekDays function expects ALL week 1 events, and here it is being called once every time we loop through the events
-  console.log(uniqueDays)
-  weekOneEvents.forEach(function(event) {
-    $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
-    $("#week-one-tasks").append("<div class='form-check'>" +
-                            "<label class='form-check-label'>" +
-                            "<input class='form-check-input' type='checkbox'>" +
-                            event[2] + " " + event[1] +
-                            "</label>" +
-                            "</div>")
-})
+  var uniqueDaysWeekOne = makeUniqueWeekDays(weekOneEvents)
+
+  for (m = 0; m < uniqueDaysWeekOne.length; ++m) { // for every unique weekday
+    $("#week-one-tasks").append("<h4>" + uniqueDaysWeekOne[m] + "</h4>")
+    for (n = 0; n < weekOneEvents.length; ++n) {
+      // console.log(uniqueDaysWeekOne[m])
+      // console.log(weekdayArray[weekOneEvents[n][0].getDay()])
+      if (uniqueDaysWeekOne[m] === weekdayArray[weekOneEvents[n][0].getDay()]) {
+        console.log("reached")
+        $("#week-one-tasks").append("<div class='form-check'>" +
+                                "<label class='form-check-label'>" +
+                                "<input class='form-check-input' type='checkbox'>" +
+                                weekOneEvents[n][2] + " " + weekOneEvents[n][1] +
+                                "</label>" +
+                                "</div>")
+      }
+    }
+  }
+//
+//   weekOneEvents.forEach(function(event) {
+//     $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
+//     $("#week-one-tasks").append("<div class='form-check'>" +
+//                             "<label class='form-check-label'>" +
+//                             "<input class='form-check-input' type='checkbox'>" +
+//                             event[2] + " " + event[1] +
+//                             "</label>" +
+//                             "</div>")
+// })
 }
 
 function makeCalendar(everyPlant) {
