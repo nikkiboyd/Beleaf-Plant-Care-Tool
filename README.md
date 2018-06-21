@@ -25,6 +25,7 @@ A plant profile and calendar app for plant owners. The web application helps pla
 <img align="left" width="300" height="300" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
 
 * Each plant profile is saved and can be seen in the "My Plant" link at  the top of the page
+<img align="left" width="300" height="300"  alt="screen shot 2018-06-21 at 2 53 01 pm" src="https://user-images.githubusercontent.com/39496805/41747505-10b5c9bc-7563-11e8-8c58-d6631871c938.png">
 
 
 
