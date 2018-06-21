@@ -355,9 +355,9 @@ $(function(){
     $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
       waterCheckBoxes.push($(this).val());
     })
-    $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
-      waterCheckBoxes.push($(this).val());
-    })
+    // $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
+    //   waterCheckBoxes.push($(this).val());
+    // })
     if(hasDropdownOptionBeenSelected(water)){
       if(waterCheckBoxes.length > 0 || waterMonthday !== "Select a date"){
         console.log("in the if statement with" + water)
@@ -377,10 +377,14 @@ $(function(){
 
   //STEP FOUR -Pruning div, show fertilizing div
   $("#pruningNext").click(function(){
-    var water = $("#waterSelection :selected").text()
+    var prune = $("#pruningSelection :selected").text()
     var pruneMonthday = $("#pruneMonthDropdown :selected").text()
-    var waterCheckBoxes = []
-    alert("pruning working")
+    var pruneCheckBoxes = []
+    $("input:checkbox[name=pruningSelectionCheckBoxes]:checked").each(function(){
+      pruneCheckBoxes.push($(this).val());
+    })
+    alert(prune)
+    alert("prune week day " + pruneCheckBoxes)
 
   })
 
