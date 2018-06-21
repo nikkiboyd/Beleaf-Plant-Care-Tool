@@ -370,11 +370,8 @@ function resetDropdown(dropdownId){
 
 function validateTaskInputs(taskFrequency, taskDayCheckboxes, taskMonthSelection){
   validatedArray = []
-  console.log("the task frequency is " + taskFrequency)
-  console.log("the checkbox array is " + taskDayCheckboxes)
   if(taskDayCheckboxes.length > 0){
     validatedArray.push(taskFrequency)
-    console.log("the validated array after frequency " + validatedArray)
     for(i=0; i < taskDayCheckboxes.length; ++i){
       validatedArray.push(taskDayCheckboxes[i])
     }
@@ -430,9 +427,6 @@ $(function(){
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
     $("#helppage").hide();
-    event.preventDefault()
-    console.log(allUserPlants)
-    console.log(testPlants)
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
@@ -524,7 +518,6 @@ $(function(){
     // })
     if(hasDropdownOptionBeenSelected(water)){
       if(waterCheckBoxes.length > 0 || waterMonthday !== "Select a date"){
-        console.log("in the if statement with" + water)
         $("#waterNext").hide()
         $("#waterReset").show()
         $(".pruningDiv").show()
@@ -726,7 +719,6 @@ function showHideMonthWeek(elementId){
   } else if (selection.search("week") > -1) {
     var limit= parseInt($("#" + elementId + " :selected").val())
     var newVar = ("document.forms.plantEntryForm."+ elementId+"CheckBoxes")
-    console.log(newVar)
     checkboxlimit(eval(newVar), limit)
     $("#" + elementId + "Month").hide();
     $("#" + elementId + "Weekday").show();
