@@ -326,54 +326,7 @@ function validateNickName(nickName){
 }//END OF validateNickName
 
 //user logic
-$(function(){
-  $(".linkhomepage").click(function(event){
-    event.preventDefault();
-    $(".homepage").show();
-    $(".container").hide();
-  });
 
-  $(".myplantslink").click(function(event){
-    event.preventDefault();
-    $(".homepage").hide();
-    $(".container").show();
-    $("#calendar-container").hide();
-    $("#plantEntryForm").hide();
-    $("#myPlants-display").show();
-    $("#helppage").hide();
-
-  });
-  $(".schedulelink").click(function(event){
-    event.preventDefault();
-    $(".homepage").hide();
-    $(".container").show();
-    $("#calendar-container").show();
-    $("#plantEntryForm").hide();
-    $("#myPlants-display").hide();
-    $("#helppage").hide();
-// the rest here is same code as the refresh button
-    var everyPlant = testPlants.concat(allUserPlants);
-    var allEvents = makeCalendar(everyPlant);
-    sortIntoWeeksAndFormat(allEvents);
-  });
-  $(".addplantlink").click(function(event){
-    event.preventDefault();
-    $(".homepage").hide();
-    $(".container").show();
-    $("#calendar-container").hide();
-    $("#plantEntryForm").show()
-    $("#myPlants-display").hide();
-    $("#helppage").hide();
-  });
-  $(".helplink").click(function(event){
-    event.preventDefault();
-    $(".homepage").hide();
-    $(".container").show();
-    $("#calendar-container").hide();
-    $("#plantEntryForm").hide();
-    $("#myPlants-display").hide();
-    $("#helppage").show();
-  });
 
 function getTemplatePlantDetails(){
   // var nickname = $("#nickNameInput").val()
@@ -422,13 +375,59 @@ function resetDropdown(dropdownId){
 //
 
 $(function(){
-
-
   //Hide Plant detail divs
   $("#plantEntryStepTwo").hide()
   $(".waterDiv").hide()
   $(".pruningDiv").hide()
   $(".fertilizingDiv").hide()
+
+  $(".linkhomepage").click(function(event){
+    event.preventDefault();
+    $(".homepage").show();
+    $(".container").hide();
+  });
+
+  $(".myplantslink").click(function(event){
+    event.preventDefault();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").hide();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").show();
+    $("#helppage").hide();
+
+  });
+  $(".schedulelink").click(function(event){
+    event.preventDefault();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").show();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").hide();
+    $("#helppage").hide();
+// the rest here is same code as the refresh button
+    var everyPlant = testPlants.concat(allUserPlants);
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
+  });
+  $(".addplantlink").click(function(event){
+    event.preventDefault();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").hide();
+    $("#plantEntryForm").show()
+    $("#myPlants-display").hide();
+    $("#helppage").hide();
+  });
+  $(".helplink").click(function(event){
+    event.preventDefault();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").hide();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").hide();
+    $("#helppage").show();
+  });
 
   //STEP ONE - Name plant and select its type
   $("#createPlant").click(function(event){
@@ -481,7 +480,7 @@ $(function(){
       alert("Please select sunlight needs")
     }
   })
-  
+
     //STEP THREE - Water div, show pruning
   $("#waterNext").click(function(){
     var water = $("#waterSelection :selected").text()
@@ -583,6 +582,7 @@ $(function(){
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
     var nickName = $("#nickNameInput").val()
+    // need to update commonName var to pull from validation function
     var commonName = $("#selectPlant").val()
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
@@ -632,6 +632,7 @@ $(function(){
     // }
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
+    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
     console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryForm input").attr("disabled", false)
@@ -641,6 +642,7 @@ $(function(){
     $(".nextButtons").show()
     $(".resetButtons").hide()
     $("#plantEntryStepTwo").hide()
+
   }) //END SUBMIT CLICK EVENT
 
   document.getElementById("waterSelection").onchange = function(){
