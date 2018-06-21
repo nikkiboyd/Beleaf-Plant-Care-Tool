@@ -335,8 +335,8 @@ $(function(){
     Plant.prototype.addUsersDetails(newPlant, nickName)
 
     //appends unique nickname and common name to myplants
-    $("#myPlants-display").append("<div class='newPlant'>" +
-                        "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3>" + commonName + "</h3>" + "<img src='img/" + commonName + ".jpg'>" + "</div>")
+    $("#myGarden").append("<div class='newPlant col-md-3'>" +
+                        "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/" + commonName + ".jpg'>" + "</div>")
 
   }) //END SUBMIT CLICK EVENT
 
