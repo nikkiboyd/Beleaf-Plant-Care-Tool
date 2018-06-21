@@ -315,6 +315,8 @@ $(function(){
        $("#nickNameInput").prop("readonly", true)
        $("#selectPlant").attr("disabled", true)
        $("#customCommonName").prop("readonly", true)
+       $("#createPlant").hide()
+       $("#resetCreatePlant").show()
      }
     }
   });
@@ -402,6 +404,21 @@ $(function(){
     } else {
       alert("Please select how often to prune")
     }
+  })
+
+  // RESET BUTTONS
+  // $("#resetCreatePlant").click(function(){
+  //   resetDropdown("selectPlant")
+  //   $("$commonNameDiv").val("")
+  // })
+
+  $("#sunReset").click(function(){
+    resetDropdown("sunlightSelection")
+    resetDropdown("hardinessSelection")
+    $("#sunlightSelection").attr("disabled", false)
+    $("#hardinessSelection").attr("disabled", false)
+    $("#sunReset").hide()
+    $("#sunNext").show()
   })
 
   $("#waterReset").click(function(){
