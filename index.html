@@ -11,20 +11,26 @@
 </head>
 <body>
   <div class="container">
-   <ul class="nav nav-pills">
-<li class="nav-item">
-  <a class="nav-link active linkhomepage">Homepage</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link myplantslink">My Plants</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link schedulelink">Calendar</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link helplink">Help/Info</a>
-</li>
-</ul>
+    <div class="navbar navbar-light" style="background-color: #a6e234; color: black; font-weight: bold">
+      <ul class="nav nav-pills">
+         <li class="nav-item">
+           <a class="nav-link linkhomepage">Homepage</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link myplantslink">My Plants</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link schedulelink">Calendar</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link helplink">Help/Info</a>
+         </li>
+       </ul>
+    </div>
+   <form  id="plantEntryForm" class="card center" action="index.html" method="post">
+     <div class="jumbotron">
+       <h1>Create Your Plant</h1>
+     </div>
 <div class="jumbotron">
   <h1>Add a Plant</h1>
 </div>
@@ -50,11 +56,9 @@
               <option>Dracena</option>
             </select>
           </div>
-        </div>
-        <div class="row">
           <div class="col-sm-6">
-            <button class=" col-sm-6 btn btn-success"type="button" id="createPlant">Create your plant</button>
-            <button class="col-sm-6 btn btn-warning hidden"type="button" id="resetCreatePlant">Reset this section</button>
+            <button class="col-sm-6 btn btn-success" type="button" id="createPlant">Create</button>
+            <button class="col-sm-6 btn btn-primary hidden" type="button" id="resetCreatePlant">Reset</button>
           </div>
           <div id="commonNameDiv" class="form-group col-sm-6 hidden">
             <label for="exampleFormControlInput1">What type of plant is this?</label>
@@ -89,7 +93,7 @@
         </div>
         <div class="col-sm-2 buttonDiv">
           <button id="sunNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
-          <button id="sunReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
+          <button id="sunReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
         </div>
       </div>
       <div class="waterDiv row">
@@ -176,7 +180,7 @@
         </div>
         <div class="col-sm-2">
           <button id="waterNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
-          <button id="waterReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
+          <button id="waterReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
         </div>
       </div>
       <div class="pruningDiv row">
@@ -227,6 +231,7 @@
           <div class="form-group hidden" id="pruningSelectionMonth">
             <label for="pruningMonthDay">Select a day of the month</label>
             <select id="pruneMonthDropdown"class="form-control" id="pruningMonthDay">
+              <option>Select a date</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -260,7 +265,7 @@
         </div>
         <div class="col-sm-2">
           <button id="pruningNext"class="nextButtons btn btn-info btn-sm" type="button" name="button">Next</button>
-          <button id="pruningReset"class="resetButtons btn btn-warning btn-sm hidden" type="button" name="button">Reset this section</button>
+          <button id="pruningReset"class="resetButtons btn btn-primary btn-sm hidden" type="button" name="button">Reset</button>
         </div>
       </div>
       <div class="fertilizingDiv row">
@@ -311,6 +316,7 @@
           <div class="form-group hidden" id="fertilizingSelectionMonth">
             <label for="pruningMonthDay">Select a day of the month</label>
             <select id="fertilizingMonthDropdown" class="form-control" id="pruningMonthDay">
+              <option>Select a date</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -343,7 +349,7 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <button id="submit" type="submit" name="button">Add Plant</button>
+          <button class="btn btn-primary nextButtons" id="submit" type="submit" name="button">Add</button>
         </div>
       </div>
     </form>
@@ -353,29 +359,33 @@
         <h1>Upcoming Tasks</h1>
       </div>
       <div class="row">
-        <div class="col-md-6 card">
-          <h2 class="calendar-header">This week: <span id="week-one-range"></span></h2>
+        <div class="col-md-6 calendar-card card">
+          <h2 class="calendar-header">The week of: <span id="week-one-range"></span></h2>
+          <hr>
           <p class="daily-tasks" id="week-one-tasks"></p>
         </div>
         <div class="col-md-6 card">
-          <h2 class="calendar-header">Next week: <span id="week-two-range"></span></h2>
+          <h2 class="calendar-header">The week of: <span id="week-two-range"></span></h2>
+          <hr>
           <p class="daily-tasks" id="week-two-tasks"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 card">
-        <h2 class="calendar-header">In 3 weeks: <span id="week-three-range"></span></h2>
-        <p class="daily-tasks" id="week-three-tasks"></p>
+          <h2 class="calendar-header">The week of: <span id="week-three-range"></span></h2>
+          <hr>
+          <p class="daily-tasks" id="week-three-tasks"></p>
         </div>
         <div class="col-md-6 card">
-          <h2 class="calendar-header">In 4 weeks: <span id="week-four-range"></span></h2>
+          <h2 class="calendar-header">The week of: <span id="week-four-range"></span></h2>
+          <hr>
           <p class="daily-tasks" id="week-four-tasks"></p>
         </div>
       </div>
-      <div class="col-md-12 card">
-        <h2 class="calendar-header">A glance into the future: <span id="glance-range"></span></h2>
+      <!-- <div class="col-md-12 card">
+        <h2 class="calendar-header">Next month: <span id="glance-range"></span></h2>
         <p class="daily-tasks" id="week-glance-tasks"></p>
-      </div>
+      </div> -->
       <button id="refreshButton" type="button" class="center btn btn-primary">Refresh Calendar</button>
     </div>
     <div id="myPlants-display" class="card">
@@ -385,37 +395,14 @@
       <div class="row" id="myGarden">
       </div>
     </div>
-
-    <div class="card" id="helppage">
-      <p>helppage</p>
-
-      Lorem ipsum
-    </div>
   </div>   <!-- container ending -->
 
 <!-- id="homepagelink" -->
   <div class="card homepage" >
-    <h1 id="plantAppTitle">Plant App</h1>
+    <img src="css/beleaf.jpg" alt="Beleaf Logo"><br><br><br>
     <button class="col-sm-6 btn btn-primary myplantslink"type="button">My Plants</button>
     <button class="col-sm-6 btn btn btn-info schedulelink"type="button">Schedule</button>
     <button class="col-sm-6 btn btn-success addplantlink"type="button">Add Plant</button>
-    <button class="col-sm-6 btn btn-secondary helplink"type="button">Help/Info</button>
   </div>
-
-  <div class="card" id="homepage">
-    <h1>Plant App</h1>
-    <button class="col-sm-6 btn btn-primary"type="button" id="myplantslink">My Plants</button>
-    <button class="col-sm-6 btn btn btn-info"type="button" id="schedulelink">Schedule</button>
-    <button class="col-sm-6 btn btn-success"type="button" id="addplantlink">Add Plant</button>
-    <button class="col-sm-6 btn btn-secondary"type="button" id="helplink">Help/Info</button>
-    <div class="card" id="helppage">
-      <p>helppage</p>
-
-    </div>
-
-  </div>
-
-  <!-- ****Nikki putting in myPlants-display***** -->
-
 </body>
 </html>

@@ -640,7 +640,6 @@ $(function(){
     var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
     Plant.prototype.addUsersDetails(newPlant, validatedNickName)
     allUserPlants.push(newPlant);
-    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
     console.log(newPlant)
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryStepTwo").hide()
