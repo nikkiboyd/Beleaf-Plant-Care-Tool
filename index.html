@@ -5,16 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Amatic+SC:700|Josefin+Sans|Poiret+One|Spirax" rel="stylesheet">
   <script src="js/scripts.js"></script>
   <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body>
   <div class="container">
-    <div class="navigation">
-      <button class="col-sm-6 btn btn-success"type="button" id="linkhomepage">Homepage</button>
-    </div>
-    <h1>Add a plant</h1>
-    <form  id="plantEntryForm" class="" action="index.html" method="post">
+   <ul class="nav nav-pills">
+<li class="nav-item">
+  <a class="nav-link active linkhomepage">Homepage</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link myplantslink">My Plants</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link schedulelink">Calendar</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link helplink">Help/Info</a>
+</li>
+</ul>
+<div class="jumbotron">
+  <h1>Create Your Plant</h1>
+</div>   
+   <form  id="plantEntryForm" class="" action="index.html" method="post">
       <div id="plantEntryStepOne">
         <div class="row">
           <div class="form-group col-sm-6">
@@ -333,37 +347,61 @@
         </div>
       </div>
     </form>
-    <div id="calendar-display">
+    <div id="calendar-display" class="card">
       <span id="fullDate"></span>
+      <div class="jumbotron">
+        <h1>Upcoming Tasks</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">This week: <span id="week-one-range"></span></h2>
+          <p class="daily-tasks" id="week-one-tasks"></p>
+        </div>
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">Next week: <span id="week-two-range"></span></h2>
+          <p class="daily-tasks" id="week-two-tasks"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 card">
+        <h2 class="calendar-header">In 3 weeks: <span id="week-three-range"></span></h2>
+        <p class="daily-tasks" id="week-three-tasks"></p>
+        </div>
+        <div class="col-md-6 card">
+          <h2 class="calendar-header">In 4 weeks: <span id="week-four-range"></span></h2>
+          <p class="daily-tasks" id="week-four-tasks"></p>
+        </div>
+      </div>
+      <div class="col-md-12 card">
+        <h2 class="calendar-header">A glance into the future: <span id="glance-range"></span></h2>
+        <p class="daily-tasks" id="week-glance-tasks"></p>
+      </div>
+      <button id="refreshButton" type="button" class="center btn btn-primary">Refresh Calendar</button>
     </div>
-    <h1>My Calendar</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Week 1</h2>
-        <p class="daily-tasks" id="week-one-tasks"></p>
+    <div id="myPlants-display" class="card">
+      <div class="jumbotron">
+        <h1>My Garden</h1>
       </div>
-      <div class="col-md-6">
-        <h2>Week 2</h2>
-        <p class="daily-tasks" id="week-two-tasks"></p>
+      <div class="row" id="myGarden">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-      <h2>Week 3</h2>
-      <p class="daily-tasks" id="week-three-tasks"></p>
-      </div>
-      <div class="col-md-6">
-        <h2>Week 4</h2>
-        <p class="daily-tasks" id="week-four-tasks"></p>
-      </div>
-    </div>
+    
+    <div class="card" id="helppage">
+      <p>helppage</p>
 
-    <h2>A glance into the future...</h2>
-    <p class="daily-tasks" id="week-glance-tasks">
+      Lorem ipsum
+    </div>
+  </div>   <!-- container ending -->
 
-    </p>
-    <button id="refreshButton" type="button" class="btn btn-primary ">Refresh Calendar</button>
+<!-- id="homepagelink" -->
+  <div class="card homepage" >
+    <h1 id="plantAppTitle">Plant App</h1>
+    <button class="col-sm-6 btn btn-primary myplantslink"type="button">My Plants</button>
+    <button class="col-sm-6 btn btn btn-info schedulelink"type="button">Schedule</button>
+    <button class="col-sm-6 btn btn-success addplantlink"type="button">Add Plant</button>
+    <button class="col-sm-6 btn btn-secondary helplink"type="button">Help/Info</button>
   </div>
+
   <div class="card" id="homepage">
     <h1>Plant App</h1>
     <button class="col-sm-6 btn btn-primary"type="button" id="myplantslink">My Plants</button>
@@ -376,5 +414,8 @@
     </div>
 
   </div>
+
+  <!-- ****Nikki putting in myPlants-display***** -->
+
 </body>
 </html>

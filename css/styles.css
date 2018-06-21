@@ -1,31 +1,107 @@
-body{
-
+body {
+    background-image: url('background.jpg');
+    background-repeat: repeat;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #656863;
 }
+
+.select-options {
+    color: #9ba098;
+}
+
 #plantEntryStepOne {
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
-}
-.bottomBorder{
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #82c2aa;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-button{
+button {
   margin-bottom: 10px;
-}
-
-#plantEntryStepOne, .waterDiv{
-  position: relative;
-}
-
-.nextButtons, .resetButtons, #submit{
-  float: right;
-  position: absolute;
-  bottom: 2px;
 }
 
 .hidden {
   display: none;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.newPlant {
+  margin: 30px;
+  padding: 15px;
+  text-align: center;
+}
+
+#unique-name {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  color: #d1eb56;
+  font-size: 30px
+}
+.navigation {
+
+
+#common-name {
+  font-family: 'Poiret One', cursive;
+  font-size: 20px;
+  color: #c4cf80;
+}
+
+.calendar-header {
+  color: #82c2aa;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 30px;
+}
+
+.card {
+  padding: 50px;
+  margin: 0px;
+}
+
+.btn {
+  background-color: #a6e234;
+  border-color: #a6e234;
+  font-size: 25px;
+  width: 25%;
+}
+
+.btn:hover {
+  background-color: #82c2aa;
+  border-color: #82c2aa;
+}
+
+.jumbotron {
+  background-image: url('jumbotron.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Abril Fatface', cursive;
+  color: white;
+  padding: 50px;
+  margin-top: -50px;
+  margin-left: -50px;
+  margin-right: -50px;
+  text-align: right;
+}
+.homepage {
+  display: none;
+  text-align: center;
+  background-color: grey;
+  box-sizing: border-box;
+  width: 70%;
+  height: 400px;
+  margin: auto;
+}
+
+#plantAppTitle {
+  font-family: monospace;
+  font-size: 52pt;
+}
+
+#helppage {
+  background-color: lightgreen;
 }
 
 #homepage {
