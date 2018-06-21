@@ -101,6 +101,12 @@ function makeUniqueWeekDays(weekEvents) {
 
 function sortIntoWeeksAndFormat(allEvents) {
 
+  $("#week-glance-tasks").text("")
+  $("#week-one-tasks").text("")
+  $("#week-two-tasks").text("")
+  $("#week-three-tasks").text("")
+  $("#week-four-tasks").text("")
+
   var weekOneRange = [today, (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6).setHours(0,0,0,0)))];
   var weekTwoRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13).setHours(0,0,0,0)))]
   var weekThreeRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20).setHours(0,0,0,0)))]
@@ -423,6 +429,12 @@ $(function(){
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
     $("#helppage").hide();
+    event.preventDefault()
+    console.log(allUserPlants)
+    console.log(testPlants)
+    var everyPlant = testPlants.concat(allUserPlants);
+    var allEvents = makeCalendar(everyPlant);
+    sortIntoWeeksAndFormat(allEvents);
 
   });
   $(".addplantlink").click(function(event){
@@ -463,12 +475,15 @@ $(function(){
        $("#customCommonName").prop("readonly", true)
        $("#createPlant").hide()
        $("#resetCreatePlant").show()
+
      }
     }
   });
     document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
-    if (plantName === "Create your own") {
+    if (plantName !== "Create your own") {
+        $("#commonNameDiv").hide()
+      } else {
         $("#commonNameDiv").show()
       }
     }
@@ -562,6 +577,7 @@ $(function(){
     //swap buttons
     $("#resetCreatePlant").hide()
     $("#createPlant").show()
+     $("#commonNameDiv").hide()
     //enable all fields, dropdowns
     $("#selectPlant").attr("disabled", false)
     $("#nickNameInput").prop("readonly", false)
@@ -654,8 +670,19 @@ $(function(){
     $(".nextButtons").show()
     $(".resetButtons").hide()
     $("#plantEntryStepTwo").hide()
+    $("#detailMsg").hide()
+    $("#confirmMsg").show()
+
 
   }) //END SUBMIT CLICK EVENT
+
+  // document.getElementById("selectPlant").onchange = function(){
+  //   var selectedPlant = $("#selectPlant").val()
+  //   if(selectdPlant !== "Creat your own"){
+  //     $("#commonNameDiv").hide();
+  //   }
+  //
+  // };
 
   document.getElementById("waterSelection").onchange = function(){
     var elementId = "waterSelection"
