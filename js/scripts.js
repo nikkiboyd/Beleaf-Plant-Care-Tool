@@ -281,8 +281,8 @@ function hasDropdownOptionBeenSelected(value){
   }
 }
 
-function resetFields(fieldId){
-  document.getElementById(fieldId).reset();
+function resetDropdown(dropdownId){
+  document.getElementById(dropdownId).selectedIndex = 0
 }
 
 
@@ -405,10 +405,14 @@ $(function(){
   })
 
   $("#waterReset").click(function(){
-    alert("this button is working")
-    // resetFields("waterSelection")
-    // resetFields("waterMonthDropdown")
-    document.getElementById("waterSelection").reset();
+    resetDropdown("waterSelection")
+    resetDropdown("waterMonthDropdown")
+    $("#waterSelectionWeekday input").prop("checked", false);
+    $("#waterSelection").attr("disabled", false)
+    $("#waterSelectionWeekday input").attr("disabled", false)
+    $("#waterMonthDropdown").attr("disabled", false)
+    $("#waterReset").hide()
+    $("#waterNext").show()
   })
 
 
