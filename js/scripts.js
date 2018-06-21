@@ -288,13 +288,17 @@ function resetDropdown(dropdownId){
 
 
 //user logic
+
+// homepage
+//
+
 $(function(){
+
   //Hide Plant detail divs
   $("#plantEntryStepTwo").hide()
   $(".waterDiv").hide()
   $(".pruningDiv").hide()
   $(".fertilizingDiv").hide()
-
 
 
   //STEP ONE - Name plant and select its type
