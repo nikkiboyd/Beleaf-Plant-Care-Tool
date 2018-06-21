@@ -9,8 +9,14 @@ button{
   margin-bottom: 10px;
 }
 
-
-
 .hidden {
   display: none;
+}
+
+.newPlant {
+  margin: 30px;
+}
+
+#unique-name {
+  color: blue;
 }

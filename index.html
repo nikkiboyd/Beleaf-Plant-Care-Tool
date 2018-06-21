@@ -20,7 +20,7 @@
           </div>
           <div class="form-group col-sm-6">
             <label for="selectPlant">Select the type of plant or create your own:</label>
-            <select class="form-control" id="selectPlant">
+            <select name="choice" onchange="uploadPhoto(this.value)" class="form-control" id="selectPlant">
               <option>Select a plant to begin</option>
               <option>Create your own</option>
               <option>Spider Plant</option>
@@ -302,38 +302,37 @@
           </select>
         </div>
       </div>
-      <button type="submit" name="button">Add Plant</button>
+      <button class="btn btn-warning" type="submit" name="button">Add Plant</button>
     </form>
     <div id="calendar-display">
       <span id="fullDate"></span>
+      <h1>My Calendar</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Week 1</h2>
+          <p class="daily-tasks" id="week-one-tasks"></p>
+        </div>
+        <div class="col-md-6">
+          <h2>Week 2</h2>
+          <p class="daily-tasks" id="week-two-tasks"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+        <h2>Week 3</h2>
+        <p class="daily-tasks" id="week-three-tasks"></p>
+        </div>
+        <div class="col-md-6">
+          <h2>Week 4</h2>
+          <p class="daily-tasks" id="week-four-tasks"></p>
+        </div>
+      </div>
+      <h2>A glance into the future...</h2>
+      <p class="daily-tasks" id="week-glance-tasks"></p>
+      <button id="refreshButton" type="button" class="btn btn-primary">Refresh Calendar</button>
     </div>
-    <h1>My Calendar</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Week 1</h2>
-        <p class="daily-tasks" id="week-one-tasks"></p>
-      </div>
-      <div class="col-md-6">
-        <h2>Week 2</h2>
-        <p class="daily-tasks" id="week-two-tasks"></p>
-      </div>
+    <div class="row" id="myPlants-display">
     </div>
-    <div class="row">
-      <div class="col-md-6">
-      <h2>Week 3</h2>
-      <p class="daily-tasks" id="week-three-tasks"></p>
-      </div>
-      <div class="col-md-6">
-        <h2>Week 4</h2>
-        <p class="daily-tasks" id="week-four-tasks"></p>
-      </div>
-    </div>
-
-    <h2>A glance into the future...</h2>
-    <p class="daily-tasks" id="week-glance-tasks">
-
-    </p>
-    <button id="refreshButton" type="button" class="btn btn-primary">Refresh Calendar</button>
   </div>
 </body>
 </html>

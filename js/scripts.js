@@ -212,7 +212,6 @@ function validateCommonName(commonName, customCommonName){
   console.log("the validated commonName is " + validatedCommonName)
 }//END OF validateCommonName
 
-
 function validateNickName(nickName){
   var validatedNickName
   //validate nickname
@@ -248,6 +247,7 @@ $(function(){
     var customCommonName = $("#customCommonName").val()
     validateNickName(nickName)
     validateCommonName(commonName, customCommonName)
+    previewFile();
   });
 
   // STEP TWO - fill in plant details if a template plant is selected
@@ -288,6 +288,7 @@ $(function(){
     event.preventDefault();
     var nickName = $("#nickNameInput").val()
     var commonName = $("#selectPlant").val()
+    var photo = $("img#src").val();
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
     var water =  $("#waterSelection :selected").text()
@@ -332,10 +333,12 @@ $(function(){
     // }
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
-    console.log(newPlant)
+
+    //appends unique nickname and common name to myplants
+    $("#myPlants-display").append("<div class='newPlant'>" +
+                        "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3>" + commonName + "</h3>" + "<img src='img/" + commonName + ".jpg'>" + "</div>")
 
   }) //END SUBMIT CLICK EVENT
-
 
   document.getElementById("waterSelection").onchange = function(){
     var elementId = "waterSelection"
@@ -352,8 +355,6 @@ $(function(){
     showHideMonthWeek(elementId)
   };
 
-
-
 // NOT USING THIS YET
 function checkNickname(nickname, myPlants){
   // check each name in myPlants to make sure it nickname isn't already taken
@@ -365,10 +366,6 @@ function checkNickname(nickname, myPlants){
     }
   }
 }
-
-
-
-
 
   $("#refreshButton").click(function(event){
     console.log("button")
