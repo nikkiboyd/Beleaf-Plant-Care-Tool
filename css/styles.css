@@ -103,3 +103,13 @@ button {
 #helppage {
   background-color: lightgreen;
 }
+
+#homepage {
+  display: none;
+  text-align: center;
+  background-color: grey;
+  box-sizing: border-box;
+  width: 70%;
+  margin: auto;
+}
+}
