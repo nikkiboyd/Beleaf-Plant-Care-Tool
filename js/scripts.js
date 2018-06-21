@@ -100,6 +100,7 @@ function makeUniqueWeekDays(weekEvents) {
 }
 
 function sortIntoWeeksAndFormat(allEvents) {
+
   var weekOneRange = [today, (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 6).setHours(0,0,0,0)))];
   var weekTwoRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 13).setHours(0,0,0,0)))]
   var weekThreeRange = [(new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14).setHours(0,0,0,0))), (new Date(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20).setHours(0,0,0,0)))]
@@ -114,70 +115,48 @@ function sortIntoWeeksAndFormat(allEvents) {
   var weekFourEvents = []
   var glanceEvents = []
 
+  $("#week-one-range").text(" " + (weekOneRange[0].getMonth() + 1) + "/" + weekOneRange[0].getDate() + " - " + (weekOneRange[1].getMonth() + 1) + "/" + weekOneRange[1].getDate())
+
+  $("#week-two-range").text(" " + (weekTwoRange[0].getMonth() + 1) + "/" + weekTwoRange[0].getDate() + " - " + (weekTwoRange[1].getMonth() + 1) + "/" + weekTwoRange[1].getDate())
+
+  $("#week-three-range").text(" " + (weekThreeRange[0].getMonth() + 1) + "/" + weekThreeRange[0].getDate() + " - " + (weekThreeRange[1].getMonth() + 1) + "/" + weekThreeRange[1].getDate())
+
+  $("#week-four-range").text(" " + (weekFourRange[0].getMonth() + 1) + "/" + weekFourRange[0].getDate() + " - " + (weekFourRange[1].getMonth() + 1) + "/" + weekFourRange[1].getDate())
+
+  $("#glance-range").text(" " + (glanceRange[0].getMonth() + 1) + "/" + glanceRange[0].getDate() + " - " + (glanceRange[1].getMonth() + 1) + "/" + glanceRange[1].getDate())
+
   for(i = 0; i < allEvents.length; i++) {
-
-    $("#week-one-range").text(" " + (weekOneRange[0].getMonth() + 1) + "/" + weekOneRange[0].getDate() + " - " + (weekOneRange[1].getMonth() + 1) + "/" + weekOneRange[1].getDate())
-
-    $("#week-two-range").text(" " + (weekTwoRange[0].getMonth() + 1) + "/" + weekTwoRange[0].getDate() + " - " + (weekTwoRange[1].getMonth() + 1) + "/" + weekTwoRange[1].getDate())
-
-    $("#week-three-range").text(" " + (weekThreeRange[0].getMonth() + 1) + "/" + weekThreeRange[0].getDate() + " - " + (weekThreeRange[1].getMonth() + 1) + "/" + weekThreeRange[1].getDate())
-
-    $("#week-four-range").text(" " + (weekFourRange[0].getMonth() + 1) + "/" + weekFourRange[0].getDate() + " - " + (weekFourRange[1].getMonth() + 1) + "/" + weekFourRange[1].getDate())
-
-    $("#glance-range").text(" " + (glanceRange[0].getMonth() + 1) + "/" + glanceRange[0].getDate() + " - " + (glanceRange[1].getMonth() + 1) + "/" + glanceRange[1].getDate())
 
     if (allEvents[i][0] >= weekOneRange[0] && allEvents[i][0] <= weekOneRange[1]) {
       weekOneEvents.push(allEvents[i])
+    } else if (allEvents[i][0] >= weekTwoRange[0] && allEvents[i][0] <= weekTwoRange[1]) {
+      weekTwoEvents.push(allEvents[i])
+    } else if (allEvents[i][0] >= weekThreeRange[0] && allEvents[i][0] <= weekThreeRange[1]) {
+      weekThreeEvents.push(allEvents[i])
+    } else if (allEvents[i][0] >= weekFourRange[0] && allEvents[i][0] <= weekFourRange[1]) {
+      weekFourEvents.push(allEvents[i])
+    } else if (allEvents[i][0] >= glanceRange[0] && allEvents[i][0] <= glanceRange[1]) {
+      glanceEvents.push(allEvents[i])
+    } else {
+      $("#week-glance-tasks").append("<div class='form-check'>" +
+                              "<label class='form-check-label'>" +
+                              "<input class='form-check-input' type='checkbox'>" +
+                              "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
+                              "</label>" +
+                              "</div>")
     }
-  //   } else if (allEvents[i][0] >= weekTwoRange[0] && allEvents[i][0] <= weekTwoRange[1]) {
-  //     $("#week-two-tasks").append("<div class='form-check'>" +
-  //                         "<label class='form-check-label'>" +
-  //                         "<input class='form-check-input' type='checkbox'>" +
-  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-  //                         "</label>" +
-  //                         "</div>")
-  //   } else if (allEvents[i][0] >= weekThreeRange[0] && allEvents[i][0] <= weekThreeRange[1]) {
-  //     $("#week-three-tasks").append("<div class='form-check'>" +
-  //                         "<label class='form-check-label'>" +
-  //                         "<input class='form-check-input' type='checkbox'>" +
-  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-  //                         "</label>" +
-  //                         "</div>")
-  //   } else if (allEvents[i][0] >= weekFourRange[0] && allEvents[i][0] <= weekFourRange[1]) {
-  //     $("#week-four-tasks").append("<div class='form-check'>" +
-  //                         "<label class='form-check-label'>" +
-  //                         "<input class='form-check-input' type='checkbox'>" +
-  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-  //                         "</label>" +
-  //                         "</div>")
-  //   } else if (allEvents[i][0] >= glanceRange[0] && allEvents[i][0] <= glanceRange[1]) {
-  //     $("#week-glance-tasks").append("<div class='form-check'>" +
-  //                         "<label class='form-check-label'>" +
-  //                         "<input class='form-check-input' type='checkbox'>" +
-  //                         allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-  //                         "</label>" +
-  //                         "</div>")
-  //   } else {
-  //     $("#week-glance-tasks").append("<div class='form-check'>" +
-  //                         "<label class='form-check-label'>" +
-  //                         "<input class='form-check-input' type='checkbox'>" +
-  //                         "Else: " + allEvents[i][2] + " " + allEvents[i][1] + " on " + formattedDate +
-  //                         "</label>" +
-  //                         "</div>")
-  //   }
-  // }
-
-    // })
   }
+
   var uniqueDaysWeekOne = makeUniqueWeekDays(weekOneEvents)
+  var uniqueDaysWeekTwo = makeUniqueWeekDays(weekTwoEvents)
+  var uniqueDaysWeekThree = makeUniqueWeekDays(weekThreeEvents)
+  var uniqueDaysWeekFour = makeUniqueWeekDays(weekFourEvents)
+  var uniqueDaysWeekGlance = makeUniqueWeekDays(glanceEvents)
 
   for (m = 0; m < uniqueDaysWeekOne.length; ++m) { // for every unique weekday
     $("#week-one-tasks").append("<h4>" + uniqueDaysWeekOne[m] + "</h4>")
-    for (n = 0; n < weekOneEvents.length; ++n) {
-      // console.log(uniqueDaysWeekOne[m])
-      // console.log(weekdayArray[weekOneEvents[n][0].getDay()])
+    for (n = 0; n < weekOneEvents.length; ++n) { // for every day in weekOneEvents
       if (uniqueDaysWeekOne[m] === weekdayArray[weekOneEvents[n][0].getDay()]) {
-        console.log("reached")
         $("#week-one-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
@@ -187,20 +166,64 @@ function sortIntoWeeksAndFormat(allEvents) {
       }
     }
   }
-//
-//   weekOneEvents.forEach(function(event) {
-//     $("#week-one-tasks").append("<h4>" + weekdayArray[event[0].getDay()] + "</h4>")
-//     $("#week-one-tasks").append("<div class='form-check'>" +
-//                             "<label class='form-check-label'>" +
-//                             "<input class='form-check-input' type='checkbox'>" +
-//                             event[2] + " " + event[1] +
-//                             "</label>" +
-//                             "</div>")
-// })
+
+  for (o = 0; o < uniqueDaysWeekTwo.length; ++o) {
+    $("#week-two-tasks").append("<h4>" + uniqueDaysWeekTwo[o] + "</h4>")
+    for (p = 0; p < weekTwoEvents.length; ++p) {
+      if (uniqueDaysWeekTwo[o] === weekdayArray[weekTwoEvents[p][0].getDay()]) {
+        $("#week-two-tasks").append("<div class='form-check'>" +
+                                "<label class='form-check-label'>" +
+                                "<input class='form-check-input' type='checkbox'>" +
+                                weekTwoEvents[p][2] + " " + weekTwoEvents[p][1] +
+                                "</label>" +
+                                "</div>")
+      }
+    }
+  }
+  for (x = 0; x < uniqueDaysWeekThree.length; ++x) {
+    $("#week-three-tasks").append("<h4>" + uniqueDaysWeekThree[x] + "</h4>")
+    for (y = 0; y < weekThreeEvents.length; ++y) {
+      if (uniqueDaysWeekThree[x] === weekdayArray[weekThreeEvents[y][0].getDay()]) {
+        $("#week-three-tasks").append("<div class='form-check'>" +
+                                "<label class='form-check-label'>" +
+                                "<input class='form-check-input' type='checkbox'>" +
+                                weekThreeEvents[y][2] + " " + weekThreeEvents[y][1] +
+                                "</label>" +
+                                "</div>")
+      }
+    }
+  }
+  for (d = 0; d < uniqueDaysWeekFour.length; ++d) {
+    $("#week-four-tasks").append("<h4>" + uniqueDaysWeekFour[d] + "</h4>")
+    for (b = 0; b < weekFourEvents.length; ++b) {
+      if (uniqueDaysWeekFour[d] === weekdayArray[weekFourEvents[b][0].getDay()]) {
+        $("#week-four-tasks").append("<div class='form-check'>" +
+                                "<label class='form-check-label'>" +
+                                "<input class='form-check-input' type='checkbox'>" +
+                                weekFourEvents[b][2] + " " + weekFourEvents[b][1] +
+                                "</label>" +
+                                "</div>")
+      }
+    }
+  }
+  for (l = 0; l < uniqueDaysWeekGlance.length; ++l) {
+    $("#week-glance-tasks").append("<h4>" + uniqueDaysWeekGlance[l] + "</h4>")
+    for (j = 0; j < glanceEvents.length; ++j) {
+      if (uniqueDaysWeekGlance[l] === weekdayArray[glanceEvents[j][0].getDay()]) {
+        $("#week-glance-tasks").append("<div class='form-check'>" +
+                                "<label class='form-check-label'>" +
+                                "<input class='form-check-input' type='checkbox'>" +
+                                glanceEvents[j][2] + " " + glanceEvents[j][1] +
+                                "</label>" +
+                                "</div>")
+      }
+    }
+  }
 }
 
+
 function makeCalendar(everyPlant) {
-  var allEvents = [];
+  var allEvents = []
   everyPlant.forEach(function(plant) {
     var waterDays = plant.makeSchedule(plant.water)
     for (i = 0; i < waterDays.length; i++) {
@@ -220,7 +243,7 @@ function makeCalendar(everyPlant) {
       singleFertilizeEvent.push(fertilizingDays[y], plant.commonName, "Fertilize");
       allEvents.push(singleFertilizeEvent)
     }
-  });
+  })
   return allEvents;
 }
 
