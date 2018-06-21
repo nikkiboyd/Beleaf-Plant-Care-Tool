@@ -244,45 +244,53 @@ function validateNickName(nickName){
 //
 
 $(function(){
-  $("#linkhomepage").click(function(event){
+  $(".linkhomepage").click(function(event){
     event.preventDefault();
+    $(".homepage").show();
     $(".container").hide();
-    $("#homepage").show();
-    $("#helppage").hide();
   });
 
-  $("#myplantslink").click(function(event){
+  $(".myplantslink").click(function(event){
     event.preventDefault();
-    $(".container").hide();
-    $("#homepage").show();
-    $("#plantEntryForm").hide();
-    $("#calendar-display").hide();
-    $("#myPlants-display").show();
-  });
-  $("#schedulelink").click(function(event){
-    event.preventDefault();
+    $(".homepage").hide();
     $(".container").show();
-    $("#homepage").hide();
+    $("#calendar-container").hide();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").show();
+    $("#helppage").hide();
+
+  });
+  $(".schedulelink").click(function(event){
+    event.preventDefault();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").show();
     $("#plantEntryForm").hide();
     $("#myPlants-display").hide();
+    $("#helppage").hide();
 // the rest here is same code as the refresh button
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
   });
-  $("#addplantlink").click(function(event){
+  $(".addplantlink").click(function(event){
     event.preventDefault();
+    $(".homepage").hide();
     $(".container").show();
-    $("#homepage").hide();
+    $("#calendar-container").hide();
     $("#plantEntryForm").show()
-    $("#calendar-display").hide();
     $("#myPlants-display").hide();
+    $("#helppage").hide();
   });
-  $("#helplink").click(function(event){
+  $(".helplink").click(function(event){
     event.preventDefault();
-    $("#helppage").toggle();
+    $(".homepage").hide();
+    $(".container").show();
+    $("#calendar-container").hide();
+    $("#plantEntryForm").hide();
+    $("#myPlants-display").hide();
+    $("#helppage").show();
   });
-
   //STEP ONE - Name plant and select its type
   $("#createPlant").click(function(event){
     event.preventDefault()

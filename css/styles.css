@@ -14,13 +14,24 @@ button{
 .hidden {
   display: none;
 }
+.navigation {
 
-#homepage {
+}
+.homepage {
   display: none;
   text-align: center;
   background-color: grey;
   box-sizing: border-box;
   width: 70%;
+  height: 400px;
   margin: auto;
 }
+
+#plantAppTitle {
+  font-family: monospace;
+  font-size: 52pt;
+}
+
+#helppage {
+  background-color: lightgreen;
 }
