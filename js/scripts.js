@@ -633,8 +633,7 @@ $(function(){
     // }
     allUserPlants.push(newPlant);
     Plant.prototype.addUsersDetails(newPlant, nickName)
-    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
-    console.log(newPlant)
+    appendToGarden(allUserPlants) // see below function
     document.getElementById("plantEntryForm").reset();
     $("#plantEntryForm input").attr("disabled", false)
     $("#plantEntryForm select").attr("disabled", false)
@@ -661,6 +660,12 @@ $(function(){
     showHideMonthWeek(elementId)
   };
 
+function appendToGarden(allUserPlants) {
+  allUserPlants.forEach(function(plant){
+    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id=" + plant.nickName + ">" + plant.nickName + "</h2>" + "<h3 id=" + plant.commonName + ">" + plant.commonName + "</h3>" + "<img src='img/" + plant.commonName + ".jpg'>" +"</div>")
+  })
+}
+
 // NOT USING THIS YET
 function checkNickname(nickname, myPlants){
   // check each name in myPlants to make sure it nickname isn't already taken
@@ -678,7 +683,6 @@ function checkNickname(nickname, myPlants){
     console.log(allUserPlants)
     console.log(testPlants)
     var everyPlant = testPlants.concat(allUserPlants);
-    debugger
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
   });
