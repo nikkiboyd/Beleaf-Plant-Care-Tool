@@ -474,12 +474,15 @@ $(function(){
        $("#customCommonName").prop("readonly", true)
        $("#createPlant").hide()
        $("#resetCreatePlant").show()
+
      }
     }
   });
     document.getElementById("selectPlant").onchange = function(){
     var plantName = $("#selectPlant :selected").text()
-    if (plantName === "Create your own") {
+    if (plantName !== "Create your own") {
+        $("#commonNameDiv").hide()
+      } else {
         $("#commonNameDiv").show()
       }
     }
@@ -573,6 +576,7 @@ $(function(){
     //swap buttons
     $("#resetCreatePlant").hide()
     $("#createPlant").show()
+     $("#commonNameDiv").hide()
     //enable all fields, dropdowns
     $("#selectPlant").attr("disabled", false)
     $("#nickNameInput").prop("readonly", false)
@@ -671,6 +675,14 @@ $(function(){
 
 
   }) //END SUBMIT CLICK EVENT
+
+  // document.getElementById("selectPlant").onchange = function(){
+  //   var selectedPlant = $("#selectPlant").val()
+  //   if(selectdPlant !== "Creat your own"){
+  //     $("#commonNameDiv").hide();
+  //   }
+  //
+  // };
 
   document.getElementById("waterSelection").onchange = function(){
     var elementId = "waterSelection"
