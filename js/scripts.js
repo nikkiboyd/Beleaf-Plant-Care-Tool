@@ -388,6 +388,7 @@ function validateTaskInputs(taskFrequency, taskDayCheckboxes, taskMonthSelection
 
 $(function(){
   //Hide Plant detail divs
+  $(".homepage").show();
   $("#plantEntryStepTwo").hide()
   $(".waterDiv").hide()
   $(".pruningDiv").hide()
