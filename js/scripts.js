@@ -382,9 +382,10 @@ function validateTaskInputs(taskFrequency, taskDayCheckboxes, taskMonthSelection
   } else if(taskMonthSelection !== "Select a date"){
     validatedArray = [] = [taskFrequency, parseInt(taskMonthSelection)]
     return validatedArray
-  } else{
-    alert("Select your water day.")
   }
+  // else{
+  //   alert("Select a day.")
+  // }
 } //END validateTaskInputs
 
 //user logic
@@ -650,30 +651,34 @@ $(function(){
     var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
     var fertilizingArray = validateTaskInputs(fertilizing, fertilizingCheckBoxes, fertilizeMonthday)
-
-
-    //create new plant
-    var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
-    Plant.prototype.addUsersDetails(newPlant, validatedNickName)
-    allUserPlants.push(newPlant);
-    document.getElementById("plantEntryForm").reset();
-    $("#plantEntryStepTwo").hide()
-    $(".waterDiv").hide()
-    $(".pruningDiv").hide()
-    $(".fertilizingDiv").hide()
-    $("#resetCreatePlant").hide()
-    $("#createPlant").show()
-    $("#plantEntryForm input").attr("disabled", false)
-    $("#plantEntryForm select").attr("disabled", false)
-    $("#nickNameInput").prop("readonly", false)
-    $("#customCommonName").prop("readonly", false)
-    $(".nextButtons").show()
-    $(".resetButtons").hide()
-    $("#plantEntryStepTwo").hide()
-    $("#detailMsg").hide()
-    $("#confirmMsg").show()
-
-
+    if(hasDropdownOptionBeenSelected(fertilizing)){
+      if(fertilizingCheckBoxes.length > 0 || fertilizeMonthday !== "Select a date"){
+        //create new plant
+        var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
+        Plant.prototype.addUsersDetails(newPlant, validatedNickName)
+        allUserPlants.push(newPlant);
+        document.getElementById("plantEntryForm").reset();
+        $("#plantEntryStepTwo").hide()
+        $(".waterDiv").hide()
+        $(".pruningDiv").hide()
+        $(".fertilizingDiv").hide()
+        $("#resetCreatePlant").hide()
+        $("#createPlant").show()
+        $("#plantEntryForm input").attr("disabled", false)
+        $("#plantEntryForm select").attr("disabled", false)
+        $("#nickNameInput").prop("readonly", false)
+        $("#customCommonName").prop("readonly", false)
+        $(".nextButtons").show()
+        $(".resetButtons").hide()
+        $("#plantEntryStepTwo").hide()
+        $("#detailMsg").hide()
+        $("#confirmMsg").show()
+      } else {
+        alert("Please select when you will fertilize.")
+      }
+    } else {
+      alert("Please select how often to fertilize.")
+    }
   }) //END SUBMIT CLICK EVENT
 
   // document.getElementById("selectPlant").onchange = function(){
@@ -698,6 +703,7 @@ $(function(){
     var elementId = "fertilizingSelection"
     showHideMonthWeek(elementId)
   };
+});
 
 // NOT USING THIS YET
 function checkNickname(nickname, myPlants){
@@ -710,14 +716,6 @@ function checkNickname(nickname, myPlants){
     }
   }
 } // NOT USING THE ABOVE FUNCTION
-
-  $("#refreshButton").click(function(event){
-    event.preventDefault()
-    var everyPlant = testPlants.concat(allUserPlants);
-    var allEvents = makeCalendar(everyPlant);
-    sortIntoWeeksAndFormat(allEvents);
-  });
-});
 
 function showHideMonthWeek(elementId){
   var selection = $("#" + elementId + " :selected").text()
