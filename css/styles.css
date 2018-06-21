@@ -10,9 +10,23 @@ body {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-
+/* START next/reset buttons to the bottom of parent div*/
 button {
   margin-bottom: 10px;
+}
+.buttonDiv{
+  position: relative;
+}
+/*END next/reset buttons*/
+
+/*START form formatting */
+
+/*END */
+
+
+.nextButtons, .resetButtons{
+  position: absolute;
+  bottom: 2px;
 }
 
 .hidden {
