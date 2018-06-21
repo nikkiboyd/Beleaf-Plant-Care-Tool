@@ -160,7 +160,7 @@ function sortIntoWeeksAndFormat(allEvents) {
         $("#week-one-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
-                                weekOneEvents[n][2] + " " + weekOneEvents[n][1] +
+                                weekOneEvents[n][2] + " " + weekOneEvents[n][1] + " the " + weekOneEvents[n][3] +
                                 "</label>" +
                                 "</div>")
       }
@@ -174,7 +174,7 @@ function sortIntoWeeksAndFormat(allEvents) {
         $("#week-two-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
-                                weekTwoEvents[p][2] + " " + weekTwoEvents[p][1] +
+                                weekTwoEvents[p][2] + " " + weekTwoEvents[p][1] + " the " + weekTwoEvents[p][3] +
                                 "</label>" +
                                 "</div>")
       }
@@ -187,7 +187,7 @@ function sortIntoWeeksAndFormat(allEvents) {
         $("#week-three-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
-                                weekThreeEvents[y][2] + " " + weekThreeEvents[y][1] +
+                                weekThreeEvents[y][2] + " " + weekThreeEvents[y][1] + " the " + weekThreeEvents[y][3] +
                                 "</label>" +
                                 "</div>")
       }
@@ -200,7 +200,7 @@ function sortIntoWeeksAndFormat(allEvents) {
         $("#week-four-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
-                                weekFourEvents[b][2] + " " + weekFourEvents[b][1] +
+                                weekFourEvents[b][2] + " " + weekFourEvents[b][1] + " the " + weekFourEvents[b][3] +
                                 "</label>" +
                                 "</div>")
       }
@@ -213,7 +213,7 @@ function sortIntoWeeksAndFormat(allEvents) {
         $("#week-glance-tasks").append("<div class='form-check'>" +
                                 "<label class='form-check-label'>" +
                                 "<input class='form-check-input' type='checkbox'>" +
-                                glanceEvents[j][2] + " " + glanceEvents[j][1] +
+                                glanceEvents[j][2] + " " + glanceEvents[j][1] + " the " + glanceEvents[j][3] +
                                 "</label>" +
                                 "</div>")
       }
@@ -228,19 +228,19 @@ function makeCalendar(everyPlant) {
     var waterDays = plant.makeSchedule(plant.water)
     for (i = 0; i < waterDays.length; i++) {
       var singleWaterEvent = [];
-      singleWaterEvent.push(waterDays[i], plant.commonName, "Water");
+      singleWaterEvent.push(waterDays[i], plant.nickName, "Water", plant.commonName);
       allEvents.push(singleWaterEvent)
     }
     var pruningDays = plant.makeSchedule(plant.pruning)
     for (x = 0; x < pruningDays.length; x++) {
       var singlePruneEvent = [];
-      singlePruneEvent.push(pruningDays[x], plant.commonName, "Prune");
+      singlePruneEvent.push(pruningDays[x], plant.nickName, "Prune", plant.commonName);
       allEvents.push(singlePruneEvent)
     }
     var fertilizingDays = plant.makeSchedule(plant.fertilizing)
     for (y = 0; y < fertilizingDays.length; y++) {
       var singleFertilizeEvent = [];
-      singleFertilizeEvent.push(fertilizingDays[y], plant.commonName, "Fertilize");
+      singleFertilizeEvent.push(fertilizingDays[y], plant.nickName, "Fertilize", plant.commonName);
       allEvents.push(singleFertilizeEvent)
     }
   })
@@ -685,8 +685,6 @@ function checkNickname(nickname, myPlants){
 
   $("#refreshButton").click(function(event){
     event.preventDefault()
-    console.log(allUserPlants)
-    console.log(testPlants)
     var everyPlant = testPlants.concat(allUserPlants);
     var allEvents = makeCalendar(everyPlant);
     sortIntoWeeksAndFormat(allEvents);
@@ -756,6 +754,13 @@ var asparagus2 = new Plant ("Asparagus Fern", "Part Sun", "Temperamental", ["Onc
 var dracena2 = new Plant ("Dracena", "Indirect Sun", "Very Tolerant", ["Every other week", "Wednesday"], ["Once a month", 14], ["Every other week", "Thursday"])
 
 Plant.prototype.addUsersDetails(spider2, "spidey")
+Plant.prototype.addUsersDetails(snake2, "Slytherin")
+Plant.prototype.addUsersDetails(maple2, "Syrup")
+Plant.prototype.addUsersDetails(aralia2, "Ari")
+Plant.prototype.addUsersDetails(xmascactus2, "Christmas")
+Plant.prototype.addUsersDetails(peacelily2, "Dove")
+Plant.prototype.addUsersDetails(asparagus2, "Sparry")
+Plant.prototype.addUsersDetails(dracena2, "Draco")
 testPlants.push(spider2)
 testPlants.push(snake2)
 testPlants.push(maple2)
