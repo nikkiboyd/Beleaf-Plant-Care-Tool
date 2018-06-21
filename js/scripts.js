@@ -268,7 +268,7 @@ function checkboxlimit(checkgroup, limit){
     for (var i=0; i<checkgroup.length; i++)
       checkedcount+=(checkgroup[i].checked)? 1 : 0
     if (checkedcount>limit){
-      alert("You can only select a maximum of "+limit+" checkboxes")
+      alert("You can only select a maximum of "+limit+" checkboxes.")
       this.checked=false
       }
     }
@@ -284,14 +284,12 @@ function validateCommonName(commonName, customCommonName){
   var validatedCommonName
   if (commonName === "Create your own" && customCommonName !== ""){
     validatedCommonName = customCommonName
-    console.log("this is the validated commonName " + validatedCommonName)
   } else if (commonName !== "Select a plant to begin" && commonName !== "Create your own"){
       validatedCommonName = commonName
   } else{
-    alert("what kind of plant is this")
+    alert("What kind of plant is this?")
     validatedCommonName = ""
   }
-  console.log("the validated commonName is " + validatedCommonName)
   return validatedCommonName
 }//END OF validateCommonName
 
@@ -299,17 +297,14 @@ function validateNickName(nickName){
   var validatedNickName
   //validate nickname
   if(nickName !== ""){
-    console.log("in the if statement")
     // if this is the first entry then just validate the nickname, otherwise check to see if name is taken
     if(allUserPlants.length > 0){
     //check if name is taken already
       for(i=0; i < allUserPlants.length; ++i){
-        console.log("in the for loop")
         if(nickName === allUserPlants[i].nickName){
-          alert("please pick another name")
+          alert("Please pick another name. " + nickName + " is already taken.")
           validatedNickName = ""
         } else{
-          console.log("this is the current nickName:" + validatedNickName)
           validatedNickName = nickName
           break
         }
@@ -321,7 +316,6 @@ function validateNickName(nickName){
     alert("Please enter a nickname for your plant")
     validatedNickName = ""
   }
-  console.log("the validated nickname is " + validatedNickName)
   return validatedNickName
 }//END OF validateNickName
 
@@ -368,6 +362,24 @@ function resetDropdown(dropdownId){
   document.getElementById(dropdownId).selectedIndex = 0
 }
 
+function validateTaskInputs(taskFrequency, taskDayCheckboxes, taskMonthSelection){
+  validatedArray = []
+  console.log("the task frequency is " + taskFrequency)
+  console.log("the checkbox array is " + taskDayCheckboxes)
+  if(taskDayCheckboxes.length > 0){
+    validatedArray.push(taskFrequency)
+    console.log("the validated array after frequency " + validatedArray)
+    for(i=0; i < taskDayCheckboxes.length; ++i){
+      validatedArray.push(taskDayCheckboxes[i])
+    }
+    return validatedArray
+  } else if(taskMonthSelection !== "Select a date"){
+    validatedArray = [] = [taskFrequency, parseInt(taskMonthSelection)]
+    return validatedArray
+  } else{
+    alert("Select your water day.")
+  }
+} //END validateTaskInputs
 
 //user logic
 
@@ -436,7 +448,6 @@ $(function(){
     var commonName = $("#selectPlant").val()
     var customCommonName = $("#customCommonName").val()
     var validatedNickName =validateNickName(nickName)
-    console.log("this is the validatedNickName " + validatedNickName)
     if(validatedNickName !== ""){
       var validatedCommonName = validateCommonName(commonName, customCommonName);
       if(validatedCommonName !== ""){
@@ -541,11 +552,17 @@ $(function(){
 
   // RESET BUTTONS
   $("#resetCreatePlant").click(function(){
+    // reset values
     resetDropdown("selectPlant")
-    $("$commonNameDiv").val("")
+    $("#nickNameInput").val("")
+    $("#nickNameInput").val("")
+    //swap buttons
+    $("#resetCreatePlant").hide()
+    $("#createPlant").show()
+    //enable all fields, dropdowns
     $("#selectPlant").attr("disabled", false)
-    $("#plantCreateReset").hide()
-    $("#plantCreateNext").show()
+    $("#nickNameInput").prop("readonly", false)
+    $("#customCommonName").prop("readonly", false)
   })
 
   $("#sunReset").click(function(){
@@ -582,59 +599,52 @@ $(function(){
   $("#plantEntryForm").submit(function(event){
     event.preventDefault();
     var nickName = $("#nickNameInput").val()
-    // need to update commonName var to pull from validation function
+    var validatedNickName = validateNickName(nickName)
     var commonName = $("#selectPlant").val()
+    var customCommonName = $("#customCommonName").val()
+    var validatedCommonName = validateCommonName(commonName, customCommonName)
     var sunlight = $("#sunlightSelection :selected").text()
     var hardiness = $("#hardinessSelection :selected").text()
+    //water variables
     var water =  $("#waterSelection :selected").text()
     var waterCheckBoxes = []
     $("input:checkbox[name=waterSelectionCheckBoxes]:checked").each(function(){
       waterCheckBoxes.push($(this).val());
     })
-    console.log("waterCheckBoxes array is: " + waterCheckBoxes)
-    var waterArray =[]
     var waterMonthday = $("#waterMonthDropdown :selected").text()
+    var waterArray = validateTaskInputs(water, waterCheckBoxes, waterMonthday)
+    // pruning variables
     var prune = $("#pruningSelection :selected").text()
+    var pruneCheckBoxes = []
+    $("input:checkbox[name=pruningSelectionCheckBoxes]:checked").each(function(){
+      pruneCheckBoxes.push($(this).val());
+    })
     var pruneWeekday = $("#pruningSelectionWeekday :checked").val()
     var pruneMonthday = $("#pruneMonthDropdown :selected").text()
+    var pruningArray = validateTaskInputs(prune, pruneCheckBoxes, pruneMonthday)
+    // fertilizing variables
     var fertilizing = $("#fertilizingSelection :selected").text()
+    var fertilizingCheckBoxes = []
+    $("input:checkbox[name=fertilizingSelectionCheckBoxes]:checked").each(function(){
+      fertilizingCheckBoxes.push($(this).val());
+    })
     var fertilizeWeekday = $("#fertilizingSelectionWeekday :checked").val()
     var fertilizeMonthday = $("#fertilizingMonthDropdown :selected").text()
+    var fertilizingArray = validateTaskInputs(fertilizing, fertilizingCheckBoxes, fertilizeMonthday)
+
+    //create new plant
+    var newPlant = new Plant (validatedCommonName, sunlight, hardiness, waterArray, pruningArray, fertilizingArray)
+    allUserPlants.push(newPlant);
+    Plant.prototype.addUsersDetails(newPlant, validatedNickName)
+    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
+    console.log(newPlant)
+    document.getElementById("plantEntryForm").reset();
     $("#plantEntryStepTwo").hide()
     $(".waterDiv").hide()
     $(".pruningDiv").hide()
     $(".fertilizingDiv").hide()
-
-    //NEED TO UPDATE TO MAKE SURE USER HAS SELECTED ALL NECESSARY SELECTIONS FOR ALL FIELDS
-    if(waterCheckBoxes.length > 0){
-      console.log("water var is: " + water)
-      waterArray.push(water)
-      for(i=0; i< waterCheckBoxes.length; ++i){
-        waterArray.push(waterCheckBoxes[i])
-        console.log(waterCheckBoxes[i])
-        console.log("water array: " + waterArray)
-      }
-      var newPlant = new Plant (commonName, sunlight, hardiness, waterArray, prune, fertilizing)
-    } else if(waterMonthday !== "Select a date"){
-      console.log(waterMonthday)
-      waterArray = [water, parseInt(waterMonthday)]
-      var newPlant = new Plant (commonName, sunlight, hardiness, waterArray, prune, fertilizing)
-    } else{
-      alert("Select your water day.")
-    }
-    // if(waterArray.length >= 2){
-    //   var newPlant = new Plant (commonName, sunlight, hardiness, waterArray, prune, fertilizing)
-    //   console.log(newPlant)
-    //   console.log("water dates" + newPlant.makeSchedule(newPlant.water))
-    //   // console.log("prune dates" + newPlant.makeSchedule(newPlant.pruning))
-    // } else{
-    //   console.log("in the else for the water check if")
-    // }
-    allUserPlants.push(newPlant);
-    Plant.prototype.addUsersDetails(newPlant, nickName)
-    $("#myGarden").append("<div class ='newPlant col-md-3'>" + "<h2 id='unique-name'>" + nickName + "</h2>" + "<h3 id='common-name'>" + commonName + "</h3>" + "<img src='img/'" + commonName + ".jpg'>" +"</div>")
-    console.log(newPlant)
-    document.getElementById("plantEntryForm").reset();
+    $("#resetCreatePlant").hide()
+    $("#createPlant").show()
     $("#plantEntryForm input").attr("disabled", false)
     $("#plantEntryForm select").attr("disabled", false)
     $("#nickNameInput").prop("readonly", false)
@@ -670,7 +680,7 @@ function checkNickname(nickname, myPlants){
       console.log("this is a valid nickname")
     }
   }
-}
+} // NOT USING THE ABOVE FUNCTION
 
   $("#refreshButton").click(function(event){
     event.preventDefault();
