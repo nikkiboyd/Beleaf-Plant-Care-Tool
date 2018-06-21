@@ -5,7 +5,8 @@
 #### By Nikki Boyd, Renee Sarley, Nick Brown, Rita Bennett-Chew
 
 ## Description
-A plant profile and calendar app that will remind users when to complete tasks relating to each of their plants.
+A plant profile and calendar app for plant owners. The web application helps plant owners with visualization and scheduling for their plant care. A user can add customizable plant profiles that records plant type, nickname, amount of sunlight, hardiness. Each plant profile created also records the frequency of the plant's future watering, pruning, and fertilizing needs. These needs are saved and presented as tasks in a scheduled calendar. 
+
 
 ## Setup/Contribution Requirements
 
@@ -19,6 +20,24 @@ A plant profile and calendar app that will remind users when to complete tasks r
 * Bootstrap 3.3.7
 * jQuery 3.3.1
 
+## Design Decisions
+* page for user to create a new plant profile
+<img align="left" width="300" height="300" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
+
+* Each plant profile is saved and can be seen in the "My Plant" link at  the top of the page
+
+
+
+## Support and contact details
+
+If you have find issues or have questions, ideas to improve the app, or concerns.  Please feel free to email us at;
+
+ Nikki Boyd: boyd.nikki@icloud.com
+ Nick Brown: nickrossbrown@gmail.com
+ Renee Sarley: Reneesarkey@gmail.com
+ Rita Bennett-Chew: ritabs@gmail.com
+ 
+
 ## Links
 
 
@@ -27,3 +46,6 @@ A plant profile and calendar app that will remind users when to complete tasks r
 This software is licensed under the MIT license.
 
 Copyright (c) 2018 **Team Plant Care**
+
+<img align="left" width="100" height="100" alt="screen shot 2018-06-21 at 2 43 09 pm" src="https://user-images.githubusercontent.com/39496805/41747154-d0684d68-7561-11e8-8e43-ce332be0be73.png">
+
